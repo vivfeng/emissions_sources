@@ -158,6 +158,132 @@ def _variance_level(pct):
 
 
 # ============================================================
+# UNCERTAINTY RANGES
+# ============================================================
+# IPCC-informed default uncertainty percentages for single-source factors.
+# When multiple sources exist, the cross-source spread is used instead.
+#
+# IMPORTANT: These are order-of-magnitude estimates, not validated IPCC
+# Tier 1 uncertainty budgets. They combine measurement uncertainty,
+# model uncertainty, and representativeness uncertainty into a single
+# ± percentage. The actual IPCC guidance uses asymmetric distributions
+# and category-specific methods that are more nuanced than this.
+#
+# The percentages below are conservative midpoints informed by:
+# - IPCC 2006 Guidelines Vol 1, Ch 3 (Uncertainties)
+# - IPCC AR5 GWP uncertainty ranges
+# - Observed cross-source variance in this dataset
+
+IPCC_UNCERTAINTY = {
+    "stationary_combustion": {"pct": 5, "notes": "IPCC Tier 1: ±5% for fossil fuel CO2 from combustion (well-characterized chemistry). Does not cover upstream methane leakage uncertainty."},
+    "electricity": {"pct": 10, "notes": "Uncertainty from grid mix measurement, T&D losses, temporal averaging, and generation vs consumption basis differences."},
+    "air_travel": {"pct": 50, "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."},
+    "ground_transport": {"pct": 30, "notes": "Fleet composition, occupancy assumptions, and real-world vs test-cycle driving conditions vary widely across geographies."},
+    "freight": {"pct": 30, "notes": "Payload utilization, route efficiency, vehicle age, and per-tonne-km vs per-vehicle-km basis choices."},
+    "accommodation": {"pct": 40, "notes": "Hotel energy use varies by climate zone, building age, HVAC type, and occupancy. Few standardized measurement approaches."},
+    "materials": {"pct": 25, "notes": "Primary vs recycled content, production process variation (e.g., BF-BOF vs EAF for steel), and system boundary choices."},
+    "waste": {"pct": 50, "notes": "Decomposition rates, methane capture efficiency, waste composition, and landfill vs incineration pathway differences."},
+}
+
+
+def _compute_uncertainty(category, sources, values):
+    """Compute uncertainty range for an activity comparison.
+
+    For multi-source activities, uses the empirical cross-source spread.
+    For single-source activities, applies IPCC Tier 1 default uncertainty
+    percentages as order-of-magnitude estimates (not validated uncertainty budgets).
+    """
+    if len(values) >= 2:
+        # Multi-source: use cross-source spread
+        low = min(values)
+        high = max(values)
+        avg = sum(values) / len(values)
+        spread_pct = round(((high - low) / avg) * 100, 1) if avg > 0 else 0
+        return {
+            "low": round(low, 6),
+            "high": round(high, 6),
+            "spread_pct": spread_pct,
+            "method": "cross_source_spread",
+            "notes": f"Range across {len(sources)} independent sources. True uncertainty may be wider.",
+        }
+    elif len(values) == 1:
+        # Single-source: apply IPCC default based on activity category
+        ipcc = IPCC_UNCERTAINTY.get(category, {"pct": 30, "notes": "Default ±30% uncertainty estimate"})
+        val = values[0]
+        margin = val * (ipcc["pct"] / 100)
+        return {
+            "low": round(val - margin, 6),
+            "high": round(val + margin, 6),
+            "spread_pct": ipcc["pct"] * 2,  # full range: ±5% → 10% total spread
+            "method": "ipcc_default",
+            "notes": ipcc["notes"],
+        }
+    return None
+
+
+# ============================================================
+# UNCERTAINTY RANGES
+# ============================================================
+# IPCC-informed default uncertainty percentages for single-source factors.
+# When multiple sources exist, the cross-source spread is used instead.
+#
+# IMPORTANT: These are order-of-magnitude estimates, not validated IPCC
+# Tier 1 uncertainty budgets. They combine measurement uncertainty,
+# model uncertainty, and representativeness uncertainty into a single
+# +/- percentage. The actual IPCC guidance uses asymmetric distributions
+# and category-specific methods that are more nuanced than this.
+#
+# The percentages below are conservative midpoints informed by:
+# - IPCC 2006 Guidelines Vol 1, Ch 3 (Uncertainties)
+# - IPCC AR5 GWP uncertainty ranges
+# - Observed cross-source variance in this dataset
+
+IPCC_UNCERTAINTY = {
+    "stationary_combustion": {"pct": 5, "notes": "IPCC Tier 1: +/-5% for fossil fuel CO2 from combustion (well-characterized chemistry). Does not cover upstream methane leakage uncertainty."},
+    "electricity": {"pct": 10, "notes": "Uncertainty from grid mix measurement, T&D losses, temporal averaging, and generation vs consumption basis differences."},
+    "air_travel": {"pct": 50, "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."},
+    "ground_transport": {"pct": 30, "notes": "Fleet composition, occupancy assumptions, and real-world vs test-cycle driving conditions vary widely across geographies."},
+    "freight": {"pct": 30, "notes": "Payload utilization, route efficiency, vehicle age, and per-tonne-km vs per-vehicle-km basis choices."},
+    "accommodation": {"pct": 40, "notes": "Hotel energy use varies by climate zone, building age, HVAC type, and occupancy. Few standardized measurement approaches."},
+    "materials": {"pct": 25, "notes": "Primary vs recycled content, production process variation (e.g., BF-BOF vs EAF for steel), and system boundary choices."},
+    "waste": {"pct": 50, "notes": "Decomposition rates, methane capture efficiency, waste composition, and landfill vs incineration pathway differences."},
+}
+
+
+def _compute_uncertainty(category, sources, values):
+    """Compute uncertainty range for an activity comparison.
+
+    For multi-source activities, uses the empirical cross-source spread.
+    For single-source activities, applies IPCC Tier 1 default uncertainty
+    percentages as order-of-magnitude estimates (not validated uncertainty budgets).
+    """
+    if len(values) >= 2:
+        low = min(values)
+        high = max(values)
+        avg = sum(values) / len(values)
+        spread_pct = round(((high - low) / avg) * 100, 1) if avg > 0 else 0
+        return {
+            "low": round(low, 6),
+            "high": round(high, 6),
+            "spread_pct": spread_pct,
+            "method": "cross_source_spread",
+            "notes": f"Range across {len(sources)} independent sources. True uncertainty may be wider.",
+        }
+    elif len(values) == 1:
+        ipcc = IPCC_UNCERTAINTY.get(category, {"pct": 30, "notes": "Default +/-30% uncertainty estimate"})
+        val = values[0]
+        margin = val * (ipcc["pct"] / 100)
+        return {
+            "low": round(val - margin, 6),
+            "high": round(val + margin, 6),
+            "spread_pct": ipcc["pct"] * 2,  # full range: +/-5% = 10% total spread
+            "method": "ipcc_default",
+            "notes": ipcc["notes"],
+        }
+    return None
+
+
+# ============================================================
 # COMPARISON ENGINE
 # ============================================================
 
@@ -254,6 +380,9 @@ def compare_activity(activity_id, factors=None):
     else:
         key_insight = None
 
+    # Calculate uncertainty range
+    uncertainty = _compute_uncertainty(matching[0]["category"], sources, values)
+
     return {
         "activity_id": activity_id,
         "activity_name": matching[0]["activity_name"],
@@ -268,6 +397,7 @@ def compare_activity(activity_id, factors=None):
             "max_value": max_v,
             "diagnosis": diagnosis,
         },
+        "uncertainty": uncertainty,
         "key_insight": key_insight,
     }
 
@@ -465,6 +595,102 @@ def compare_all_countries(factors=None):
     return comparisons
 
 
+# ============================================================
+# SUBREGION COMPARISON
+# ============================================================
+
+def load_subregions():
+    """Load eGRID subregion data."""
+    path = DATA_DIR / "egrid_subregions.json"
+    if path.exists():
+        with open(path) as f:
+            return json.load(f)
+    return []
+
+
+def compare_subregions():
+    """Compare grid electricity across US eGRID subregions."""
+    subregions = load_subregions()
+    if not subregions:
+        return None
+
+    entries = []
+    for sr in subregions:
+        entries.append({
+            "subregion_code": sr["subregion_code"],
+            "subregion_name": sr["subregion_name"],
+            "value_kg_co2e": sr["factor"]["value_kg_co2e"],
+            "unit_denominator": sr["factor"]["unit_denominator"],
+            "original_value": sr["original_value"]["value"],
+            "original_unit": sr["original_value"]["unit"],
+        })
+
+    values = [e["value_kg_co2e"] for e in entries]
+    min_v, max_v = min(values), max(values)
+    avg = sum(values) / len(values)
+    variance_pct = round(((max_v - min_v) / avg) * 100, 1) if avg > 0 else 0
+    ratio = round(max_v / min_v, 1) if min_v > 0 else 0
+
+    highest = max(entries, key=lambda e: e["value_kg_co2e"])
+    lowest = min(entries, key=lambda e: e["value_kg_co2e"])
+
+    # US average for reference — match exact known scope string,
+    # fall back to mean of subregion values if not found
+    us_avg = None
+    try:
+        all_f = load_factors()
+        for f in all_f:
+            if (f["activity_id"] == "electricity_grid"
+                    and f.get("geographic_scope") == "US (national average)"):
+                us_avg = f["factor"]["value_kg_co2e"]
+                break
+    except Exception:
+        pass
+    if us_avg is None and values:
+        # Fallback: simple mean of subregions (not generation-weighted, but
+        # better than no reference line)
+        us_avg = round(sum(values) / len(values), 6)
+
+    return {
+        "activity_id": "electricity_grid",
+        "activity_name": "Grid Electricity — US eGRID Subregions",
+        "category": "electricity",
+        "normalized_unit": "kg CO2e per kWh",
+        "source": "EPA eGRID2023 (January 2025)",
+        "subregions": sorted(entries, key=lambda e: -e["value_kg_co2e"]),
+        "us_average": us_avg,
+        "variance": {
+            "percentage": variance_pct,
+            "level": _variance_level(variance_pct),
+            "min_value": min_v,
+            "max_value": max_v,
+            "highest_subregion": f"{highest['subregion_code']} ({highest['subregion_name']})",
+            "lowest_subregion": f"{lowest['subregion_code']} ({lowest['subregion_name']})",
+            "ratio": ratio,
+        },
+        "key_insight": (
+            f"Within the US alone, grid carbon intensity varies by {variance_pct}% across "
+            f"{len(entries)} eGRID subregions. {highest['subregion_code']} ({highest['subregion_name']}) "
+            f"is {ratio}x more carbon-intensive than {lowest['subregion_code']} ({lowest['subregion_name']}). "
+            "This means a company's Scope 2 emissions depend heavily on which US subregion they operate in. "
+            "Using the national average can over- or under-estimate by 2-3x."
+        ),
+    }
+
+
+# ============================================================
+# TEMPORAL TRENDS
+# ============================================================
+
+def load_trends():
+    """Load grid intensity trend data."""
+    path = DATA_DIR / "grid_trends.json"
+    if path.exists():
+        with open(path) as f:
+            return json.load(f)
+    return {}
+
+
 def print_comparison(comp):
     """Pretty-print a single activity comparison."""
     if not comp:
@@ -526,11 +752,21 @@ def main():
     # Country comparisons (from separate country_factors.json)
     country_comparisons = compare_all_countries()
 
-    # Write full comparison JSON (includes country comparisons)
+    # Subregion comparison
+    subregion_comparison = compare_subregions()
+
+    # Load temporal trends and attach to country comparisons
+    trends = load_trends()
+    if trends and "electricity_grid" in country_comparisons:
+        country_comparisons["electricity_grid"]["trends"] = trends
+
+    # Write full comparison JSON
     output = {
         "source_comparisons": comparisons,
         "country_comparisons": country_comparisons,
     }
+    if subregion_comparison:
+        output["subregion_comparison"] = subregion_comparison
     out_path = DATA_DIR / "full_comparison.json"
     with open(out_path, "w") as f:
         json.dump(output, f, indent=2)

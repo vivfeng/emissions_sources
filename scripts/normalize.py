@@ -119,20 +119,14 @@ def extract_epa(wb):
             "staleness_flag": False,
         })
 
-    # --- Electricity US Average (Table 6, row 366) ---
-    # Columns verified: col 5=CO2, col 6=CH4, col 7=N2O (total output)
-    co2_lb_mwh = _cell(ws, 366, 5)  # lb CO2 / MWh
-    ch4_lb_mwh = _cell(ws, 366, 6)  # lb CH4 / MWh
-    n2o_lb_mwh = _cell(ws, 366, 7)  # lb N2O / MWh
-
-    if co2_lb_mwh:
-        # Convert lb/MWh to kg CO2e/kWh
-        co2_kg_kwh = (co2_lb_mwh * LB_TO_KG) / MWH_TO_KWH
-        ch4_co2e_kg_kwh = (ch4_lb_mwh * LB_TO_KG * GWP_CH4) / MWH_TO_KWH if ch4_lb_mwh else 0
-        n2o_co2e_kg_kwh = (n2o_lb_mwh * LB_TO_KG * GWP_N2O) / MWH_TO_KWH if n2o_lb_mwh else 0
-        total = co2_kg_kwh + ch4_co2e_kg_kwh + n2o_co2e_kg_kwh
-
-        factors.append({
+    # --- Electricity (Table 6) ---
+    # Helper: convert eGRID lb/MWh values to a normalized factor dict
+    def _egrid_factor(co2_lb, ch4_lb, n2o_lb, geo_scope, original_unit_suffix, methodology_note):
+        co2_kg = (co2_lb * LB_TO_KG) / MWH_TO_KWH
+        ch4_co2e = (ch4_lb * LB_TO_KG * GWP_CH4) / MWH_TO_KWH if ch4_lb else 0
+        n2o_co2e = (n2o_lb * LB_TO_KG * GWP_N2O) / MWH_TO_KWH if n2o_lb else 0
+        total = co2_kg + ch4_co2e + n2o_co2e
+        return {
             "activity_id": "electricity_grid",
             "activity_name": "Grid Electricity",
             "category": "electricity",
@@ -141,19 +135,52 @@ def extract_epa(wb):
             "factor": {
                 "value_kg_co2e": round(total, 6),
                 "unit_denominator": "kWh",
-                "co2_component": round(co2_kg_kwh, 6),
-                "ch4_component": round(ch4_co2e_kg_kwh, 6),
-                "n2o_component": round(n2o_co2e_kg_kwh, 6),
+                "co2_component": round(co2_kg, 6),
+                "ch4_component": round(ch4_co2e, 6),
+                "n2o_component": round(n2o_co2e, 6),
             },
             "original_value": {
-                "value": co2_lb_mwh,
-                "unit": "lb CO2 per MWh (total output, US average)",
-                "notes": "Source: eGRID2023. Converted from lb/MWh to kg CO2e/kWh."
+                "value": co2_lb,
+                "unit": f"lb CO2 per MWh (total output{original_unit_suffix})",
+                "notes": methodology_note,
             },
-            "geographic_scope": "US (national average)",
-            "methodology_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
+            "geographic_scope": geo_scope,
+            "methodology_notes": methodology_note,
             "staleness_flag": False,
-        })
+        }
+
+    # US Average (row 366)
+    co2_lb_mwh = _cell(ws, 366, 5)
+    ch4_lb_mwh = _cell(ws, 366, 6)
+    n2o_lb_mwh = _cell(ws, 366, 7)
+    if co2_lb_mwh:
+        factors.append(_egrid_factor(
+            co2_lb_mwh, ch4_lb_mwh, n2o_lb_mwh,
+            geo_scope="US (national average)",
+            original_unit_suffix=", US average",
+            methodology_note="eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
+        ))
+
+    # eGRID Subregions (rows 339-365, 27 subregions)
+    egrid_subregions = []
+    for row in range(339, 366):
+        acronym = _cell(ws, row, 3)
+        name = _cell(ws, row, 4)
+        co2 = _cell(ws, row, 5)
+        ch4 = _cell(ws, row, 6)
+        n2o = _cell(ws, row, 7)
+
+        if acronym and co2:
+            entry = _egrid_factor(
+                co2, ch4, n2o,
+                geo_scope=f"US - {acronym}",
+                original_unit_suffix="",
+                methodology_note=f"eGRID2023 total output emission factor for subregion {acronym} ({name}). CH4 and N2O converted to CO2e using AR5 GWPs.",
+            )
+            entry["subregion_code"] = str(acronym).strip()
+            entry["subregion_name"] = str(name).strip()
+            entry["original_value"]["notes"] = f"eGRID2023 subregion: {acronym} ({name})"
+            egrid_subregions.append(entry)
 
     # --- Air Travel (Table 10, rows 513-515) ---
     air_rows = [
@@ -328,7 +355,7 @@ def extract_epa(wb):
             "staleness_flag": False,
         })
 
-    return factors
+    return factors, egrid_subregions
 
 
 # ============================================================
@@ -894,8 +921,9 @@ def main():
     # EPA
     print("Extracting EPA factors...")
     wb_epa = openpyxl.load_workbook(RAW_DIR / "epa-ghg-emission-factors-hub-2025.xlsx", data_only=True)
-    epa_factors = extract_epa(wb_epa)
+    epa_factors, egrid_subregions = extract_epa(wb_epa)
     print(f"  Found {len(epa_factors)} factors")
+    print(f"  Found {len(egrid_subregions)} eGRID subregions")
     all_factors.extend(epa_factors)
 
     # DEFRA
@@ -925,6 +953,11 @@ def main():
     # Write combined file (source factors only — no country data)
     with open(OUT_DIR / "all_factors.json", "w") as f:
         json.dump(all_factors, f, indent=2)
+
+    # Write eGRID subregion data
+    with open(OUT_DIR / "egrid_subregions.json", "w") as f:
+        json.dump(egrid_subregions, f, indent=2)
+    print(f"  eGRID subregions written to {OUT_DIR / 'egrid_subregions.json'}")
 
     # Load and write country-specific factors separately
     country_factors_path = Path(__file__).parent.parent / "data" / "country_factors.json"

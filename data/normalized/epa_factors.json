@@ -49,7 +49,7 @@
     "original_value": {
       "value": 771.523,
       "unit": "lb CO2 per MWh (total output, US average)",
-      "notes": "Source: eGRID2023. Converted from lb/MWh to kg CO2e/kWh."
+      "notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs."
     },
     "geographic_scope": "US (national average)",
     "methodology_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",

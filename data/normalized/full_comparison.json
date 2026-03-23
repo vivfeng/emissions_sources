@@ -34,6 +34,13 @@
         "max_value": 0.22928,
         "diagnosis": null
       },
+      "uncertainty": {
+        "low": 0.11464,
+        "high": 0.34392,
+        "spread_pct": 100,
+        "method": "ipcc_default",
+        "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
+      },
       "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
     "air_travel_domestic_uk_ghgp": {
@@ -69,6 +76,13 @@
         "min_value": 0.129907,
         "max_value": 0.129907,
         "diagnosis": null
+      },
+      "uncertainty": {
+        "low": 0.064953,
+        "high": 0.19486,
+        "spread_pct": 100,
+        "method": "ipcc_default",
+        "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
       "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
@@ -106,6 +120,13 @@
         "max_value": 0.14253,
         "diagnosis": null
       },
+      "uncertainty": {
+        "low": 0.071265,
+        "high": 0.213795,
+        "spread_pct": 100,
+        "method": "ipcc_default",
+        "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
+      },
       "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
     "air_travel_international_uk_ghgp": {
@@ -141,6 +162,13 @@
         "min_value": 0.09698,
         "max_value": 0.09698,
         "diagnosis": null
+      },
+      "uncertainty": {
+        "low": 0.04849,
+        "high": 0.14547,
+        "spread_pct": 100,
+        "method": "ipcc_default",
+        "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
       "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
@@ -216,6 +244,13 @@
         "max_value": 0.15282,
         "diagnosis": "Radiative forcing (RF) inclusion. DEFRA includes RF (accounting for non-CO2 climate effects of aviation like contrails and NOx at altitude), which roughly increases the climate impact by 50-90%. EPA and GHG Protocol do not include RF. This is a genuine methodological choice, not an error."
       },
+      "uncertainty": {
+        "low": 0.10215,
+        "high": 0.15282,
+        "spread_pct": 42.6,
+        "method": "cross_source_spread",
+        "notes": "Range across 3 independent sources. True uncertainty may be wider."
+      },
       "key_insight": "These 3 sources vary by 42.6%. Radiative forcing (RF) inclusion. DEFRA includes RF (accounting for non-CO2 climate effects of aviation like contrails and NOx at altitude), which roughly increases the climate impact by 50-90%. EPA and GHG Protocol do not include RF. This is a genuine methodological choice, not an error."
     },
     "air_travel_long_haul_uk_ghgp": {
@@ -251,6 +286,13 @@
         "min_value": 0.101975,
         "max_value": 0.101975,
         "diagnosis": null
+      },
+      "uncertainty": {
+        "low": 0.050987,
+        "high": 0.152963,
+        "spread_pct": 100,
+        "method": "ipcc_default",
+        "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
       "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
@@ -307,6 +349,13 @@
         "max_value": 0.080842,
         "diagnosis": "Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
       },
+      "uncertainty": {
+        "low": 0.080842,
+        "high": 0.080842,
+        "spread_pct": 0.0,
+        "method": "cross_source_spread",
+        "notes": "Range across 2 independent sources. True uncertainty may be wider."
+      },
       "key_insight": "These 2 sources vary by 0.0%. Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
     },
     "air_travel_short_haul": {
@@ -362,6 +411,13 @@
         "max_value": 0.129822,
         "diagnosis": "Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
       },
+      "uncertainty": {
+        "low": 0.129822,
+        "high": 0.129822,
+        "spread_pct": 0.0,
+        "method": "cross_source_spread",
+        "notes": "Range across 2 independent sources. True uncertainty may be wider."
+      },
       "key_insight": "These 2 sources vary by 0.0%. Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
     },
     "air_travel_short_haul_defra": {
@@ -397,6 +453,13 @@
         "min_value": 0.12786,
         "max_value": 0.12786,
         "diagnosis": null
+      },
+      "uncertainty": {
+        "low": 0.06393,
+        "high": 0.19179,
+        "spread_pct": 100,
+        "method": "ipcc_default",
+        "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
       "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
@@ -434,6 +497,13 @@
         "max_value": 0.081087,
         "diagnosis": null
       },
+      "uncertainty": {
+        "low": 0.040544,
+        "high": 0.121631,
+        "spread_pct": 100,
+        "method": "ipcc_default",
+        "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
+      },
       "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
     "aluminum": {
@@ -469,6 +539,13 @@
         "min_value": 9115.90131,
         "max_value": 9115.90131,
         "diagnosis": null
+      },
+      "uncertainty": {
+        "low": 6836.925982,
+        "high": 11394.876637,
+        "spread_pct": 50,
+        "method": "ipcc_default",
+        "notes": "Primary vs recycled content, production process variation (e.g., BF-BOF vs EAF for steel), and system boundary choices."
       },
       "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
@@ -544,6 +621,13 @@
         "max_value": 0.10385,
         "diagnosis": "Geographic fleet composition. US and UK vehicle fleets differ in average vehicle size, fuel efficiency standards, fuel mix, and public transit ridership patterns. US buses tend to show lower per-passenger-km emissions partly due to different occupancy assumptions."
       },
+      "uncertainty": {
+        "low": 0.041403,
+        "high": 0.10385,
+        "spread_pct": 98.7,
+        "method": "cross_source_spread",
+        "notes": "Range across 3 independent sources. True uncertainty may be wider."
+      },
       "key_insight": "These 3 sources vary by 98.7%. Geographic fleet composition. US and UK vehicle fleets differ in average vehicle size, fuel efficiency standards, fuel mix, and public transit ridership patterns. US buses tend to show lower per-passenger-km emissions partly due to different occupancy assumptions."
     },
     "electricity_grid": {
@@ -567,7 +651,7 @@
           "n2o_component": 0.000962,
           "original_value": 771.523,
           "original_unit": "lb CO2 per MWh (total output, US average)",
-          "original_notes": "Source: eGRID2023. Converted from lb/MWh to kg CO2e/kWh.",
+          "original_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
           "geographic_scope": "US (national average)",
           "methodology_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
           "staleness_flag": false
@@ -598,6 +682,13 @@
         "min_value": 0.177,
         "max_value": 0.351642,
         "diagnosis": "Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference \u2014 it's a real physical difference in how electricity is generated."
+      },
+      "uncertainty": {
+        "low": 0.177,
+        "high": 0.351642,
+        "spread_pct": 66.1,
+        "method": "cross_source_spread",
+        "notes": "Range across 2 independent sources. True uncertainty may be wider."
       },
       "key_insight": "These 2 sources vary by 66.1%. Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference \u2014 it's a real physical difference in how electricity is generated."
     },
@@ -635,6 +726,13 @@
         "max_value": 0.812931,
         "diagnosis": null
       },
+      "uncertainty": {
+        "low": 0.569052,
+        "high": 1.05681,
+        "spread_pct": 60,
+        "method": "ipcc_default",
+        "notes": "Payload utilization, route efficiency, vehicle age, and per-tonne-km vs per-vehicle-km basis choices."
+      },
       "key_insight": "Only one source covers this activity (EPA GHG Emission Factors Hub). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
     "hotel_stay_uk": {
@@ -670,6 +768,13 @@
         "min_value": 10.4,
         "max_value": 10.4,
         "diagnosis": null
+      },
+      "uncertainty": {
+        "low": 6.24,
+        "high": 14.56,
+        "spread_pct": 80,
+        "method": "ipcc_default",
+        "notes": "Hotel energy use varies by climate zone, building age, HVAC type, and occupancy. Few standardized measurement approaches."
       },
       "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
@@ -707,6 +812,13 @@
         "max_value": 16.1,
         "diagnosis": null
       },
+      "uncertainty": {
+        "low": 9.66,
+        "high": 22.54,
+        "spread_pct": 80,
+        "method": "ipcc_default",
+        "notes": "Hotel energy use varies by climate zone, building age, HVAC type, and occupancy. Few standardized measurement approaches."
+      },
       "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
     "light_duty_truck": {
@@ -742,6 +854,13 @@
         "min_value": 0.246459,
         "max_value": 0.246459,
         "diagnosis": null
+      },
+      "uncertainty": {
+        "low": 0.172521,
+        "high": 0.320397,
+        "spread_pct": 60,
+        "method": "ipcc_default",
+        "notes": "Fleet composition, occupancy assumptions, and real-world vs test-cycle driving conditions vary widely across geographies."
       },
       "key_insight": "Only one source covers this activity (EPA GHG Emission Factors Hub). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     },
@@ -817,6 +936,13 @@
         "max_value": 0.2027,
         "diagnosis": "Energy measurement basis. EPA uses Higher Heating Value (HHV/Gross CV), while DEFRA and IPCC use Lower Heating Value (LHV/Net CV). HHV includes the latent heat of water vapor in combustion products; LHV does not. The difference is ~10% for natural gas. Additionally, the IPCC factor (via GHG Protocol) is CO2-only while EPA/DEFRA include CH4/N2O."
       },
+      "uncertainty": {
+        "low": 0.181234,
+        "high": 0.2027,
+        "spread_pct": 11.0,
+        "method": "cross_source_spread",
+        "notes": "Range across 3 independent sources. True uncertainty may be wider."
+      },
       "key_insight": "These 3 sources vary by 11.0%. Energy measurement basis. EPA uses Higher Heating Value (HHV/Gross CV), while DEFRA and IPCC use Lower Heating Value (LHV/Net CV). HHV includes the latent heat of water vapor in combustion products; LHV does not. The difference is ~10% for natural gas. Additionally, the IPCC factor (via GHG Protocol) is CO2-only while EPA/DEFRA include CH4/N2O."
     },
     "passenger_car": {
@@ -871,6 +997,13 @@
         "min_value": 0.109321,
         "max_value": 0.185523,
         "diagnosis": "Data vintage. GHG Protocol Cross-Sector Emission Factors uses older underlying data. Emission factors change as energy grids evolve, vehicle fleets turn over, and measurement methodologies improve."
+      },
+      "uncertainty": {
+        "low": 0.109321,
+        "high": 0.185523,
+        "spread_pct": 51.7,
+        "method": "cross_source_spread",
+        "notes": "Range across 2 independent sources. True uncertainty may be wider."
       },
       "key_insight": "These 2 sources vary by 51.7%. Data vintage. GHG Protocol Cross-Sector Emission Factors uses older underlying data. Emission factors change as energy grids evolve, vehicle fleets turn over, and measurement methodologies improve."
     },
@@ -927,6 +1060,13 @@
         "max_value": 0.06012,
         "diagnosis": "Geographic infrastructure. UK rail is partially electrified with higher occupancy rates. US intercity rail (Amtrak) covers longer distances with lower occupancy, affecting per-passenger-km intensity."
       },
+      "uncertainty": {
+        "low": 0.03546,
+        "high": 0.06012,
+        "spread_pct": 51.6,
+        "method": "cross_source_spread",
+        "notes": "Range across 2 independent sources. True uncertainty may be wider."
+      },
       "key_insight": "These 2 sources vary by 51.6%. Geographic infrastructure. UK rail is partially electrified with higher occupancy rates. US intercity rail (Amtrak) covers longer distances with lower occupancy, affecting per-passenger-km intensity."
     },
     "steel": {
@@ -962,6 +1102,13 @@
         "min_value": 2863.90131,
         "max_value": 2863.90131,
         "diagnosis": null
+      },
+      "uncertainty": {
+        "low": 2147.925982,
+        "high": 3579.876638,
+        "spread_pct": 50,
+        "method": "ipcc_default",
+        "notes": "Primary vs recycled content, production process variation (e.g., BF-BOF vs EAF for steel), and system boundary choices."
       },
       "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
     }
@@ -1038,7 +1185,239 @@
         "lowest_country": "Germany",
         "ratio": 1.9
       },
-      "key_insight": "These 5 countries vary by 69.8% in grid carbon intensity. India (1.9x Germany) reflects real differences in electricity generation mix: India's grid is ~75% coal, while Germany has exceeded 60% renewables. This is not a methodology difference \u2014 it's a physical difference in how electricity is generated. Implication: the same kWh of electricity has very different climate impact depending on where it's consumed. A company's Scope 2 emissions are heavily geography-dependent."
+      "key_insight": "These 5 countries vary by 69.8% in grid carbon intensity. India (1.9x Germany) reflects real differences in electricity generation mix: India's grid is ~75% coal, while Germany has exceeded 60% renewables. This is not a methodology difference \u2014 it's a physical difference in how electricity is generated. Implication: the same kWh of electricity has very different climate impact depending on where it's consumed. A company's Scope 2 emissions are heavily geography-dependent.",
+      "trends": {
+        "US": {
+          "country_code": "US",
+          "country_name": "United States",
+          "unit": "g CO2/kWh",
+          "source": "Ember Global Electricity Review (2025)",
+          "years": [
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "values": [
+            468,
+            453,
+            440,
+            431,
+            407,
+            388,
+            399,
+            394,
+            388,
+            384
+          ],
+          "yoy_changes_pct": [
+            -3.2,
+            -2.9,
+            -2.0,
+            -5.6,
+            -4.7,
+            2.8,
+            -1.3,
+            -1.5,
+            -1.0
+          ],
+          "total_change_pct": -17.9,
+          "avg_annual_change_pct": -2.0,
+          "direction": "declining",
+          "period": "2015-2024",
+          "notes": "Driven by coal-to-gas switching and wind/solar growth. 2021 uptick from post-COVID demand rebound."
+        },
+        "CN": {
+          "country_code": "CN",
+          "country_name": "China",
+          "unit": "g CO2/kWh",
+          "source": "Ember Global Electricity Review (2025)",
+          "years": [
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "values": [
+            623,
+            614,
+            615,
+            608,
+            594,
+            581,
+            581,
+            577,
+            564,
+            560
+          ],
+          "yoy_changes_pct": [
+            -1.4,
+            0.2,
+            -1.1,
+            -2.3,
+            -2.2,
+            0.0,
+            -0.7,
+            -2.3,
+            -0.7
+          ],
+          "total_change_pct": -10.1,
+          "avg_annual_change_pct": -1.1,
+          "direction": "declining",
+          "period": "2015-2024",
+          "notes": "Slow decline despite massive renewable buildout, offset by rising absolute demand. Coal still ~60% of generation."
+        },
+        "IN": {
+          "country_code": "IN",
+          "country_name": "India",
+          "unit": "g CO2/kWh",
+          "source": "Ember Global Electricity Review (2025)",
+          "years": [
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "values": [
+            743,
+            740,
+            731,
+            727,
+            720,
+            710,
+            716,
+            716,
+            712,
+            708
+          ],
+          "yoy_changes_pct": [
+            -0.4,
+            -1.2,
+            -0.5,
+            -1.0,
+            -1.4,
+            0.8,
+            0.0,
+            -0.6,
+            -0.6
+          ],
+          "total_change_pct": -4.7,
+          "avg_annual_change_pct": -0.5,
+          "direction": "flat",
+          "period": "2015-2024",
+          "notes": "Modest decline. Coal remains ~75% of generation. Solar growing fast but from small base."
+        },
+        "DE": {
+          "country_code": "DE",
+          "country_name": "Germany",
+          "unit": "g CO2/kWh",
+          "source": "Ember Global Electricity Review (2025)",
+          "years": [
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "values": [
+            528,
+            516,
+            485,
+            468,
+            401,
+            338,
+            349,
+            366,
+            331,
+            310
+          ],
+          "yoy_changes_pct": [
+            -2.3,
+            -6.0,
+            -3.5,
+            -14.3,
+            -15.7,
+            3.3,
+            4.9,
+            -9.6,
+            -6.3
+          ],
+          "total_change_pct": -41.3,
+          "avg_annual_change_pct": -4.6,
+          "direction": "declining",
+          "period": "2015-2024",
+          "notes": "Fastest decline. Energiewende driving coal phase-out, 60%+ renewables by 2024. 2022 uptick from gas crisis/coal restart."
+        },
+        "RU": {
+          "country_code": "RU",
+          "country_name": "Russia",
+          "unit": "g CO2/kWh",
+          "source": "Ember Global Electricity Review (2025)",
+          "years": [
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "values": [
+            332,
+            326,
+            324,
+            325,
+            322,
+            319,
+            328,
+            333,
+            335,
+            338
+          ],
+          "yoy_changes_pct": [
+            -1.8,
+            -0.6,
+            0.3,
+            -0.9,
+            -0.9,
+            2.8,
+            1.5,
+            0.6,
+            0.9
+          ],
+          "total_change_pct": 1.8,
+          "avg_annual_change_pct": 0.2,
+          "direction": "flat",
+          "period": "2015-2024",
+          "notes": "Relatively low baseline due to large hydro/nuclear share. Slight increase in recent years from gas generation growth."
+        }
+      }
     },
     "natural_gas_stationary": {
       "activity_id": "natural_gas_stationary",
@@ -1259,5 +1638,241 @@
       },
       "key_insight": "These 5 countries vary by 136.1% (United States is 7.3x India). This variance is driven almost entirely by occupancy, not technology. Indian urban buses operate at extremely high occupancy (60-80+ passengers, often standing room), producing just 15 g CO2/passenger-km. US transit buses average ~25% capacity utilization, inflating per-passenger emissions to 110 g/km. Per vehicle-km, all countries' diesel buses emit comparably (~800-1200 g CO2/vkm). The per-passenger-km metric amplifies ridership differences. Data quality caveat: India, Russia use stale data (2+ years old), so these figures may not reflect current conditions."
     }
+  },
+  "subregion_comparison": {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity \u2014 US eGRID Subregions",
+    "category": "electricity",
+    "normalized_unit": "kg CO2e per kWh",
+    "source": "EPA eGRID2023 (January 2025)",
+    "subregions": [
+      {
+        "subregion_code": "PRMS",
+        "subregion_name": "Puerto Rico Miscellaneous",
+        "value_kg_co2e": 0.702292,
+        "unit_denominator": "kWh",
+        "original_value": 1542.952,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "HIOA",
+        "subregion_name": "HICC Oahu",
+        "value_kg_co2e": 0.679789,
+        "unit_denominator": "kWh",
+        "original_value": 1489.362,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "MROE",
+        "subregion_name": "MRO East",
+        "value_kg_co2e": 0.639455,
+        "unit_denominator": "kWh",
+        "original_value": 1402.005,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "SRMW",
+        "subregion_name": "SERC Midwest",
+        "value_kg_co2e": 0.565649,
+        "unit_denominator": "kWh",
+        "original_value": 1238.311,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "NYLI",
+        "subregion_name": "NPCC Long Island",
+        "value_kg_co2e": 0.539488,
+        "unit_denominator": "kWh",
+        "original_value": 1180.678,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "HIMS",
+        "subregion_name": "HICC Miscellaneous",
+        "value_kg_co2e": 0.513482,
+        "unit_denominator": "kWh",
+        "original_value": 1122.117,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "RMPA",
+        "subregion_name": "WECC Rockies",
+        "value_kg_co2e": 0.472637,
+        "unit_denominator": "kWh",
+        "original_value": 1036.021,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "NYCW",
+        "subregion_name": "NPCC NYC/Westchester",
+        "value_kg_co2e": 0.442775,
+        "unit_denominator": "kWh",
+        "original_value": 974.656,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "RFCM",
+        "subregion_name": "RFC Michigan",
+        "value_kg_co2e": 0.438758,
+        "unit_denominator": "kWh",
+        "original_value": 962.084,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "MROW",
+        "subregion_name": "MRO West",
+        "value_kg_co2e": 0.42023,
+        "unit_denominator": "kWh",
+        "original_value": 920.022,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "RFCW",
+        "subregion_name": "RFC West",
+        "value_kg_co2e": 0.415472,
+        "unit_denominator": "kWh",
+        "original_value": 911.321,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "AKGD",
+        "subregion_name": "ASCC Alaska Grid",
+        "value_kg_co2e": 0.410316,
+        "unit_denominator": "kWh",
+        "original_value": 899.003,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "SRTV",
+        "subregion_name": "SERC Tennessee Valley",
+        "value_kg_co2e": 0.408605,
+        "unit_denominator": "kWh",
+        "original_value": 895.693,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "SPSO",
+        "subregion_name": "SPP South",
+        "value_kg_co2e": 0.405858,
+        "unit_denominator": "kWh",
+        "original_value": 891.103,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "SPNO",
+        "subregion_name": "SPP North",
+        "value_kg_co2e": 0.39351,
+        "unit_denominator": "kWh",
+        "original_value": 861.925,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "SRSO",
+        "subregion_name": "SERC South",
+        "value_kg_co2e": 0.383083,
+        "unit_denominator": "kWh",
+        "original_value": 840.893,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "FRCC",
+        "subregion_name": "FRCC All",
+        "value_kg_co2e": 0.364866,
+        "unit_denominator": "kWh",
+        "original_value": 801.891,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "AZNM",
+        "subregion_name": "WECC Southwest",
+        "value_kg_co2e": 0.337268,
+        "unit_denominator": "kWh",
+        "original_value": 740.81,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "SRMV",
+        "subregion_name": "SERC Mississippi Valley",
+        "value_kg_co2e": 0.33628,
+        "unit_denominator": "kWh",
+        "original_value": 739.415,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "ERCT",
+        "subregion_name": "ERCOT All",
+        "value_kg_co2e": 0.336036,
+        "unit_denominator": "kWh",
+        "original_value": 738.038,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "NWPP",
+        "subregion_name": "WECC Northwest",
+        "value_kg_co2e": 0.288184,
+        "unit_denominator": "kWh",
+        "original_value": 631.705,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "RFCE",
+        "subregion_name": "RFC East",
+        "value_kg_co2e": 0.270828,
+        "unit_denominator": "kWh",
+        "original_value": 594.74,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "SRVC",
+        "subregion_name": "SERC Virginia/Carolina",
+        "value_kg_co2e": 0.269016,
+        "unit_denominator": "kWh",
+        "original_value": 590.229,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "NEWE",
+        "subregion_name": "NPCC New England",
+        "value_kg_co2e": 0.245451,
+        "unit_denominator": "kWh",
+        "original_value": 537.243,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "AKMS",
+        "subregion_name": "ASCC Miscellaneous",
+        "value_kg_co2e": 0.236427,
+        "unit_denominator": "kWh",
+        "original_value": 519.445,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "CAMX",
+        "subregion_name": "WECC California",
+        "value_kg_co2e": 0.198741,
+        "unit_denominator": "kWh",
+        "original_value": 436.655,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "NYUP",
+        "subregion_name": "NPCC Upstate NY",
+        "value_kg_co2e": 0.109571,
+        "unit_denominator": "kWh",
+        "original_value": 240.99,
+        "original_unit": "lb CO2 per MWh (total output)"
+      }
+    ],
+    "us_average": 0.351642,
+    "variance": {
+      "percentage": 147.9,
+      "level": "very_high",
+      "min_value": 0.109571,
+      "max_value": 0.702292,
+      "highest_subregion": "PRMS (Puerto Rico Miscellaneous)",
+      "lowest_subregion": "NYUP (NPCC Upstate NY)",
+      "ratio": 6.4
+    },
+    "key_insight": "Within the US alone, grid carbon intensity varies by 147.9% across 27 eGRID subregions. PRMS (Puerto Rico Miscellaneous) is 6.4x more carbon-intensive than NYUP (NPCC Upstate NY). This means a company's Scope 2 emissions depend heavily on which US subregion they operate in. Using the national average can over- or under-estimate by 2-3x."
   }
 }

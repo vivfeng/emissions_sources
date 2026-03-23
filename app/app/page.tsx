@@ -497,7 +497,7 @@ function CountryComparisonView({ comp }: { comp: CountryComparison }) {
               Trend Insight
             </div>
             <p className="text-xs text-slate-700 leading-relaxed">
-              Germany has cut grid intensity by 34% since 2015, the fastest among the top 5 emitters.
+              Germany has cut grid intensity by 41% since 2015, the fastest among the top 5 emitters.
               China&apos;s absolute renewable capacity is the world&apos;s largest, but rising demand keeps
               intensity declining slowly (~10%). Russia is the only country where grid intensity is rising.
               These trends mean that Scope 2 emission factors have a shelf life &mdash; using a factor
@@ -1051,7 +1051,7 @@ export default function Home() {
               </p>
               <p>
                 <span className="font-medium">4. Factors have a shelf life.</span>{" "}Germany&apos;s grid intensity
-                fell 34% from 2015&ndash;2024. Using a 3-year-old factor materially misstates the footprint.
+                fell 41% from 2015&ndash;2024. Using a 3-year-old factor materially misstates the footprint.
               </p>
             </div>
           </div>
