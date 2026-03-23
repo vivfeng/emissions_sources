@@ -278,6 +278,111 @@ def compare_all(factors=None):
     return comparisons
 
 
+# ============================================================
+# COUNTRY COMPARISON ENGINE
+# ============================================================
+
+COUNTRY_NAMES = {
+    "US": "United States",
+    "CN": "China",
+    "IN": "India",
+    "DE": "Germany",
+    "RU": "Russia",
+    "GB": "United Kingdom",
+}
+
+COUNTRY_ACTIVITIES = [
+    "electricity_grid",
+    "natural_gas_stationary",
+    "passenger_car_gasoline",
+    "bus",
+]
+
+
+def compare_by_country(activity_id, factors=None):
+    """
+    Compare emission factors for the same activity across countries.
+
+    Groups factors by country_code and returns per-country values
+    with cross-country variance calculation.
+    """
+    if factors is None:
+        factors = load_factors()
+
+    matching = [f for f in factors if f["activity_id"] == activity_id and f.get("country_code")]
+    if not matching:
+        return None
+
+    # Group by country
+    by_country = {}
+    for f in matching:
+        cc = f["country_code"]
+        if cc not in by_country:
+            by_country[cc] = []
+        by_country[cc].append(f)
+
+    if len(by_country) < 2:
+        return None
+
+    # Build country entries (take first factor per country)
+    countries = []
+    for cc, country_factors in sorted(by_country.items()):
+        f = country_factors[0]  # primary factor for this country
+        countries.append({
+            "country_code": cc,
+            "country_name": COUNTRY_NAMES.get(cc, cc),
+            "value_kg_co2e": f["factor"]["value_kg_co2e"],
+            "unit_denominator": f["factor"]["unit_denominator"],
+            "source_name": f["source"]["name"],
+            "source_edition": f["source"]["edition"],
+            "geographic_scope": f["geographic_scope"],
+            "methodology_notes": f.get("methodology_notes", ""),
+            "staleness_flag": f.get("staleness_flag", False),
+        })
+
+    # Calculate cross-country variance
+    values = [c["value_kg_co2e"] for c in countries]
+    min_v, max_v = min(values), max(values)
+    avg = sum(values) / len(values)
+    variance_pct = round(((max_v - min_v) / avg) * 100, 1) if avg > 0 else 0
+
+    # Find highest and lowest countries
+    highest = max(countries, key=lambda c: c["value_kg_co2e"])
+    lowest = min(countries, key=lambda c: c["value_kg_co2e"])
+    ratio = round(highest["value_kg_co2e"] / lowest["value_kg_co2e"], 1) if lowest["value_kg_co2e"] > 0 else 0
+
+    return {
+        "activity_id": activity_id,
+        "activity_name": matching[0]["activity_name"],
+        "category": matching[0]["category"],
+        "normalized_unit": f"kg CO2e per {matching[0]['factor']['unit_denominator']}",
+        "countries": countries,
+        "variance": {
+            "percentage": variance_pct,
+            "level": _variance_level(variance_pct),
+            "min_value": min_v,
+            "max_value": max_v,
+            "highest_country": highest["country_name"],
+            "lowest_country": lowest["country_name"],
+            "ratio": ratio,
+        },
+    }
+
+
+def compare_all_countries(factors=None):
+    """Compare all country-enabled activities across countries."""
+    if factors is None:
+        factors = load_factors()
+
+    comparisons = {}
+    for aid in COUNTRY_ACTIVITIES:
+        comp = compare_by_country(aid, factors)
+        if comp:
+            comparisons[aid] = comp
+
+    return comparisons
+
+
 def print_comparison(comp):
     """Pretty-print a single activity comparison."""
     if not comp:
@@ -336,10 +441,17 @@ def main():
     factors = load_factors()
     comparisons = compare_all(factors)
 
-    # Write full comparison JSON
+    # Country comparisons
+    country_comparisons = compare_all_countries(factors)
+
+    # Write full comparison JSON (includes country comparisons)
+    output = {
+        "source_comparisons": comparisons,
+        "country_comparisons": country_comparisons,
+    }
     out_path = DATA_DIR / "full_comparison.json"
     with open(out_path, "w") as f:
-        json.dump(comparisons, f, indent=2)
+        json.dump(output, f, indent=2)
     print(f"Full comparison written to {out_path}")
 
     # Print summary of all activities with variance
@@ -359,6 +471,27 @@ def main():
     multi_source = {aid: comp for aid, comp in comparisons.items() if len(comp["sources"]) >= 2}
     for aid in sorted(multi_source, key=lambda x: -(multi_source[x]["variance"]["percentage"] or 0)):
         print_comparison(multi_source[aid])
+
+    # Print country comparisons
+    if country_comparisons:
+        print("\n" + "=" * 70)
+        print("  COUNTRY COMPARISONS")
+        print("=" * 70)
+        print(f"\n  {'Activity':<40} {'Countries':>9} {'Variance':>10} {'Highest':>12} {'Lowest':>12}")
+        print("  " + "-" * 85)
+        for aid, comp in sorted(country_comparisons.items(), key=lambda x: -x[1]["variance"]["percentage"]):
+            v = comp["variance"]
+            print(f"  {comp['activity_name']:<40} {len(comp['countries']):>9} {v['percentage']:>9}% {v['highest_country']:>12} {v['lowest_country']:>12}")
+
+        for aid, comp in sorted(country_comparisons.items(), key=lambda x: -x[1]["variance"]["percentage"]):
+            print(f"\n  {'─'*70}")
+            print(f"  {comp['activity_name']} ({comp['normalized_unit']})")
+            print(f"  Cross-country variance: {comp['variance']['percentage']}% | "
+                  f"{comp['variance']['highest_country']} is {comp['variance']['ratio']}x {comp['variance']['lowest_country']}")
+            print()
+            for c in sorted(comp["countries"], key=lambda x: -x["value_kg_co2e"]):
+                stale = " [STALE]" if c["staleness_flag"] else ""
+                print(f"    {c['country_name']:<20} {c['value_kg_co2e']:>10.4f}  ({c['source_name'][:40]}){stale}")
 
 
 if __name__ == "__main__":

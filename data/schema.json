@@ -59,6 +59,10 @@
       "type": "string",
       "description": "Geographic applicability (e.g., 'US', 'UK', 'Global')"
     },
+    "country_code": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code (e.g., 'US', 'GB', 'CN', 'IN', 'DE', 'RU'). Optional — omitted for factors without a specific country assignment."
+    },
     "methodology_notes": {
       "type": "string",
       "description": "Key assumptions or methodology choices that affect the number"
