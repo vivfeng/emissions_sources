@@ -162,9 +162,18 @@ def _variance_level(pct):
 # ============================================================
 
 def load_factors():
-    """Load all normalized factors."""
+    """Load all normalized source factors (EPA, DEFRA, GHG Protocol)."""
     with open(DATA_DIR / "all_factors.json") as f:
         return json.load(f)
+
+
+def load_country_factors():
+    """Load country-specific factors (separate from source factors)."""
+    path = DATA_DIR / "country_factors.json"
+    if path.exists():
+        with open(path) as f:
+            return json.load(f)
+    return []
 
 
 def get_activity_ids(factors=None):
@@ -299,6 +308,74 @@ COUNTRY_ACTIVITIES = [
 ]
 
 
+def _diagnose_country_variance(activity_id, countries, variance):
+    """Generate a plain-language explanation of cross-country variance."""
+    highest = variance["highest_country"]
+    lowest = variance["lowest_country"]
+    ratio = variance["ratio"]
+    pct = variance["percentage"]
+
+    stale_countries = [c["country_name"] for c in countries if c["staleness_flag"]]
+    stale_note = ""
+    if stale_countries:
+        stale_note = (
+            f" Data quality caveat: {', '.join(stale_countries)} "
+            f"{'uses' if len(stale_countries) == 1 else 'use'} stale data (2+ years old), "
+            "so these figures may not reflect current conditions."
+        )
+
+    if "electricity" in activity_id:
+        return (
+            f"These {len(countries)} countries vary by {pct}% in grid carbon intensity. "
+            f"{highest} ({ratio}x {lowest}) reflects real differences in electricity generation mix: "
+            "India's grid is ~75% coal, while Germany has exceeded 60% renewables. "
+            "This is not a methodology difference — it's a physical difference in how electricity is generated. "
+            "Implication: the same kWh of electricity has very different climate impact depending on where it's consumed. "
+            "A company's Scope 2 emissions are heavily geography-dependent."
+            + stale_note
+        )
+
+    if "natural_gas" in activity_id:
+        return (
+            f"All {len(countries)} countries show identical factors (0% variance) because the IPCC provides "
+            "a single global default for natural gas. Unlike electricity or transport, natural gas composition "
+            "is relatively uniform worldwide — the combustion chemistry doesn't vary by country. "
+            "This is itself a key finding: some emission sources are genuinely geography-independent. "
+            "The real country-level variation in natural gas emissions comes from upstream methane leakage rates "
+            "(not captured here), which can vary 2-10x between countries."
+        )
+
+    if "bus" in activity_id:
+        return (
+            f"These {len(countries)} countries vary by {pct}% ({highest} is {ratio}x {lowest}). "
+            "This variance is driven almost entirely by occupancy, not technology. "
+            "Indian urban buses operate at extremely high occupancy (60-80+ passengers, often standing room), "
+            "producing just 15 g CO2/passenger-km. US transit buses average ~25% capacity utilization, "
+            "inflating per-passenger emissions to 110 g/km. Per vehicle-km, all countries' diesel buses "
+            "emit comparably (~800-1200 g CO2/vkm). The per-passenger-km metric amplifies ridership differences."
+            + stale_note
+        )
+
+    if "passenger_car" in activity_id:
+        return (
+            f"These {len(countries)} countries vary by {pct}% ({highest} is {ratio}x {lowest}). "
+            "Variance is driven by three factors: (1) vehicle fleet composition — Indian/Chinese fleets "
+            "are smaller and lighter than US/German fleets; (2) fuel efficiency standards — EU regulations "
+            "are stricter than US; (3) occupancy assumptions — ranging from 1.4 (Germany) to 1.6 (India). "
+            "China's rapid BEV/PHEV adoption (~35% of new sales in 2023) is also pulling fleet averages down. "
+            "Caution: some values use new-sales averages while others use on-road fleet averages, "
+            "which can differ by 20-40%."
+            + stale_note
+        )
+
+    return (
+        f"These {len(countries)} countries vary by {pct}%. "
+        "Differences reflect local infrastructure, regulations, fleet composition, "
+        "and energy mix."
+        + stale_note
+    )
+
+
 def compare_by_country(activity_id, factors=None):
     """
     Compare emission factors for the same activity across countries.
@@ -351,28 +428,33 @@ def compare_by_country(activity_id, factors=None):
     lowest = min(countries, key=lambda c: c["value_kg_co2e"])
     ratio = round(highest["value_kg_co2e"] / lowest["value_kg_co2e"], 1) if lowest["value_kg_co2e"] > 0 else 0
 
+    variance_info = {
+        "percentage": variance_pct,
+        "level": _variance_level(variance_pct),
+        "min_value": min_v,
+        "max_value": max_v,
+        "highest_country": highest["country_name"],
+        "lowest_country": lowest["country_name"],
+        "ratio": ratio,
+    }
+
+    key_insight = _diagnose_country_variance(activity_id, countries, variance_info)
+
     return {
         "activity_id": activity_id,
         "activity_name": matching[0]["activity_name"],
         "category": matching[0]["category"],
         "normalized_unit": f"kg CO2e per {matching[0]['factor']['unit_denominator']}",
         "countries": countries,
-        "variance": {
-            "percentage": variance_pct,
-            "level": _variance_level(variance_pct),
-            "min_value": min_v,
-            "max_value": max_v,
-            "highest_country": highest["country_name"],
-            "lowest_country": lowest["country_name"],
-            "ratio": ratio,
-        },
+        "variance": variance_info,
+        "key_insight": key_insight,
     }
 
 
 def compare_all_countries(factors=None):
     """Compare all country-enabled activities across countries."""
     if factors is None:
-        factors = load_factors()
+        factors = load_country_factors()
 
     comparisons = {}
     for aid in COUNTRY_ACTIVITIES:
@@ -441,8 +523,8 @@ def main():
     factors = load_factors()
     comparisons = compare_all(factors)
 
-    # Country comparisons
-    country_comparisons = compare_all_countries(factors)
+    # Country comparisons (from separate country_factors.json)
+    country_comparisons = compare_all_countries()
 
     # Write full comparison JSON (includes country comparisons)
     output = {

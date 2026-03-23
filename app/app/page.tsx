@@ -64,6 +64,7 @@ type CountryComparison = {
     lowest_country: string;
     ratio: number;
   };
+  key_insight: string;
 };
 
 // Handle both old flat format and new nested format
@@ -301,6 +302,16 @@ function CountryComparisonView({ comp }: { comp: CountryComparison }) {
         ))}
       </div>
 
+      {/* Key Insight */}
+      {comp.key_insight && (
+        <div className="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4">
+          <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">
+            Key Insight
+          </div>
+          <p className="text-sm text-slate-700 leading-relaxed">{comp.key_insight}</p>
+        </div>
+      )}
+
       {/* Source attribution */}
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
         {sorted.map((country) => (
@@ -339,44 +350,114 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-6">
           <h1 className="text-2xl font-bold">Emission Factor Source Comparator</h1>
           <p className="text-gray-500 mt-1 text-sm">
-            Side-by-side comparison of emission factors from EPA, DEFRA, and GHG
-            Protocol. Built as a learning artifact — not a product.
+            How much do emission factor databases actually agree with each other?
           </p>
-          {/* View mode toggle */}
-          {hasCountryData && !selected && (
-            <div className="mt-4 flex gap-1 bg-gray-100 rounded-lg p-1 w-fit">
-              <button
-                onClick={() => setViewMode("sources")}
-                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "sources" ? "bg-white shadow font-medium" : "text-gray-500 hover:text-gray-700"}`}
-              >
-                By Source
-              </button>
-              <button
-                onClick={() => setViewMode("countries")}
-                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "countries" ? "bg-white shadow font-medium" : "text-gray-500 hover:text-gray-700"}`}
-              >
-                By Country
-              </button>
-            </div>
-          )}
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        {/* COUNTRY VIEW */}
-        {viewMode === "countries" && !selected && (
-          <>
-            <div className="mb-6">
-              <h2 className="text-lg font-semibold mb-1">
-                Country Comparison ({countryCompList.length} activities)
-              </h2>
-              <p className="text-sm text-gray-500">
-                Same activity, different countries. Top 5 emitters: US, China, India, Germany, Russia.
-                Scope narrowed to 4 activities where country-level public data exists.
+        {/* Introduction — show only on list views */}
+        {!selected && (
+          <div className="mb-10 max-w-3xl">
+            <h2 className="text-lg font-semibold mb-3">The Problem</h2>
+            <p className="text-sm text-gray-700 leading-relaxed mb-4">
+              Companies measuring carbon emissions rely on published emission factor databases to
+              convert activity data (kWh consumed, km traveled) into CO2e. But these databases
+              often disagree, sometimes by over 90% for the same activity. If your bus travel
+              footprint can vary 2-7x depending on which database you pick, how much can you trust
+              the final number?
+            </p>
+
+            <h2 className="text-lg font-semibold mb-3">What This Tool Does</h2>
+            <p className="text-sm text-gray-700 leading-relaxed mb-4">
+              This comparator normalizes emission factors from three major public databases to a
+              common unit (kg CO2e), then calculates variance and diagnoses <em>why</em> they differ.
+              It surfaces whether disagreement comes from real physical differences like grid mix and fleet composition,
+              methodological choices like radiative forcing or HHV vs LHV, or data provenance issues like circular sourcing
+              and stale data.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="border border-gray-200 rounded-lg p-4 bg-white">
+                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Data Sources</div>
+                <ul className="text-sm text-gray-700 space-y-1.5">
+                  <li><span className="font-medium">EPA</span> GHG Emission Factors Hub (Jan 2025), US-focused</li>
+                  <li><span className="font-medium">DEFRA/DESNZ</span> Conversion Factors (Jun 2025), UK-focused</li>
+                  <li><span className="font-medium">GHG Protocol</span> Cross-Sector Tools V2.0 (Mar 2024), compiles from IPCC, EPA, DEFRA</li>
+                  <li><span className="font-medium">Ember Climate</span> Global Electricity Review (2025), country-level grid intensity</li>
+                  <li><span className="font-medium">ICCT, UBA, IPCC</span> for country-level transport factors</li>
+                </ul>
+              </div>
+              <div className="border border-gray-200 rounded-lg p-4 bg-white">
+                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Current State</div>
+                <ul className="text-sm text-gray-700 space-y-1.5">
+                  <li><span className="font-medium">20 activities</span> compared across sources (8 with 2+ sources)</li>
+                  <li><span className="font-medium">5 countries</span> compared for 4 key activities (US, China, India, Germany, Russia)</li>
+                  <li><span className="font-medium">Variance range:</span> 0% (air travel) to 98.7% (bus)</li>
+                  <li className="text-amber-700">Some factors use stale data (2+ years old), flagged throughout</li>
+                  <li className="text-amber-700">GHG Protocol is not independent. It compiles from EPA/DEFRA/IPCC</li>
+                </ul>
+              </div>
+            </div>
+
+            <h2 className="text-lg font-semibold mb-3">What We Learn</h2>
+            <div className="text-sm text-gray-700 leading-relaxed space-y-2 mb-6">
+              <p>
+                <span className="font-medium">1. Geography dominates.</span>{" "}Most variance comes from comparing
+                US factors to UK factors, not from methodology disagreement. A US bus factor (0.04 kg/pkm)
+                and a UK one (0.10 kg/pkm) aren&apos;t wrong. They measure different fleets with different occupancy.
+              </p>
+              <p>
+                <span className="font-medium">2. Source independence is an illusion.</span>{" "}GHG Protocol compiles from
+                IPCC, DEFRA, and EPA. Apparent &quot;three-source agreement&quot; may actually be circular citation.
+              </p>
+              <p>
+                <span className="font-medium">3. Per-passenger metrics amplify occupancy.</span>{" "}Indian buses
+                emit 15 g CO2/pkm vs US at 110 g, a 7x gap driven by ridership, not technology.
+                Per vehicle-km, they&apos;re comparable.
+              </p>
+              <p>
+                <span className="font-medium">4. Some factors are genuinely universal.</span>{" "}Natural gas
+                shows 0% cross-country variance because combustion chemistry doesn&apos;t vary by country.
               </p>
             </div>
 
-            {/* Country activity selector */}
+            <h2 className="text-lg font-semibold mb-3">Next Steps</h2>
+            <ul className="text-sm text-gray-700 space-y-1.5 list-disc list-inside mb-6">
+              <li>Expand country coverage beyond top 5 emitters (requires IEA paid data for many countries)</li>
+              <li>Add sub-national resolution (e.g., US eGRID subregions have 3x internal variation)</li>
+              <li>Incorporate supplier-specific data to show how averages compare to real operator data</li>
+              <li>Add temporal trends. Grid intensity is falling rapidly in some countries</li>
+              <li>Quantify uncertainty ranges instead of just point estimates</li>
+            </ul>
+          </div>
+        )}
+
+        {/* View mode toggle — between shared intro and view-specific content */}
+        {hasCountryData && !selected && (
+          <div className="mb-8 flex gap-1 bg-gray-100 rounded-lg p-1 w-fit">
+            <button
+              onClick={() => setViewMode("sources")}
+              className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "sources" ? "bg-white shadow font-medium" : "text-gray-500 hover:text-gray-700"}`}
+            >
+              By Source
+            </button>
+            <button
+              onClick={() => setViewMode("countries")}
+              className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "countries" ? "bg-white shadow font-medium" : "text-gray-500 hover:text-gray-700"}`}
+            >
+              By Country
+            </button>
+          </div>
+        )}
+
+        {/* COUNTRY VIEW */}
+        {viewMode === "countries" && !selected && (
+          <>
+            <h2 className="text-lg font-semibold mb-4">
+              Same activity, different countries ({countryCompList.length} activities)
+            </h2>
+
             <div className="grid gap-3 mb-8">
               {countryCompList.map(([id, comp]) => (
                 <button
@@ -404,18 +485,6 @@ export default function Home() {
                 </button>
               ))}
             </div>
-
-            {/* Scope assumptions callout */}
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800">
-              <div className="font-semibold mb-1">Scope Assumptions</div>
-              <ul className="list-disc list-inside space-y-1 text-xs">
-                <li><strong>Countries:</strong> US, China, India, Germany (EU proxy), Russia — top 5 emitters</li>
-                <li><strong>Activities:</strong> Narrowed to 4 (electricity, natural gas, passenger car, bus) where country-level public data exists</li>
-                <li><strong>Not covered:</strong> Air travel (inherently global), hotels/materials/freight (data paywalled or unavailable)</li>
-                <li><strong>Sources:</strong> Ember Climate (electricity), IPCC defaults (natural gas), ICCT/UBA/EPA (transport)</li>
-                <li>Factors marked <span className="font-medium">Stale</span> use data 2+ years old. Russia data is especially limited post-2019.</li>
-              </ul>
-            </div>
           </>
         )}
 
@@ -423,7 +492,7 @@ export default function Home() {
         {viewMode === "sources" && !selected && (
           <>
             <h2 className="text-lg font-semibold mb-4">
-              Select an activity to compare ({multiSource.length} with multiple sources)
+              Same activity, different databases ({multiSource.length} with multiple sources)
             </h2>
 
             {/* Multi-source activities */}
