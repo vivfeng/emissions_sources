@@ -13,14 +13,14 @@
       "underlying_data_source": "IPCC 2006 Guidelines"
     },
     "factor": {
-      "value_kg_co2e": 0.23112,
+      "value_kg_co2e": 0.20196,
       "unit_denominator": "kWh",
-      "co2_component": 0.23112,
+      "co2_component": 0.20196,
       "ch4_component": null,
       "n2o_component": null
     },
     "original_value": {
-      "value": 64200.0,
+      "value": 56100.0,
       "unit": "kg CO2 per TJ",
       "notes": "CO2 only. CH4/N2O in separate table. LHV (Net CV) basis."
     },
@@ -242,7 +242,7 @@
       "notes": "US Passenger Car. Converted from vehicle-miles to vehicle-km."
     },
     "geographic_scope": "US",
-    "methodology_notes": "From EPA via GHG Protocol. Note: GHG Protocol value (0.175) differs from EPA Hub value (0.297) \u2014 likely different data vintages or vehicle fleet definitions.",
+    "methodology_notes": "From EPA via GHG Protocol. WARNING: GHG Protocol value (0.175 kg CO2/mi) differs significantly from EPA Hub value (0.297 kg CO2/mi). Likely different fleet definitions or data vintages. The EPA Hub 2025 value appears to be a newer, higher estimate. This 51% discrepancy is itself a key finding.",
     "staleness_flag": true
   },
   {

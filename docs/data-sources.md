@@ -112,8 +112,11 @@ Each row is one factor. Multiple rows per activity cover different GHG breakdown
 - 38+ countries covered with per-country factors
 
 **Steel (Scope 3 > Material use > Metal):**
-- Steel cans: 2863.9 kg CO2e / tonne (with recycled content offset: 1823.9)
-- Aluminium cans and foil: 9115.9 kg CO2e / tonne (with recycled content offset: 995.1)
+- Steel cans (primary material production): 2,863.9 kg CO2e / tonne
+- Steel cans (closed-loop / recycled credit): 1,823.9 kg CO2e / tonne
+- Aluminium cans and foil (primary material production): 9,115.9 kg CO2e / tonne
+- Aluminium cans and foil (closed-loop / recycled credit): 995.1 kg CO2e / tonne
+- **Note:** We use "primary material production" as the default. The "closed-loop" value assumes the recycled material displaces virgin production — a specific methodology choice.
 
 ---
 

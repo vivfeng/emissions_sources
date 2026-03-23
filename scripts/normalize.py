@@ -443,9 +443,12 @@ def extract_defra(wb):
     # DEFRA has duplicate kg CO2e rows per flight: WITH and WITHOUT radiative forcing.
     # The first occurrence is WITH RF, second WITHOUT. We also need Level 4 = "Average passenger".
     # Scan manually to get the right values.
+    # NOTE: DEFRA "Short-haul" (<3700km) covers a MUCH wider range than EPA "Short Haul" (<300mi/483km).
+    # We give DEFRA short-haul its own activity_id to avoid misleading comparisons.
+    # DEFRA long-haul (>3700km) aligns with EPA long-haul (>=2300mi/~3701km) — these are comparable.
     air_mappings = [
-        ("Short-haul, to/from UK", "air_travel_short_haul", "Air Travel - Short Haul", "Up to 3700 km (DEFRA definition)"),
-        ("Long-haul, to/from UK", "air_travel_long_haul", "Air Travel - Long Haul", "Over 3700 km (DEFRA definition)"),
+        ("Short-haul, to/from UK", "air_travel_short_haul_defra", "Air Travel - Short Haul (DEFRA: <3700km)", "Up to 3700 km. WARNING: Not comparable to EPA short-haul (<300 miles/483km). Covers EPA short + medium combined."),
+        ("Long-haul, to/from UK", "air_travel_long_haul", "Air Travel - Long Haul", "Over 3700 km — comparable to EPA >=2300 miles"),
         ("Domestic, to/from UK", "air_travel_domestic", "Air Travel - Domestic", "Domestic flights within UK"),
         ("International, to/from non-UK", "air_travel_international", "Air Travel - International", "International, non-UK origin/destination"),
     ]
@@ -541,32 +544,47 @@ def extract_defra(wb):
             })
 
     # --- Steel and Aluminum ---
+    # DEFRA has multiple kg CO2e rows per material differentiated by "Column Text" (col 7):
+    #   "Primary material production" = total embodied carbon (USE THIS)
+    #   "Closed-loop source" = net of recycled content credit
+    # We must match on Column Text to get the right value.
     mat_mappings = [
-        ("Metal: steel cans", "steel", "Steel (Cans)", "Steel cans — includes forming. Not raw steel."),
-        ("Metal: aluminium cans and foil (excl. forming)", "aluminum", "Aluminum (Cans/Foil)", "Aluminium cans and foil, excluding forming process."),
+        ("Metal: steel cans", "steel", "Steel (Cans)", "Steel cans — primary material production. Not raw steel."),
+        ("Metal: aluminium cans and foil (excl. forming)", "aluminum", "Aluminum (Cans/Foil)", "Aluminium cans and foil, excluding forming. Primary material production."),
     ]
     for l3_name, aid, aname, note in mat_mappings:
-        val, uom = get_factor("Scope 3", "Material use", "Metal", l3_name)
-        if val:
-            factors.append({
-                "activity_id": aid,
-                "activity_name": aname,
-                "category": "materials",
-                "scope": "scope_3",
-                "source": DEFRA_SOURCE,
-                "factor": {
-                    "value_kg_co2e": round(val, 6),
-                    "unit_denominator": "tonne",
-                },
-                "original_value": {
-                    "value": val,
-                    "unit": "kg CO2e per tonne",
-                    "notes": note,
-                },
-                "geographic_scope": "UK",
-                "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
-                "staleness_flag": False,
-            })
+        for row_num in range(7, ws.max_row + 1):
+            scope = str(_cell(ws, row_num, 2) or "").strip()
+            l1 = str(_cell(ws, row_num, 3) or "").strip()
+            l2 = str(_cell(ws, row_num, 4) or "").strip()
+            l3 = str(_cell(ws, row_num, 5) or "").strip()
+            col_text = str(_cell(ws, row_num, 7) or "").strip()
+            ghg = str(_cell(ws, row_num, 9) or "").strip()
+            val = _cell(ws, row_num, 10)
+            if (scope == "Scope 3" and l1 == "Material use" and l2 == "Metal"
+                and l3 == l3_name and ghg == "kg CO2e"
+                and "primary material production" in col_text.lower()
+                and val is not None and isinstance(val, (int, float))):
+                factors.append({
+                    "activity_id": aid,
+                    "activity_name": aname,
+                    "category": "materials",
+                    "scope": "scope_3",
+                    "source": DEFRA_SOURCE,
+                    "factor": {
+                        "value_kg_co2e": round(val, 6),
+                        "unit_denominator": "tonne",
+                    },
+                    "original_value": {
+                        "value": val,
+                        "unit": "kg CO2e per tonne",
+                        "notes": note,
+                    },
+                    "geographic_scope": "UK",
+                    "methodology_notes": "Embodied carbon — primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
+                    "staleness_flag": False,
+                })
+                break
 
     # --- Rail ---
     val, uom = get_factor("Scope 3", "Business travel- land", "Rail", "National rail")
@@ -633,12 +651,12 @@ def extract_ghg_protocol(wb):
 
     # --- Natural Gas (Stationary Combustion sheet, row 44) ---
     # Row 44: col2='Natural gas', col3='Natural gas4', col4=48 (LHV TJ/Gg)
-    # Need col 5 for kg CO2/TJ
+    # IMPORTANT: Row 8 has "Natural Gas Liquids" (NGL) — a DIFFERENT fuel.
+    # Must match col2 exactly as "Natural gas" (not "Natural Gas Liquids").
     ws = wb["Stationary Combustion"]
     for row_num in range(2, ws.max_row + 1):
-        col2 = str(_cell(ws, row_num, 2) or "")
-        col3 = str(_cell(ws, row_num, 3) or "")
-        if "natural gas" in col2.lower() or "natural gas" in col3.lower():
+        col2 = str(_cell(ws, row_num, 2) or "").strip()
+        if col2.lower() == "natural gas":  # exact match on col2, not col3
             co2_per_tj = _cell(ws, row_num, 5)  # kg CO2 / TJ (col 5)
             if co2_per_tj and isinstance(co2_per_tj, (int, float)):
                 co2_per_kwh = co2_per_tj / TJ_TO_KWH
@@ -777,7 +795,7 @@ def extract_ghg_protocol(wb):
                 "notes": "US Passenger Car. Converted from vehicle-miles to vehicle-km."
             },
             "geographic_scope": "US",
-            "methodology_notes": "From EPA via GHG Protocol. Note: GHG Protocol value (0.175) differs from EPA Hub value (0.297) — likely different data vintages or vehicle fleet definitions.",
+            "methodology_notes": "From EPA via GHG Protocol. WARNING: GHG Protocol value (0.175 kg CO2/mi) differs significantly from EPA Hub value (0.297 kg CO2/mi). Likely different fleet definitions or data vintages. The EPA Hub 2025 value appears to be a newer, higher estimate. This 51% discrepancy is itself a key finding.",
             "staleness_flag": True,
         })
 

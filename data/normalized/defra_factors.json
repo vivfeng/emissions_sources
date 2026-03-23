@@ -50,8 +50,8 @@
     "staleness_flag": false
   },
   {
-    "activity_id": "air_travel_short_haul",
-    "activity_name": "Air Travel - Short Haul",
+    "activity_id": "air_travel_short_haul_defra",
+    "activity_name": "Air Travel - Short Haul (DEFRA: <3700km)",
     "category": "air_travel",
     "scope": "scope_3",
     "source": {
@@ -68,7 +68,7 @@
     "original_value": {
       "value": 0.12786,
       "unit": "kg CO2e per passenger-km",
-      "notes": "Up to 3700 km (DEFRA definition)"
+      "notes": "Up to 3700 km. WARNING: Not comparable to EPA short-haul (<300 miles/483km). Covers EPA short + medium combined."
     },
     "geographic_scope": "UK",
     "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
@@ -93,7 +93,7 @@
     "original_value": {
       "value": 0.15282,
       "unit": "kg CO2e per passenger-km",
-      "notes": "Over 3700 km (DEFRA definition)"
+      "notes": "Over 3700 km \u2014 comparable to EPA >=2300 miles"
     },
     "geographic_scope": "UK",
     "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
@@ -208,16 +208,16 @@
       "last_updated": "2025-06-10"
     },
     "factor": {
-      "value_kg_co2e": 1823.90131,
+      "value_kg_co2e": 2863.90131,
       "unit_denominator": "tonne"
     },
     "original_value": {
-      "value": 1823.90131,
+      "value": 2863.90131,
       "unit": "kg CO2e per tonne",
-      "notes": "Steel cans \u2014 includes forming. Not raw steel."
+      "notes": "Steel cans \u2014 primary material production. Not raw steel."
     },
     "geographic_scope": "UK",
-    "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
+    "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
     "staleness_flag": false
   },
   {
@@ -233,16 +233,16 @@
       "last_updated": "2025-06-10"
     },
     "factor": {
-      "value_kg_co2e": 995.0779,
+      "value_kg_co2e": 9115.90131,
       "unit_denominator": "tonne"
     },
     "original_value": {
-      "value": 995.0779,
+      "value": 9115.90131,
       "unit": "kg CO2e per tonne",
-      "notes": "Aluminium cans and foil, excluding forming process."
+      "notes": "Aluminium cans and foil, excluding forming. Primary material production."
     },
     "geographic_scope": "UK",
-    "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
+    "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
     "staleness_flag": false
   },
   {

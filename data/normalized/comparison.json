@@ -24,17 +24,17 @@
       },
       {
         "source_name": "GHG Protocol Cross-Sector Emission Factors",
-        "value_kg_co2e": 0.23112,
+        "value_kg_co2e": 0.20196,
         "geographic_scope": "Global (IPCC default)",
-        "original_value": 64200.0,
+        "original_value": 56100.0,
         "original_unit": "kg CO2 per TJ",
         "methodology_notes": "IPCC 2006 default factor. Lower Heating Value (Net CV) basis. CO2 only \u2014 does not include CH4/N2O from combustion.",
         "staleness_flag": true
       }
     ],
-    "variance_pct": 24.3,
+    "variance_pct": 11.0,
     "min_value": 0.181234,
-    "max_value": 0.23112
+    "max_value": 0.2027
   },
   "electricity_grid": {
     "activity_name": "Grid Electricity",
@@ -79,15 +79,6 @@
         "staleness_flag": false
       },
       {
-        "source_name": "UK Government GHG Conversion Factors",
-        "value_kg_co2e": 0.12786,
-        "geographic_scope": "UK",
-        "original_value": 0.12786,
-        "original_unit": "kg CO2e per passenger-km",
-        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
-        "staleness_flag": false
-      },
-      {
         "source_name": "GHG Protocol Cross-Sector Emission Factors",
         "value_kg_co2e": 0.129822,
         "geographic_scope": "US",
@@ -97,8 +88,8 @@
         "staleness_flag": false
       }
     ],
-    "variance_pct": 1.5,
-    "min_value": 0.12786,
+    "variance_pct": 0.0,
+    "min_value": 0.129822,
     "max_value": 0.129822
   },
   "air_travel_medium_haul": {
@@ -186,7 +177,7 @@
         "geographic_scope": "US",
         "original_value": 0.175,
         "original_unit": "kg CO2 per vehicle-mile",
-        "methodology_notes": "From EPA via GHG Protocol. Note: GHG Protocol value (0.175) differs from EPA Hub value (0.297) \u2014 likely different data vintages or vehicle fleet definitions.",
+        "methodology_notes": "From EPA via GHG Protocol. WARNING: GHG Protocol value (0.175 kg CO2/mi) differs significantly from EPA Hub value (0.297 kg CO2/mi). Likely different fleet definitions or data vintages. The EPA Hub 2025 value appears to be a newer, higher estimate. This 51% discrepancy is itself a key finding.",
         "staleness_flag": true
       }
     ],
@@ -293,6 +284,23 @@
     "min_value": 0.041403,
     "max_value": 0.10385
   },
+  "air_travel_short_haul_defra": {
+    "activity_name": "Air Travel - Short Haul (DEFRA: <3700km)",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.12786,
+        "geographic_scope": "UK",
+        "original_value": 0.12786,
+        "original_unit": "kg CO2e per passenger-km",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
   "air_travel_domestic": {
     "activity_name": "Air Travel - Domestic",
     "category": "air_travel",
@@ -368,11 +376,11 @@
     "sources": [
       {
         "source_name": "UK Government GHG Conversion Factors",
-        "value_kg_co2e": 1823.90131,
+        "value_kg_co2e": 2863.90131,
         "geographic_scope": "UK",
-        "original_value": 1823.90131,
+        "original_value": 2863.90131,
         "original_unit": "kg CO2e per tonne",
-        "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
+        "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
         "staleness_flag": false
       }
     ],
@@ -385,11 +393,11 @@
     "sources": [
       {
         "source_name": "UK Government GHG Conversion Factors",
-        "value_kg_co2e": 995.0779,
+        "value_kg_co2e": 9115.90131,
         "geographic_scope": "UK",
-        "original_value": 995.0779,
+        "original_value": 9115.90131,
         "original_unit": "kg CO2e per tonne",
-        "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
+        "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
         "staleness_flag": false
       }
     ],

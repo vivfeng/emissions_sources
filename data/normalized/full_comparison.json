@@ -183,7 +183,7 @@
         "n2o_component": null,
         "original_value": 0.15282,
         "original_unit": "kg CO2e per passenger-km",
-        "original_notes": "Over 3700 km (DEFRA definition)",
+        "original_notes": "Over 3700 km \u2014 comparable to EPA >=2300 miles",
         "geographic_scope": "UK",
         "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
         "staleness_flag": false
@@ -335,25 +335,6 @@
         "staleness_flag": false
       },
       {
-        "source_name": "UK Government GHG Conversion Factors",
-        "source_edition": "2025",
-        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
-        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
-        "last_updated": "2025-06-10",
-        "underlying_data_source": null,
-        "value_kg_co2e": 0.12786,
-        "unit_denominator": "passenger-km",
-        "co2_component": null,
-        "ch4_component": null,
-        "n2o_component": null,
-        "original_value": 0.12786,
-        "original_unit": "kg CO2e per passenger-km",
-        "original_notes": "Up to 3700 km (DEFRA definition)",
-        "geographic_scope": "UK",
-        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
-        "staleness_flag": false
-      },
-      {
         "source_name": "GHG Protocol Cross-Sector Emission Factors",
         "source_edition": "V2.0",
         "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
@@ -374,13 +355,49 @@
       }
     ],
     "variance": {
-      "percentage": 1.5,
+      "percentage": 0.0,
       "level": "low",
-      "min_value": 0.12786,
+      "min_value": 0.129822,
       "max_value": 0.129822,
-      "diagnosis": "Sources are close despite different methodologies. DEFRA includes radiative forcing while EPA/GHG Protocol do not, but different distance category definitions and base emission rates partially offset this, producing coincidentally similar results."
+      "diagnosis": "Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
     },
-    "key_insight": "These 3 sources vary by 1.5%. Sources are close despite different methodologies. DEFRA includes radiative forcing while EPA/GHG Protocol do not, but different distance category definitions and base emission rates partially offset this, producing coincidentally similar results."
+    "key_insight": "These 2 sources vary by 0.0%. Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
+  },
+  "air_travel_short_haul_defra": {
+    "activity_id": "air_travel_short_haul_defra",
+    "activity_name": "Air Travel - Short Haul (DEFRA: <3700km)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.12786,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.12786,
+        "original_unit": "kg CO2e per passenger-km",
+        "original_notes": "Up to 3700 km. WARNING: Not comparable to EPA short-haul (<300 miles/483km). Covers EPA short + medium combined.",
+        "geographic_scope": "UK",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.12786,
+      "max_value": 0.12786,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
   },
   "air_travel_short_haul_uk_ghgp": {
     "activity_id": "air_travel_short_haul_uk_ghgp",
@@ -432,24 +449,24 @@
         "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
         "last_updated": "2025-06-10",
         "underlying_data_source": null,
-        "value_kg_co2e": 995.0779,
+        "value_kg_co2e": 9115.90131,
         "unit_denominator": "tonne",
         "co2_component": null,
         "ch4_component": null,
         "n2o_component": null,
-        "original_value": 995.0779,
+        "original_value": 9115.90131,
         "original_unit": "kg CO2e per tonne",
-        "original_notes": "Aluminium cans and foil, excluding forming process.",
+        "original_notes": "Aluminium cans and foil, excluding forming. Primary material production.",
         "geographic_scope": "UK",
-        "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
+        "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
         "staleness_flag": false
       }
     ],
     "variance": {
       "percentage": null,
       "level": "single_source",
-      "min_value": 995.0779,
-      "max_value": 995.0779,
+      "min_value": 9115.90131,
+      "max_value": 9115.90131,
       "diagnosis": null
     },
     "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
@@ -779,12 +796,12 @@
         "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
         "last_updated": "2024-03-13",
         "underlying_data_source": "IPCC 2006 Guidelines",
-        "value_kg_co2e": 0.23112,
+        "value_kg_co2e": 0.20196,
         "unit_denominator": "kWh",
-        "co2_component": 0.23112,
+        "co2_component": 0.20196,
         "ch4_component": null,
         "n2o_component": null,
-        "original_value": 64200.0,
+        "original_value": 56100.0,
         "original_unit": "kg CO2 per TJ",
         "original_notes": "CO2 only. CH4/N2O in separate table. LHV (Net CV) basis.",
         "geographic_scope": "Global (IPCC default)",
@@ -793,13 +810,13 @@
       }
     ],
     "variance": {
-      "percentage": 24.3,
-      "level": "high",
+      "percentage": 11.0,
+      "level": "moderate",
       "min_value": 0.181234,
-      "max_value": 0.23112,
+      "max_value": 0.2027,
       "diagnosis": "Energy measurement basis. EPA uses Higher Heating Value (HHV/Gross CV), while DEFRA and IPCC use Lower Heating Value (LHV/Net CV). HHV includes the latent heat of water vapor in combustion products; LHV does not. The difference is ~10% for natural gas. Additionally, the IPCC factor (via GHG Protocol) is CO2-only while EPA/DEFRA include CH4/N2O."
     },
-    "key_insight": "These 3 sources vary by 24.3%. Energy measurement basis. EPA uses Higher Heating Value (HHV/Gross CV), while DEFRA and IPCC use Lower Heating Value (LHV/Net CV). HHV includes the latent heat of water vapor in combustion products; LHV does not. The difference is ~10% for natural gas. Additionally, the IPCC factor (via GHG Protocol) is CO2-only while EPA/DEFRA include CH4/N2O."
+    "key_insight": "These 3 sources vary by 11.0%. Energy measurement basis. EPA uses Higher Heating Value (HHV/Gross CV), while DEFRA and IPCC use Lower Heating Value (LHV/Net CV). HHV includes the latent heat of water vapor in combustion products; LHV does not. The difference is ~10% for natural gas. Additionally, the IPCC factor (via GHG Protocol) is CO2-only while EPA/DEFRA include CH4/N2O."
   },
   "passenger_car": {
     "activity_id": "passenger_car",
@@ -843,7 +860,7 @@
         "original_unit": "kg CO2 per vehicle-mile",
         "original_notes": "US Passenger Car. Converted from vehicle-miles to vehicle-km.",
         "geographic_scope": "US",
-        "methodology_notes": "From EPA via GHG Protocol. Note: GHG Protocol value (0.175) differs from EPA Hub value (0.297) \u2014 likely different data vintages or vehicle fleet definitions.",
+        "methodology_notes": "From EPA via GHG Protocol. WARNING: GHG Protocol value (0.175 kg CO2/mi) differs significantly from EPA Hub value (0.297 kg CO2/mi). Likely different fleet definitions or data vintages. The EPA Hub 2025 value appears to be a newer, higher estimate. This 51% discrepancy is itself a key finding.",
         "staleness_flag": true
       }
     ],
@@ -925,24 +942,24 @@
         "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
         "last_updated": "2025-06-10",
         "underlying_data_source": null,
-        "value_kg_co2e": 1823.90131,
+        "value_kg_co2e": 2863.90131,
         "unit_denominator": "tonne",
         "co2_component": null,
         "ch4_component": null,
         "n2o_component": null,
-        "original_value": 1823.90131,
+        "original_value": 2863.90131,
         "original_unit": "kg CO2e per tonne",
-        "original_notes": "Steel cans \u2014 includes forming. Not raw steel.",
+        "original_notes": "Steel cans \u2014 primary material production. Not raw steel.",
         "geographic_scope": "UK",
-        "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
+        "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
         "staleness_flag": false
       }
     ],
     "variance": {
       "percentage": null,
       "level": "single_source",
-      "min_value": 1823.90131,
-      "max_value": 1823.90131,
+      "min_value": 2863.90131,
+      "max_value": 2863.90131,
       "diagnosis": null
     },
     "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."

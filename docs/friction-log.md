@@ -144,6 +144,34 @@ The short-haul thresholds are different: EPA's short haul is <300 miles (~483 km
 
 ---
 
+## Friction Point 11: DEFRA materials have hidden "Column Text" variants
+
+**What happened during audit:** The DEFRA flat file has multiple `kg CO2e` rows per material, differentiated by a "Column Text" field (column 7) that isn't immediately visible:
+- "Primary material production" = 2,864 kg CO2e/tonne (steel cans) — total embodied carbon
+- "Closed-loop source" = 1,824 kg CO2e/tonne — nets out recycled content credit
+
+Our initial extraction silently picked the closed-loop value. This was a 36% undercount for steel and a 89% undercount for aluminum.
+
+**Why it matters:** The DEFRA flat file is designed for programmatic use, but its structure has hidden dimensions (Column Text, Level 4) that change the meaning of numbers dramatically. A naive lookup by (Scope, Level 1-3) hits the wrong row.
+
+---
+
+## Friction Point 12: GHG Protocol "Natural Gas" vs "Natural Gas Liquids"
+
+**What happened during audit:** The GHG Protocol workbook's Stationary Combustion sheet has "Natural Gas Liquids" (row 8, 64,200 kg CO2/TJ) before "Natural gas" (row 44, 56,100 kg CO2/TJ). A text search for "natural gas" matched NGL first — a completely different fuel. This silently inflated our GHG Protocol natural gas factor by 14%.
+
+**Why it matters:** NGL is a petroleum derivative. Natural gas is methane. They have different emission factors, different uses, and different reporting categories. This is exactly the kind of silent error that automated pipelines can introduce.
+
+---
+
+## Friction Point 13: Passenger car definitions diverge between same source's editions
+
+**What happened during audit:** EPA Hub 2025 reports passenger car at 0.297 kg CO2/vehicle-mile. GHG Protocol (which claims to source from EPA) reports 0.175 kg CO2/vehicle-mile — a 51% difference. Both claim US data. This suggests either different fleet definitions (all cars vs. gasoline-only) or different data vintages.
+
+**Why it matters:** Even when two databases cite the same upstream source, the actual numbers can diverge substantially. Version pinning matters.
+
+---
+
 ## Summary: Top 3 Talking Points for Watershed
 
 1. **The independence problem** — Three sources isn't three opinions if they're citing each other. The real question is how many truly independent measurement methodologies exist for a given activity.
