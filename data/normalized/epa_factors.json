@@ -1,0 +1,276 @@
+[
+  {
+    "activity_id": "natural_gas_stationary",
+    "activity_name": "Natural Gas (Stationary Combustion)",
+    "category": "stationary_combustion",
+    "scope": "scope_1",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.181234,
+      "unit_denominator": "kWh",
+      "co2_component": 0.181048,
+      "ch4_component": 9.6e-05,
+      "n2o_component": 9e-05
+    },
+    "original_value": {
+      "value": 53.06,
+      "unit": "kg CO2 per mmBtu",
+      "notes": "CO2 only; CH4 and N2O added during normalization using AR5 GWPs"
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "Higher Heating Value (HHV) basis. IPCC AR5 GWPs (CH4=28, N2O=265). CH4 and N2O converted to CO2e and added.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.351642,
+      "unit_denominator": "kWh",
+      "co2_component": 0.349957,
+      "ch4_component": 0.000724,
+      "n2o_component": 0.000962
+    },
+    "original_value": {
+      "value": 771.523,
+      "unit": "lb CO2 per MWh (total output, US average)",
+      "notes": "Source: eGRID2023. Converted from lb/MWh to kg CO2e/kWh."
+    },
+    "geographic_scope": "US (national average)",
+    "methodology_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "air_travel_short_haul",
+    "activity_name": "Air Travel - Short Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.129822,
+      "unit_denominator": "passenger-km",
+      "co2_component": 0.128624,
+      "ch4_component": 0.000111,
+      "n2o_component": 0.001087
+    },
+    "original_value": {
+      "value": 0.207,
+      "unit": "kg CO2 per passenger-mile",
+      "notes": "Distance category: < 300 miles / ~483 km. CO2 only in original; CH4/N2O added during normalization."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "air_travel_medium_haul",
+    "activity_name": "Air Travel - Medium Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.080842,
+      "unit_denominator": "passenger-km",
+      "co2_component": 0.080157,
+      "ch4_component": 1e-05,
+      "n2o_component": 0.000675
+    },
+    "original_value": {
+      "value": 0.129,
+      "unit": "kg CO2 per passenger-mile",
+      "notes": "Distance category: 300-2300 miles / ~483-3701 km. CO2 only in original; CH4/N2O added during normalization."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "air_travel_long_haul",
+    "activity_name": "Air Travel - Long Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.10215,
+      "unit_denominator": "passenger-km",
+      "co2_component": 0.101284,
+      "ch4_component": 1e-05,
+      "n2o_component": 0.000856
+    },
+    "original_value": {
+      "value": 0.163,
+      "unit": "kg CO2 per passenger-mile",
+      "notes": "Distance category: >= 2300 miles / ~3701+ km. CO2 only in original; CH4/N2O added during normalization."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "passenger_car",
+    "activity_name": "Passenger Car (Gasoline)",
+    "category": "ground_transport",
+    "scope": "scope_1",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.185523,
+      "unit_denominator": "vehicle-km",
+      "co2_component": 0.184547,
+      "ch4_component": 0.000103,
+      "n2o_component": 0.000873
+    },
+    "original_value": {
+      "value": 0.297,
+      "unit": "kg CO2 per vehicle-mile",
+      "notes": "Vehicle type: Passenger Car. Converted from vehicle-miles to vehicle-km."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "Mixed fleet average. CO2 only in original; CH4/N2O added using AR5 GWPs.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "light_duty_truck",
+    "activity_name": "Light-Duty Truck",
+    "category": "ground_transport",
+    "scope": "scope_1",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.246459,
+      "unit_denominator": "vehicle-km",
+      "co2_component": 0.24482,
+      "ch4_component": 0.00019,
+      "n2o_component": 0.001449
+    },
+    "original_value": {
+      "value": 0.394,
+      "unit": "kg CO2 per vehicle-mile",
+      "notes": "Vehicle type: Light-Duty Truck. Converted from vehicle-miles to vehicle-km."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "Mixed fleet average. CO2 only in original; CH4/N2O added using AR5 GWPs.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "freight_road_truck",
+    "activity_name": "Freight - Road (Heavy Truck)",
+    "category": "freight",
+    "scope": "scope_3",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.812931,
+      "unit_denominator": "vehicle-km",
+      "co2_component": 0.80654,
+      "ch4_component": 0.0002,
+      "n2o_component": 0.006191
+    },
+    "original_value": {
+      "value": 1.298,
+      "unit": "kg CO2 per vehicle-mile",
+      "notes": "Medium- and Heavy-Duty Truck. Converted from vehicle-miles to vehicle-km."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "Vehicle-mile basis (not ton-mile). For weight-distance, see row 425.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "rail_intercity",
+    "activity_name": "Intercity Rail (National Average)",
+    "category": "ground_transport",
+    "scope": "scope_3",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.06012,
+      "unit_denominator": "passenger-km",
+      "co2_component": 0.059652,
+      "ch4_component": 0.000139,
+      "n2o_component": 0.000329
+    },
+    "original_value": {
+      "value": 0.096,
+      "unit": "kg CO2 per passenger-mile",
+      "notes": "Intercity Rail - National Average"
+    },
+    "geographic_scope": "US",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "bus",
+    "activity_name": "Bus",
+    "category": "ground_transport",
+    "scope": "scope_3",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.041403,
+      "unit_denominator": "passenger-km"
+    },
+    "original_value": {
+      "value": 0.066,
+      "unit": "kg CO2 per passenger-mile"
+    },
+    "geographic_scope": "US",
+    "staleness_flag": false
+  }
+]

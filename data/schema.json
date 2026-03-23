@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Normalized Emission Factor",
+  "description": "A single emission factor from one source, normalized to common units",
+  "type": "object",
+  "properties": {
+    "activity_id": {
+      "type": "string",
+      "description": "Canonical activity identifier (e.g., 'air_travel_short_haul')"
+    },
+    "activity_name": {
+      "type": "string",
+      "description": "Human-readable activity name"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["stationary_combustion", "electricity", "air_travel", "ground_transport", "freight", "accommodation", "materials", "waste"],
+      "description": "Activity category grouping"
+    },
+    "scope": {
+      "type": "string",
+      "enum": ["scope_1", "scope_2", "scope_3"],
+      "description": "GHG Protocol scope"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Source database name" },
+        "edition": { "type": "string", "description": "Edition/version (e.g., '2025')" },
+        "publisher": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "last_updated": { "type": "string", "format": "date" },
+        "underlying_data_source": { "type": "string", "description": "If this source cites another source, note it here" }
+      },
+      "required": ["name", "edition", "publisher", "url", "last_updated"]
+    },
+    "factor": {
+      "type": "object",
+      "properties": {
+        "value_kg_co2e": { "type": "number", "description": "Emission factor in kg CO2e per normalized unit" },
+        "unit_denominator": { "type": "string", "description": "Normalized unit (e.g., 'passenger-km', 'kWh', 'vehicle-km')" },
+        "co2_component": { "type": ["number", "null"], "description": "CO2 portion in kg CO2 per unit (if available)" },
+        "ch4_component": { "type": ["number", "null"], "description": "CH4 portion in kg CO2e per unit (if available)" },
+        "n2o_component": { "type": ["number", "null"], "description": "N2O portion in kg CO2e per unit (if available)" }
+      },
+      "required": ["value_kg_co2e", "unit_denominator"]
+    },
+    "original_value": {
+      "type": "object",
+      "description": "The factor as published, before normalization",
+      "properties": {
+        "value": { "type": "number" },
+        "unit": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["value", "unit"]
+    },
+    "geographic_scope": {
+      "type": "string",
+      "description": "Geographic applicability (e.g., 'US', 'UK', 'Global')"
+    },
+    "methodology_notes": {
+      "type": "string",
+      "description": "Key assumptions or methodology choices that affect the number"
+    },
+    "staleness_flag": {
+      "type": "boolean",
+      "description": "True if underlying data is 2+ years old relative to publication date"
+    }
+  },
+  "required": ["activity_id", "activity_name", "category", "scope", "source", "factor", "original_value", "geographic_scope"]
+}

@@ -1,0 +1,466 @@
+{
+  "natural_gas_stationary": {
+    "activity_name": "Natural Gas (Stationary Combustion)",
+    "category": "stationary_combustion",
+    "normalized_unit": "kWh",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.181234,
+        "geographic_scope": "US",
+        "original_value": 53.06,
+        "original_unit": "kg CO2 per mmBtu",
+        "methodology_notes": "Higher Heating Value (HHV) basis. IPCC AR5 GWPs (CH4=28, N2O=265). CH4 and N2O converted to CO2e and added.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.2027,
+        "geographic_scope": "UK",
+        "original_value": 0.2027,
+        "original_unit": "kg CO2e per kWh (Net CV)",
+        "methodology_notes": "Net Calorific Value (Lower Heating Value) basis. Note: EPA uses Gross/HHV which gives ~10% higher energy content per unit fuel.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.23112,
+        "geographic_scope": "Global (IPCC default)",
+        "original_value": 64200.0,
+        "original_unit": "kg CO2 per TJ",
+        "methodology_notes": "IPCC 2006 default factor. Lower Heating Value (Net CV) basis. CO2 only \u2014 does not include CH4/N2O from combustion.",
+        "staleness_flag": true
+      }
+    ],
+    "variance_pct": 24.3,
+    "min_value": 0.181234,
+    "max_value": 0.23112
+  },
+  "electricity_grid": {
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "normalized_unit": "kWh",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.351642,
+        "geographic_scope": "US (national average)",
+        "original_value": 771.523,
+        "original_unit": "lb CO2 per MWh (total output, US average)",
+        "methodology_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.177,
+        "geographic_scope": "UK",
+        "original_value": 0.177,
+        "original_unit": "kg CO2e per kWh",
+        "methodology_notes": "UK national grid average. T&D losses are reported separately under Scope 3. This is generation-only.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": 66.1,
+    "min_value": 0.177,
+    "max_value": 0.351642
+  },
+  "air_travel_short_haul": {
+    "activity_name": "Air Travel - Short Haul",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.129822,
+        "geographic_scope": "US",
+        "original_value": 0.207,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.12786,
+        "geographic_scope": "UK",
+        "original_value": 0.12786,
+        "original_unit": "kg CO2e per passenger-km",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.129822,
+        "geographic_scope": "US",
+        "original_value": 0.207,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": 1.5,
+    "min_value": 0.12786,
+    "max_value": 0.129822
+  },
+  "air_travel_medium_haul": {
+    "activity_name": "Air Travel - Medium Haul",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.080842,
+        "geographic_scope": "US",
+        "original_value": 0.129,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.080842,
+        "geographic_scope": "US",
+        "original_value": 0.129,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": 0.0,
+    "min_value": 0.080842,
+    "max_value": 0.080842
+  },
+  "air_travel_long_haul": {
+    "activity_name": "Air Travel - Long Haul",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.10215,
+        "geographic_scope": "US",
+        "original_value": 0.163,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.15282,
+        "geographic_scope": "UK",
+        "original_value": 0.15282,
+        "original_unit": "kg CO2e per passenger-km",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.10215,
+        "geographic_scope": "US",
+        "original_value": 0.163,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": 42.6,
+    "min_value": 0.10215,
+    "max_value": 0.15282
+  },
+  "passenger_car": {
+    "activity_name": "Passenger Car (Gasoline)",
+    "category": "ground_transport",
+    "normalized_unit": "vehicle-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.185523,
+        "geographic_scope": "US",
+        "original_value": 0.297,
+        "original_unit": "kg CO2 per vehicle-mile",
+        "methodology_notes": "Mixed fleet average. CO2 only in original; CH4/N2O added using AR5 GWPs.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.109321,
+        "geographic_scope": "US",
+        "original_value": 0.175,
+        "original_unit": "kg CO2 per vehicle-mile",
+        "methodology_notes": "From EPA via GHG Protocol. Note: GHG Protocol value (0.175) differs from EPA Hub value (0.297) \u2014 likely different data vintages or vehicle fleet definitions.",
+        "staleness_flag": true
+      }
+    ],
+    "variance_pct": 51.7,
+    "min_value": 0.109321,
+    "max_value": 0.185523
+  },
+  "light_duty_truck": {
+    "activity_name": "Light-Duty Truck",
+    "category": "ground_transport",
+    "normalized_unit": "vehicle-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.246459,
+        "geographic_scope": "US",
+        "original_value": 0.394,
+        "original_unit": "kg CO2 per vehicle-mile",
+        "methodology_notes": "Mixed fleet average. CO2 only in original; CH4/N2O added using AR5 GWPs.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
+  "freight_road_truck": {
+    "activity_name": "Freight - Road (Heavy Truck)",
+    "category": "freight",
+    "normalized_unit": "vehicle-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.812931,
+        "geographic_scope": "US",
+        "original_value": 1.298,
+        "original_unit": "kg CO2 per vehicle-mile",
+        "methodology_notes": "Vehicle-mile basis (not ton-mile). For weight-distance, see row 425.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
+  "rail_intercity": {
+    "activity_name": "Intercity Rail (National Average)",
+    "category": "ground_transport",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.06012,
+        "geographic_scope": "US",
+        "original_value": 0.096,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.03546,
+        "geographic_scope": "UK",
+        "original_value": 0.03546,
+        "original_unit": "kg CO2e per passenger-km",
+        "methodology_notes": "",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": 51.6,
+    "min_value": 0.03546,
+    "max_value": 0.06012
+  },
+  "bus": {
+    "activity_name": "Bus",
+    "category": "ground_transport",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.041403,
+        "geographic_scope": "US",
+        "original_value": 0.066,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.10385,
+        "geographic_scope": "UK",
+        "original_value": 0.10385,
+        "original_unit": "kg CO2e per passenger-km",
+        "methodology_notes": "",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.044463,
+        "geographic_scope": "US",
+        "original_value": 0.071,
+        "original_unit": "kg CO2 per passenger-mile",
+        "methodology_notes": "",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": 98.7,
+    "min_value": 0.041403,
+    "max_value": 0.10385
+  },
+  "air_travel_domestic": {
+    "activity_name": "Air Travel - Domestic",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.22928,
+        "geographic_scope": "UK",
+        "original_value": 0.22928,
+        "original_unit": "kg CO2e per passenger-km",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
+  "air_travel_international": {
+    "activity_name": "Air Travel - International",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.14253,
+        "geographic_scope": "UK",
+        "original_value": 0.14253,
+        "original_unit": "kg CO2e per passenger-km",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
+  "hotel_stay_uk": {
+    "activity_name": "Hotel Stay (UK)",
+    "category": "accommodation",
+    "normalized_unit": "room-night",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 10.4,
+        "geographic_scope": "UK",
+        "original_value": 10.4,
+        "original_unit": "kg CO2e per room per night",
+        "methodology_notes": "",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
+  "hotel_stay_us": {
+    "activity_name": "Hotel Stay (US)",
+    "category": "accommodation",
+    "normalized_unit": "room-night",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 16.1,
+        "geographic_scope": "United States",
+        "original_value": 16.1,
+        "original_unit": "kg CO2e per room per night",
+        "methodology_notes": "",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
+  "steel": {
+    "activity_name": "Steel (Cans)",
+    "category": "materials",
+    "normalized_unit": "tonne",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 1823.90131,
+        "geographic_scope": "UK",
+        "original_value": 1823.90131,
+        "original_unit": "kg CO2e per tonne",
+        "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
+  "aluminum": {
+    "activity_name": "Aluminum (Cans/Foil)",
+    "category": "materials",
+    "normalized_unit": "tonne",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 995.0779,
+        "geographic_scope": "UK",
+        "original_value": 995.0779,
+        "original_unit": "kg CO2e per tonne",
+        "methodology_notes": "Embodied carbon of material. Note: this is for specific product forms (cans/foil), not raw material. Methodology differs significantly from lifecycle assessment databases.",
+        "staleness_flag": false
+      }
+    ],
+    "variance_pct": null
+  },
+  "air_travel_domestic_uk_ghgp": {
+    "activity_name": "Air Travel - Domestic (UK, GHG Protocol)",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.129907,
+        "geographic_scope": "UK",
+        "original_value": 0.12871,
+        "original_unit": "kg CO2 per passenger-km",
+        "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+        "staleness_flag": true
+      }
+    ],
+    "variance_pct": null
+  },
+  "air_travel_short_haul_uk_ghgp": {
+    "activity_name": "Air Travel - Short Haul (UK, GHG Protocol)",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.081087,
+        "geographic_scope": "UK",
+        "original_value": 0.0804,
+        "original_unit": "kg CO2 per passenger-km",
+        "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+        "staleness_flag": true
+      }
+    ],
+    "variance_pct": null
+  },
+  "air_travel_long_haul_uk_ghgp": {
+    "activity_name": "Air Travel - Long Haul (UK, GHG Protocol)",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.101975,
+        "geographic_scope": "UK",
+        "original_value": 0.10111,
+        "original_unit": "kg CO2 per passenger-km",
+        "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+        "staleness_flag": true
+      }
+    ],
+    "variance_pct": null
+  },
+  "air_travel_international_uk_ghgp": {
+    "activity_name": "Air Travel - International (UK, GHG Protocol)",
+    "category": "air_travel",
+    "normalized_unit": "passenger-km",
+    "sources": [
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "value_kg_co2e": 0.09698,
+        "geographic_scope": "UK",
+        "original_value": 0.09616,
+        "original_unit": "kg CO2 per passenger-km",
+        "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+        "staleness_flag": true
+      }
+    ],
+    "variance_pct": null
+  }
+}

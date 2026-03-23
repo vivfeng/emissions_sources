@@ -1,0 +1,272 @@
+[
+  {
+    "activity_id": "natural_gas_stationary",
+    "activity_name": "Natural Gas (Stationary Combustion)",
+    "category": "stationary_combustion",
+    "scope": "scope_1",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "IPCC 2006 Guidelines"
+    },
+    "factor": {
+      "value_kg_co2e": 0.23112,
+      "unit_denominator": "kWh",
+      "co2_component": 0.23112,
+      "ch4_component": null,
+      "n2o_component": null
+    },
+    "original_value": {
+      "value": 64200.0,
+      "unit": "kg CO2 per TJ",
+      "notes": "CO2 only. CH4/N2O in separate table. LHV (Net CV) basis."
+    },
+    "geographic_scope": "Global (IPCC default)",
+    "methodology_notes": "IPCC 2006 default factor. Lower Heating Value (Net CV) basis. CO2 only \u2014 does not include CH4/N2O from combustion.",
+    "staleness_flag": true
+  },
+  {
+    "activity_id": "air_travel_short_haul",
+    "activity_name": "Air Travel - Short Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "DEFRA (via EPA)"
+    },
+    "factor": {
+      "value_kg_co2e": 0.129822,
+      "unit_denominator": "passenger-km",
+      "co2_component": 0.128624,
+      "ch4_component": 0.000111,
+      "n2o_component": 0.001087
+    },
+    "original_value": {
+      "value": 0.207,
+      "unit": "kg CO2 per passenger-mile",
+      "notes": "US region. Distance: < 300 miles. Does NOT include radiative forcing."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "air_travel_medium_haul",
+    "activity_name": "Air Travel - Medium Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "DEFRA (via EPA)"
+    },
+    "factor": {
+      "value_kg_co2e": 0.080842,
+      "unit_denominator": "passenger-km",
+      "co2_component": 0.080157,
+      "ch4_component": 1e-05,
+      "n2o_component": 0.000675
+    },
+    "original_value": {
+      "value": 0.129,
+      "unit": "kg CO2 per passenger-mile",
+      "notes": "US region. Distance: 300-2300 miles. Does NOT include radiative forcing."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "air_travel_long_haul",
+    "activity_name": "Air Travel - Long Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "DEFRA (via EPA)"
+    },
+    "factor": {
+      "value_kg_co2e": 0.10215,
+      "unit_denominator": "passenger-km",
+      "co2_component": 0.101284,
+      "ch4_component": 1e-05,
+      "n2o_component": 0.000856
+    },
+    "original_value": {
+      "value": 0.163,
+      "unit": "kg CO2 per passenger-mile",
+      "notes": "US region. Distance: >= 2300 miles. Does NOT include radiative forcing."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+    "staleness_flag": false
+  },
+  {
+    "activity_id": "air_travel_domestic_uk_ghgp",
+    "activity_name": "Air Travel - Domestic (UK, GHG Protocol)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "DEFRA 2022"
+    },
+    "factor": {
+      "value_kg_co2e": 0.129907,
+      "unit_denominator": "passenger-km"
+    },
+    "original_value": {
+      "value": 0.12871,
+      "unit": "kg CO2 per passenger-km",
+      "notes": "UK region. UK domestic. Average Passenger class. Does NOT include radiative forcing."
+    },
+    "geographic_scope": "UK",
+    "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+    "staleness_flag": true
+  },
+  {
+    "activity_id": "air_travel_short_haul_uk_ghgp",
+    "activity_name": "Air Travel - Short Haul (UK, GHG Protocol)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "DEFRA 2022"
+    },
+    "factor": {
+      "value_kg_co2e": 0.081087,
+      "unit_denominator": "passenger-km"
+    },
+    "original_value": {
+      "value": 0.0804,
+      "unit": "kg CO2 per passenger-km",
+      "notes": "UK region. Up to 3700km. Average Passenger class. Does NOT include radiative forcing."
+    },
+    "geographic_scope": "UK",
+    "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+    "staleness_flag": true
+  },
+  {
+    "activity_id": "air_travel_long_haul_uk_ghgp",
+    "activity_name": "Air Travel - Long Haul (UK, GHG Protocol)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "DEFRA 2022"
+    },
+    "factor": {
+      "value_kg_co2e": 0.101975,
+      "unit_denominator": "passenger-km"
+    },
+    "original_value": {
+      "value": 0.10111,
+      "unit": "kg CO2 per passenger-km",
+      "notes": "UK region. Over 3700km. Average Passenger class. Does NOT include radiative forcing."
+    },
+    "geographic_scope": "UK",
+    "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+    "staleness_flag": true
+  },
+  {
+    "activity_id": "air_travel_international_uk_ghgp",
+    "activity_name": "Air Travel - International (UK, GHG Protocol)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "DEFRA 2022"
+    },
+    "factor": {
+      "value_kg_co2e": 0.09698,
+      "unit_denominator": "passenger-km"
+    },
+    "original_value": {
+      "value": 0.09616,
+      "unit": "kg CO2 per passenger-km",
+      "notes": "UK region. Non-UK international. Average Passenger class. Does NOT include radiative forcing."
+    },
+    "geographic_scope": "UK",
+    "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+    "staleness_flag": true
+  },
+  {
+    "activity_id": "passenger_car",
+    "activity_name": "Passenger Car",
+    "category": "ground_transport",
+    "scope": "scope_1",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "EPA"
+    },
+    "factor": {
+      "value_kg_co2e": 0.109321,
+      "unit_denominator": "vehicle-km"
+    },
+    "original_value": {
+      "value": 0.175,
+      "unit": "kg CO2 per vehicle-mile",
+      "notes": "US Passenger Car. Converted from vehicle-miles to vehicle-km."
+    },
+    "geographic_scope": "US",
+    "methodology_notes": "From EPA via GHG Protocol. Note: GHG Protocol value (0.175) differs from EPA Hub value (0.297) \u2014 likely different data vintages or vehicle fleet definitions.",
+    "staleness_flag": true
+  },
+  {
+    "activity_id": "bus",
+    "activity_name": "Bus",
+    "category": "ground_transport",
+    "scope": "scope_3",
+    "source": {
+      "name": "GHG Protocol Cross-Sector Emission Factors",
+      "edition": "V2.0",
+      "publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+      "url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+      "last_updated": "2024-03-13",
+      "underlying_data_source": "EPA"
+    },
+    "factor": {
+      "value_kg_co2e": 0.044463,
+      "unit_denominator": "passenger-km"
+    },
+    "original_value": {
+      "value": 0.071,
+      "unit": "kg CO2 per passenger-mile"
+    },
+    "geographic_scope": "US",
+    "staleness_flag": false
+  }
+]
