@@ -30,54 +30,9 @@
         "original_unit": "kg CO2 per TJ",
         "methodology_notes": "IPCC 2006 default factor. Lower Heating Value (Net CV) basis. CO2 only \u2014 does not include CH4/N2O from combustion.",
         "staleness_flag": true
-      },
-      {
-        "source_name": "IPCC 2006 Guidelines",
-        "value_kg_co2e": 0.2022,
-        "geographic_scope": "Global (IPCC default)",
-        "original_value": 56100,
-        "original_unit": "kg CO2 per TJ (NCV basis)",
-        "methodology_notes": "IPCC 2006 Guidelines Vol 2, Ch 2, Table 2.2. Global default \u2014 natural gas composition is relatively uniform worldwide (uncertainty range: 54,200-58,300 kg CO2/TJ). NCV/LHV basis. Applied as US factor since IPCC provides a single global default for natural gas.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "IPCC 2006 Guidelines",
-        "value_kg_co2e": 0.2022,
-        "geographic_scope": "Global (IPCC default)",
-        "original_value": 56100,
-        "original_unit": "kg CO2 per TJ (NCV basis)",
-        "methodology_notes": "IPCC 2006 Guidelines global default. Natural gas composition is uniform worldwide. China-specific data not separately published. NCV/LHV basis.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "IPCC 2006 Guidelines",
-        "value_kg_co2e": 0.2022,
-        "geographic_scope": "Global (IPCC default)",
-        "original_value": 56100,
-        "original_unit": "kg CO2 per TJ (NCV basis)",
-        "methodology_notes": "IPCC 2006 Guidelines global default. NCV/LHV basis. India does not publish a separate national natural gas emission factor.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "IPCC 2006 Guidelines",
-        "value_kg_co2e": 0.2022,
-        "geographic_scope": "Global (IPCC default)",
-        "original_value": 56100,
-        "original_unit": "kg CO2 per TJ (NCV basis)",
-        "methodology_notes": "IPCC 2006 Guidelines global default. NCV/LHV basis. Germany uses UBA national factors operationally, but IPCC default shown here for cross-country consistency.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "IPCC 2006 Guidelines",
-        "value_kg_co2e": 0.2022,
-        "geographic_scope": "Global (IPCC default)",
-        "original_value": 56100,
-        "original_unit": "kg CO2 per TJ (NCV basis)",
-        "methodology_notes": "IPCC 2006 Guidelines global default. NCV/LHV basis. Russia does not publish a separate national natural gas emission factor.",
-        "staleness_flag": false
       }
     ],
-    "variance_pct": 10.8,
+    "variance_pct": 11.0,
     "min_value": 0.181234,
     "max_value": 0.2027
   },
@@ -103,56 +58,11 @@
         "original_unit": "kg CO2e per kWh",
         "methodology_notes": "UK national grid average. T&D losses are reported separately under Scope 3. This is generation-only.",
         "staleness_flag": false
-      },
-      {
-        "source_name": "Ember Global Electricity Review",
-        "value_kg_co2e": 0.384,
-        "geographic_scope": "US",
-        "original_value": 384,
-        "original_unit": "g CO2/kWh",
-        "methodology_notes": "Ember 2025 Global Electricity Review, 2024 data. Generation-based (not consumption-based). Includes lifecycle CO2e. US grid mix: ~40% gas, ~18% coal, ~21% nuclear, ~21% renewables.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "Ember Global Electricity Review",
-        "value_kg_co2e": 0.56,
-        "geographic_scope": "China",
-        "original_value": 560,
-        "original_unit": "g CO2/kWh",
-        "methodology_notes": "Ember 2025 Global Electricity Review, 2024 data. China grid mix: ~60% coal, ~16% hydro, ~16% wind/solar, ~5% nuclear. Coal dominance drives high intensity.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "Ember Global Electricity Review",
-        "value_kg_co2e": 0.708,
-        "geographic_scope": "India",
-        "original_value": 708,
-        "original_unit": "g CO2/kWh",
-        "methodology_notes": "Ember 2025 Global Electricity Review, 2024 data. India grid mix: ~75% coal, ~12% renewables, ~3% nuclear. Highest intensity among the 5 countries.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "Ember Global Electricity Review / Fraunhofer ISE",
-        "value_kg_co2e": 0.364,
-        "geographic_scope": "Germany",
-        "original_value": 364,
-        "original_unit": "g CO2/kWh",
-        "methodology_notes": "Estimated from Ember country profile (2023: 371 g/kWh) adjusted for 2024 renewables exceeding 60% of generation per Fraunhofer ISE. Germany grid mix: ~46% renewables, ~26% coal, ~15% gas, ~12% nuclear phase-out.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "Ember Global Electricity Review",
-        "value_kg_co2e": 0.449,
-        "geographic_scope": "Russia",
-        "original_value": 449,
-        "original_unit": "g CO2/kWh",
-        "methodology_notes": "Ember 2025 Global Electricity Review, 2024 data. Russia grid mix: ~47% gas, ~20% hydro, ~18% nuclear, ~15% coal. Moderate intensity due to hydro/nuclear share.",
-        "staleness_flag": false
       }
     ],
-    "variance_pct": 124.2,
+    "variance_pct": 66.1,
     "min_value": 0.177,
-    "max_value": 0.708
+    "max_value": 0.351642
   },
   "air_travel_short_haul": {
     "activity_name": "Air Travel - Short Haul",
@@ -368,56 +278,11 @@
         "original_unit": "kg CO2 per passenger-mile",
         "methodology_notes": "",
         "staleness_flag": false
-      },
-      {
-        "source_name": "CBO / EPA",
-        "value_kg_co2e": 0.11,
-        "geographic_scope": "US",
-        "original_value": 177,
-        "original_unit": "g CO2 per passenger-mile",
-        "methodology_notes": "CBO 2022 analysis of US bus emissions. All bus types (transit + intercity coach). US transit buses have low average occupancy (~25% capacity), inflating per-pkm. Intercity coaches have higher occupancy. Blended average.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "Academic study (Beijing bus smart card data)",
-        "value_kg_co2e": 0.056,
-        "geographic_scope": "China (Beijing)",
-        "original_value": 56.2,
-        "original_unit": "g CO2 per passenger-km",
-        "methodology_notes": "Beijing-specific study using smart card ridership data. Chinese urban buses have higher occupancy than US/EU. CAUTION: Beijing data only, not nationally representative. Tier-2/3 cities may differ significantly. No national aggregate available.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "WRI India-Specific Road Transport Emission Factors",
-        "value_kg_co2e": 0.015,
-        "geographic_scope": "India",
-        "original_value": 15.2,
-        "original_unit": "g CO2 per passenger-km",
-        "methodology_notes": "WRI 2015 India-specific factors. Extremely low per-pkm because Indian urban buses operate at very high occupancy (60-80+ passengers, often standing room). Per vehicle-km, Indian diesel buses emit comparably to other countries. The low per-pkm is an occupancy effect, not a technology effect.",
-        "staleness_flag": true
-      },
-      {
-        "source_name": "UBA (Federal Environment Agency) / TREMOD",
-        "value_kg_co2e": 0.093,
-        "geographic_scope": "Germany",
-        "original_value": 93,
-        "original_unit": "g CO2e per passenger-km",
-        "methodology_notes": "UBA TREMOD model 2022. Scheduled bus average across urban/suburban routes. Diesel buses dominate at 96 g/pkm. Long-distance coaches are much lower (31 g/pkm) due to higher occupancy. German average occupancy embedded in TREMOD calculations.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "IPCC regional default (Eastern Europe/CIS)",
-        "value_kg_co2e": 0.075,
-        "geographic_scope": "Russia (IPCC regional default)",
-        "original_value": 75,
-        "original_unit": "g CO2 per passenger-km (estimated)",
-        "methodology_notes": "No Russia-specific bus emission factor exists in any publicly available source. This is an IPCC regional default for Eastern Europe/CIS, derived from typical diesel bus fuel consumption (30-35 L/100 vkm) and estimated average occupancy. Russia does not systematically report transport emission factors.",
-        "staleness_flag": true
       }
     ],
-    "variance_pct": 141.1,
-    "min_value": 0.015,
-    "max_value": 0.11
+    "variance_pct": 98.7,
+    "min_value": 0.041403,
+    "max_value": 0.10385
   },
   "air_travel_short_haul_defra": {
     "activity_name": "Air Travel - Short Haul (DEFRA: <3700km)",
@@ -605,60 +470,5 @@
       }
     ],
     "variance_pct": null
-  },
-  "passenger_car_gasoline": {
-    "activity_name": "Passenger Car (Gasoline)",
-    "category": "ground_transport",
-    "normalized_unit": "passenger-km",
-    "sources": [
-      {
-        "source_name": "EPA / U. Michigan CSS Factsheet",
-        "value_kg_co2e": 0.166,
-        "geographic_scope": "US",
-        "original_value": 249,
-        "original_unit": "g CO2 per vehicle-km",
-        "methodology_notes": "EPA on-road fleet average (22.2 mpg, 8,887 g CO2/gallon). Occupancy: 1.5 persons/vehicle (US DOT 2019). On-road fleet includes all ages, not just new sales. Real-world driving.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "ICCT China PV Trends Report",
-        "value_kg_co2e": 0.103,
-        "geographic_scope": "China",
-        "original_value": 155,
-        "original_unit": "g CO2 per vehicle-km",
-        "methodology_notes": "ICCT new car fleet average 129 g CO2/km (NEDC, 2021) adjusted +20% for real-world gap. Occupancy: 1.5 (estimated). China's BEV/PHEV share was ~35% of new sales in 2023, driving rapid fleet improvement. CAUTION: new-sales weighted, on-road fleet average is higher.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "ICCT India PV Working Paper",
-        "value_kg_co2e": 0.091,
-        "geographic_scope": "India",
-        "original_value": 146,
-        "original_unit": "g CO2 per vehicle-km",
-        "methodology_notes": "ICCT new car fleet average 121.9 g CO2/km (MIDC cycle, FY2018-19) adjusted +20% for real-world driving gap. Occupancy: 1.6 (higher than Western average, estimated). Indian cars are predominantly smaller/lighter than US/EU fleet.",
-        "staleness_flag": true
-      },
-      {
-        "source_name": "UBA (Federal Environment Agency) / TREMOD",
-        "value_kg_co2e": 0.166,
-        "geographic_scope": "Germany",
-        "original_value": 166,
-        "original_unit": "g CO2e per passenger-km",
-        "methodology_notes": "UBA TREMOD model 2022. Includes all car types (petrol 165, diesel 173 g/pkm). Occupancy: 1.4 persons/vehicle (German national average). This is the most transparent national transport emission factor database among the 5 countries.",
-        "staleness_flag": false
-      },
-      {
-        "source_name": "IEA Fuel Economy in Russia",
-        "value_kg_co2e": 0.128,
-        "geographic_scope": "Russia",
-        "original_value": 192,
-        "original_unit": "g CO2 per vehicle-km",
-        "methodology_notes": "Derived from IEA fleet average fuel consumption (8.3 Lge/100km, 2019). Russia has no fuel economy standards. ~16% above global average per IEA. Post-2019 data unavailable. Occupancy: 1.5 (estimated).",
-        "staleness_flag": true
-      }
-    ],
-    "variance_pct": 57.3,
-    "min_value": 0.091,
-    "max_value": 0.166
   }
 }

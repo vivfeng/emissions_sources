@@ -922,21 +922,20 @@ def main():
     with open(OUT_DIR / "ghg_protocol_factors.json", "w") as f:
         json.dump(ghg_factors, f, indent=2)
 
-    # Load country-specific factors
+    # Write combined file (source factors only — no country data)
+    with open(OUT_DIR / "all_factors.json", "w") as f:
+        json.dump(all_factors, f, indent=2)
+
+    # Load and write country-specific factors separately
     country_factors_path = Path(__file__).parent.parent / "data" / "country_factors.json"
     if country_factors_path.exists():
         print("Loading country-specific factors...")
         with open(country_factors_path) as f:
             country_factors = json.load(f)
         print(f"  Found {len(country_factors)} country-specific factors")
-        all_factors.extend(country_factors)
 
         with open(OUT_DIR / "country_factors.json", "w") as f:
             json.dump(country_factors, f, indent=2)
-
-    # Write combined file
-    with open(OUT_DIR / "all_factors.json", "w") as f:
-        json.dump(all_factors, f, indent=2)
 
     # Write comparison view grouped by activity_id
     comparison = {}
