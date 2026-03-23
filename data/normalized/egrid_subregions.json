@@ -1,0 +1,812 @@
+[
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.410316,
+      "unit_denominator": "kWh",
+      "co2_component": 0.407781,
+      "ch4_component": 0.001092,
+      "n2o_component": 0.001442
+    },
+    "original_value": {
+      "value": 899.003,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: AKGD (ASCC Alaska Grid)"
+    },
+    "geographic_scope": "US - AKGD",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion AKGD (ASCC Alaska Grid). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "AKGD",
+    "subregion_name": "ASCC Alaska Grid"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.236427,
+      "unit_denominator": "kWh",
+      "co2_component": 0.235616,
+      "ch4_component": 0.00033,
+      "n2o_component": 0.000481
+    },
+    "original_value": {
+      "value": 519.445,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: AKMS (ASCC Miscellaneous)"
+    },
+    "geographic_scope": "US - AKMS",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion AKMS (ASCC Miscellaneous). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "AKMS",
+    "subregion_name": "ASCC Miscellaneous"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.337268,
+      "unit_denominator": "kWh",
+      "co2_component": 0.336026,
+      "ch4_component": 0.000521,
+      "n2o_component": 0.000721
+    },
+    "original_value": {
+      "value": 740.81,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: AZNM (WECC Southwest)"
+    },
+    "geographic_scope": "US - AZNM",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion AZNM (WECC Southwest). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "AZNM",
+    "subregion_name": "WECC Southwest"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.198741,
+      "unit_denominator": "kWh",
+      "co2_component": 0.198063,
+      "ch4_component": 0.000318,
+      "n2o_component": 0.000361
+    },
+    "original_value": {
+      "value": 436.655,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: CAMX (WECC California)"
+    },
+    "geographic_scope": "US - CAMX",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion CAMX (WECC California). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "CAMX",
+    "subregion_name": "WECC California"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.336036,
+      "unit_denominator": "kWh",
+      "co2_component": 0.334768,
+      "ch4_component": 0.000546,
+      "n2o_component": 0.000721
+    },
+    "original_value": {
+      "value": 738.038,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: ERCT (ERCOT All)"
+    },
+    "geographic_scope": "US - ERCT",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion ERCT (ERCOT All). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "ERCT",
+    "subregion_name": "ERCOT All"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.364866,
+      "unit_denominator": "kWh",
+      "co2_component": 0.363732,
+      "ch4_component": 0.000533,
+      "n2o_component": 0.000601
+    },
+    "original_value": {
+      "value": 801.891,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: FRCC (FRCC All)"
+    },
+    "geographic_scope": "US - FRCC",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion FRCC (FRCC All). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "FRCC",
+    "subregion_name": "FRCC All"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.513482,
+      "unit_denominator": "kWh",
+      "co2_component": 0.508984,
+      "ch4_component": 0.001854,
+      "n2o_component": 0.002644
+    },
+    "original_value": {
+      "value": 1122.117,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: HIMS (HICC Miscellaneous)"
+    },
+    "geographic_scope": "US - HIMS",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion HIMS (HICC Miscellaneous). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "HIMS",
+    "subregion_name": "HICC Miscellaneous"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.679789,
+      "unit_denominator": "kWh",
+      "co2_component": 0.675563,
+      "ch4_component": 0.001702,
+      "n2o_component": 0.002524
+    },
+    "original_value": {
+      "value": 1489.362,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: HIOA (HICC Oahu)"
+    },
+    "geographic_scope": "US - HIOA",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion HIOA (HICC Oahu). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "HIOA",
+    "subregion_name": "HICC Oahu"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.639455,
+      "unit_denominator": "kWh",
+      "co2_component": 0.635939,
+      "ch4_component": 0.001473,
+      "n2o_component": 0.002043
+    },
+    "original_value": {
+      "value": 1402.005,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: MROE (MRO East)"
+    },
+    "geographic_scope": "US - MROE",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion MROE (MRO East). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "MROE",
+    "subregion_name": "MRO East"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.42023,
+      "unit_denominator": "kWh",
+      "co2_component": 0.417315,
+      "ch4_component": 0.001232,
+      "n2o_component": 0.001683
+    },
+    "original_value": {
+      "value": 920.022,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: MROW (MRO West)"
+    },
+    "geographic_scope": "US - MROW",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion MROW (MRO West). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "MROW",
+    "subregion_name": "MRO West"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.245451,
+      "unit_denominator": "kWh",
+      "co2_component": 0.243689,
+      "ch4_component": 0.0008,
+      "n2o_component": 0.000962
+    },
+    "original_value": {
+      "value": 537.243,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: NEWE (NPCC New England)"
+    },
+    "geographic_scope": "US - NEWE",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion NEWE (NPCC New England). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "NEWE",
+    "subregion_name": "NPCC New England"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.288184,
+      "unit_denominator": "kWh",
+      "co2_component": 0.286537,
+      "ch4_component": 0.000686,
+      "n2o_component": 0.000962
+    },
+    "original_value": {
+      "value": 631.705,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: NWPP (WECC Northwest)"
+    },
+    "geographic_scope": "US - NWPP",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion NWPP (WECC Northwest). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "NWPP",
+    "subregion_name": "WECC Northwest"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.442775,
+      "unit_denominator": "kWh",
+      "co2_component": 0.442097,
+      "ch4_component": 0.000318,
+      "n2o_component": 0.000361
+    },
+    "original_value": {
+      "value": 974.656,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: NYCW (NPCC NYC/Westchester)"
+    },
+    "geographic_scope": "US - NYCW",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion NYCW (NPCC NYC/Westchester). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "NYCW",
+    "subregion_name": "NPCC NYC/Westchester"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.539488,
+      "unit_denominator": "kWh",
+      "co2_component": 0.535547,
+      "ch4_component": 0.001778,
+      "n2o_component": 0.002164
+    },
+    "original_value": {
+      "value": 1180.678,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: NYLI (NPCC Long Island)"
+    },
+    "geographic_scope": "US - NYLI",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion NYLI (NPCC Long Island). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "NYLI",
+    "subregion_name": "NPCC Long Island"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.109571,
+      "unit_denominator": "kWh",
+      "co2_component": 0.109311,
+      "ch4_component": 0.00014,
+      "n2o_component": 0.00012
+    },
+    "original_value": {
+      "value": 240.99,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: NYUP (NPCC Upstate NY)"
+    },
+    "geographic_scope": "US - NYUP",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion NYUP (NPCC Upstate NY). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "NYUP",
+    "subregion_name": "NPCC Upstate NY"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.702292,
+      "unit_denominator": "kWh",
+      "co2_component": 0.699871,
+      "ch4_component": 0.000978,
+      "n2o_component": 0.001442
+    },
+    "original_value": {
+      "value": 1542.952,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: PRMS (Puerto Rico Miscellaneous)"
+    },
+    "geographic_scope": "US - PRMS",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion PRMS (Puerto Rico Miscellaneous). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "PRMS",
+    "subregion_name": "Puerto Rico Miscellaneous"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.270828,
+      "unit_denominator": "kWh",
+      "co2_component": 0.26977,
+      "ch4_component": 0.000457,
+      "n2o_component": 0.000601
+    },
+    "original_value": {
+      "value": 594.74,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: RFCE (RFC East)"
+    },
+    "geographic_scope": "US - RFCE",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion RFCE (RFC East). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "RFCE",
+    "subregion_name": "RFC East"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.438758,
+      "unit_denominator": "kWh",
+      "co2_component": 0.436394,
+      "ch4_component": 0.001041,
+      "n2o_component": 0.001322
+    },
+    "original_value": {
+      "value": 962.084,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: RFCM (RFC Michigan)"
+    },
+    "geographic_scope": "US - RFCM",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion RFCM (RFC Michigan). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "RFCM",
+    "subregion_name": "RFC Michigan"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.415472,
+      "unit_denominator": "kWh",
+      "co2_component": 0.413368,
+      "ch4_component": 0.000902,
+      "n2o_component": 0.001202
+    },
+    "original_value": {
+      "value": 911.321,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: RFCW (RFC West)"
+    },
+    "geographic_scope": "US - RFCW",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion RFCW (RFC West). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "RFCW",
+    "subregion_name": "RFC West"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.472637,
+      "unit_denominator": "kWh",
+      "co2_component": 0.469931,
+      "ch4_component": 0.001143,
+      "n2o_component": 0.001563
+    },
+    "original_value": {
+      "value": 1036.021,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: RMPA (WECC Rockies)"
+    },
+    "geographic_scope": "US - RMPA",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion RMPA (WECC Rockies). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "RMPA",
+    "subregion_name": "WECC Rockies"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.39351,
+      "unit_denominator": "kWh",
+      "co2_component": 0.390963,
+      "ch4_component": 0.001105,
+      "n2o_component": 0.001442
+    },
+    "original_value": {
+      "value": 861.925,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: SPNO (SPP North)"
+    },
+    "geographic_scope": "US - SPNO",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion SPNO (SPP North). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "SPNO",
+    "subregion_name": "SPP North"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.405858,
+      "unit_denominator": "kWh",
+      "co2_component": 0.404198,
+      "ch4_component": 0.000699,
+      "n2o_component": 0.000962
+    },
+    "original_value": {
+      "value": 891.103,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: SPSO (SPP South)"
+    },
+    "geographic_scope": "US - SPSO",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion SPSO (SPP South). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "SPSO",
+    "subregion_name": "SPP South"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.33628,
+      "unit_denominator": "kWh",
+      "co2_component": 0.335393,
+      "ch4_component": 0.000406,
+      "n2o_component": 0.000481
+    },
+    "original_value": {
+      "value": 739.415,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: SRMV (SERC Mississippi Valley)"
+    },
+    "geographic_scope": "US - SRMV",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion SRMV (SERC Mississippi Valley). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "SRMV",
+    "subregion_name": "SERC Mississippi Valley"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.565649,
+      "unit_denominator": "kWh",
+      "co2_component": 0.561688,
+      "ch4_component": 0.001676,
+      "n2o_component": 0.002284
+    },
+    "original_value": {
+      "value": 1238.311,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: SRMW (SERC Midwest)"
+    },
+    "geographic_scope": "US - SRMW",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion SRMW (SERC Midwest). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "SRMW",
+    "subregion_name": "SERC Midwest"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.383083,
+      "unit_denominator": "kWh",
+      "co2_component": 0.381423,
+      "ch4_component": 0.000699,
+      "n2o_component": 0.000962
+    },
+    "original_value": {
+      "value": 840.893,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: SRSO (SERC South)"
+    },
+    "geographic_scope": "US - SRSO",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion SRSO (SERC South). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "SRSO",
+    "subregion_name": "SERC South"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.408605,
+      "unit_denominator": "kWh",
+      "co2_component": 0.40628,
+      "ch4_component": 0.001003,
+      "n2o_component": 0.001322
+    },
+    "original_value": {
+      "value": 895.693,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: SRTV (SERC Tennessee Valley)"
+    },
+    "geographic_scope": "US - SRTV",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion SRTV (SERC Tennessee Valley). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "SRTV",
+    "subregion_name": "SERC Tennessee Valley"
+  },
+  {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "source": {
+      "name": "EPA GHG Emission Factors Hub",
+      "edition": "2025",
+      "publisher": "US Environmental Protection Agency",
+      "url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+      "last_updated": "2025-01-15"
+    },
+    "factor": {
+      "value_kg_co2e": 0.269016,
+      "unit_denominator": "kWh",
+      "co2_component": 0.267723,
+      "ch4_component": 0.000572,
+      "n2o_component": 0.000721
+    },
+    "original_value": {
+      "value": 590.229,
+      "unit": "lb CO2 per MWh (total output)",
+      "notes": "eGRID2023 subregion: SRVC (SERC Virginia/Carolina)"
+    },
+    "geographic_scope": "US - SRVC",
+    "methodology_notes": "eGRID2023 total output emission factor for subregion SRVC (SERC Virginia/Carolina). CH4 and N2O converted to CO2e using AR5 GWPs.",
+    "staleness_flag": false,
+    "subregion_code": "SRVC",
+    "subregion_name": "SERC Virginia/Carolina"
+  }
+]
