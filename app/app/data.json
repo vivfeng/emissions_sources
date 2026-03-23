@@ -1,0 +1,967 @@
+{
+  "air_travel_domestic": {
+    "activity_id": "air_travel_domestic",
+    "activity_name": "Air Travel - Domestic",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.22928,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.22928,
+        "original_unit": "kg CO2e per passenger-km",
+        "original_notes": "Domestic flights within UK",
+        "geographic_scope": "UK",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.22928,
+      "max_value": 0.22928,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "air_travel_domestic_uk_ghgp": {
+    "activity_id": "air_travel_domestic_uk_ghgp",
+    "activity_name": "Air Travel - Domestic (UK, GHG Protocol)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "DEFRA 2022",
+        "value_kg_co2e": 0.129907,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.12871,
+        "original_unit": "kg CO2 per passenger-km",
+        "original_notes": "UK region. UK domestic. Average Passenger class. Does NOT include radiative forcing.",
+        "geographic_scope": "UK",
+        "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+        "staleness_flag": true
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.129907,
+      "max_value": 0.129907,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "air_travel_international": {
+    "activity_id": "air_travel_international",
+    "activity_name": "Air Travel - International",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.14253,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.14253,
+        "original_unit": "kg CO2e per passenger-km",
+        "original_notes": "International, non-UK origin/destination",
+        "geographic_scope": "UK",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.14253,
+      "max_value": 0.14253,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "air_travel_international_uk_ghgp": {
+    "activity_id": "air_travel_international_uk_ghgp",
+    "activity_name": "Air Travel - International (UK, GHG Protocol)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "DEFRA 2022",
+        "value_kg_co2e": 0.09698,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.09616,
+        "original_unit": "kg CO2 per passenger-km",
+        "original_notes": "UK region. Non-UK international. Average Passenger class. Does NOT include radiative forcing.",
+        "geographic_scope": "UK",
+        "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+        "staleness_flag": true
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.09698,
+      "max_value": 0.09698,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "air_travel_long_haul": {
+    "activity_id": "air_travel_long_haul",
+    "activity_name": "Air Travel - Long Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.10215,
+        "unit_denominator": "passenger-km",
+        "co2_component": 0.101284,
+        "ch4_component": 1e-05,
+        "n2o_component": 0.000856,
+        "original_value": 0.163,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "Distance category: >= 2300 miles / ~3701+ km. CO2 only in original; CH4/N2O added during normalization.",
+        "geographic_scope": "US",
+        "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.15282,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.15282,
+        "original_unit": "kg CO2e per passenger-km",
+        "original_notes": "Over 3700 km \u2014 comparable to EPA >=2300 miles",
+        "geographic_scope": "UK",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "DEFRA (via EPA)",
+        "value_kg_co2e": 0.10215,
+        "unit_denominator": "passenger-km",
+        "co2_component": 0.101284,
+        "ch4_component": 1e-05,
+        "n2o_component": 0.000856,
+        "original_value": 0.163,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "US region. Distance: >= 2300 miles. Does NOT include radiative forcing.",
+        "geographic_scope": "US",
+        "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": 42.6,
+      "level": "high",
+      "min_value": 0.10215,
+      "max_value": 0.15282,
+      "diagnosis": "Radiative forcing (RF) inclusion. DEFRA includes RF (accounting for non-CO2 climate effects of aviation like contrails and NOx at altitude), which roughly increases the climate impact by 50-90%. EPA and GHG Protocol do not include RF. This is a genuine methodological choice, not an error."
+    },
+    "key_insight": "These 3 sources vary by 42.6%. Radiative forcing (RF) inclusion. DEFRA includes RF (accounting for non-CO2 climate effects of aviation like contrails and NOx at altitude), which roughly increases the climate impact by 50-90%. EPA and GHG Protocol do not include RF. This is a genuine methodological choice, not an error."
+  },
+  "air_travel_long_haul_uk_ghgp": {
+    "activity_id": "air_travel_long_haul_uk_ghgp",
+    "activity_name": "Air Travel - Long Haul (UK, GHG Protocol)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "DEFRA 2022",
+        "value_kg_co2e": 0.101975,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.10111,
+        "original_unit": "kg CO2 per passenger-km",
+        "original_notes": "UK region. Over 3700km. Average Passenger class. Does NOT include radiative forcing.",
+        "geographic_scope": "UK",
+        "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+        "staleness_flag": true
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.101975,
+      "max_value": 0.101975,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "air_travel_medium_haul": {
+    "activity_id": "air_travel_medium_haul",
+    "activity_name": "Air Travel - Medium Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.080842,
+        "unit_denominator": "passenger-km",
+        "co2_component": 0.080157,
+        "ch4_component": 1e-05,
+        "n2o_component": 0.000675,
+        "original_value": 0.129,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "Distance category: 300-2300 miles / ~483-3701 km. CO2 only in original; CH4/N2O added during normalization.",
+        "geographic_scope": "US",
+        "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "DEFRA (via EPA)",
+        "value_kg_co2e": 0.080842,
+        "unit_denominator": "passenger-km",
+        "co2_component": 0.080157,
+        "ch4_component": 1e-05,
+        "n2o_component": 0.000675,
+        "original_value": 0.129,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "US region. Distance: 300-2300 miles. Does NOT include radiative forcing.",
+        "geographic_scope": "US",
+        "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": 0.0,
+      "level": "low",
+      "min_value": 0.080842,
+      "max_value": 0.080842,
+      "diagnosis": "Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
+    },
+    "key_insight": "These 2 sources vary by 0.0%. Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
+  },
+  "air_travel_short_haul": {
+    "activity_id": "air_travel_short_haul",
+    "activity_name": "Air Travel - Short Haul",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.129822,
+        "unit_denominator": "passenger-km",
+        "co2_component": 0.128624,
+        "ch4_component": 0.000111,
+        "n2o_component": 0.001087,
+        "original_value": 0.207,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "Distance category: < 300 miles / ~483 km. CO2 only in original; CH4/N2O added during normalization.",
+        "geographic_scope": "US",
+        "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "DEFRA (via EPA)",
+        "value_kg_co2e": 0.129822,
+        "unit_denominator": "passenger-km",
+        "co2_component": 0.128624,
+        "ch4_component": 0.000111,
+        "n2o_component": 0.001087,
+        "original_value": 0.207,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "US region. Distance: < 300 miles. Does NOT include radiative forcing.",
+        "geographic_scope": "US",
+        "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": 0.0,
+      "level": "low",
+      "min_value": 0.129822,
+      "max_value": 0.129822,
+      "diagnosis": "Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
+    },
+    "key_insight": "These 2 sources vary by 0.0%. Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation."
+  },
+  "air_travel_short_haul_defra": {
+    "activity_id": "air_travel_short_haul_defra",
+    "activity_name": "Air Travel - Short Haul (DEFRA: <3700km)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.12786,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.12786,
+        "original_unit": "kg CO2e per passenger-km",
+        "original_notes": "Up to 3700 km. WARNING: Not comparable to EPA short-haul (<300 miles/483km). Covers EPA short + medium combined.",
+        "geographic_scope": "UK",
+        "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.12786,
+      "max_value": 0.12786,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "air_travel_short_haul_uk_ghgp": {
+    "activity_id": "air_travel_short_haul_uk_ghgp",
+    "activity_name": "Air Travel - Short Haul (UK, GHG Protocol)",
+    "category": "air_travel",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "DEFRA 2022",
+        "value_kg_co2e": 0.081087,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.0804,
+        "original_unit": "kg CO2 per passenger-km",
+        "original_notes": "UK region. Up to 3700km. Average Passenger class. Does NOT include radiative forcing.",
+        "geographic_scope": "UK",
+        "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+        "staleness_flag": true
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.081087,
+      "max_value": 0.081087,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "aluminum": {
+    "activity_id": "aluminum",
+    "activity_name": "Aluminum (Cans/Foil)",
+    "category": "materials",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per tonne",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 9115.90131,
+        "unit_denominator": "tonne",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 9115.90131,
+        "original_unit": "kg CO2e per tonne",
+        "original_notes": "Aluminium cans and foil, excluding forming. Primary material production.",
+        "geographic_scope": "UK",
+        "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 9115.90131,
+      "max_value": 9115.90131,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "bus": {
+    "activity_id": "bus",
+    "activity_name": "Bus",
+    "category": "ground_transport",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.041403,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.066,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "",
+        "geographic_scope": "US",
+        "methodology_notes": "",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.10385,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.10385,
+        "original_unit": "kg CO2e per passenger-km",
+        "original_notes": "",
+        "geographic_scope": "UK",
+        "methodology_notes": "",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "EPA",
+        "value_kg_co2e": 0.044463,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.071,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "",
+        "geographic_scope": "US",
+        "methodology_notes": "",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": 98.7,
+      "level": "very_high",
+      "min_value": 0.041403,
+      "max_value": 0.10385,
+      "diagnosis": "Geographic fleet composition. US and UK vehicle fleets differ in average vehicle size, fuel efficiency standards, fuel mix, and public transit ridership patterns. US buses tend to show lower per-passenger-km emissions partly due to different occupancy assumptions."
+    },
+    "key_insight": "These 3 sources vary by 98.7%. Geographic fleet composition. US and UK vehicle fleets differ in average vehicle size, fuel efficiency standards, fuel mix, and public transit ridership patterns. US buses tend to show lower per-passenger-km emissions partly due to different occupancy assumptions."
+  },
+  "electricity_grid": {
+    "activity_id": "electricity_grid",
+    "activity_name": "Grid Electricity",
+    "category": "electricity",
+    "scope": "scope_2",
+    "normalized_unit": "kg CO2e per kWh",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.351642,
+        "unit_denominator": "kWh",
+        "co2_component": 0.349957,
+        "ch4_component": 0.000724,
+        "n2o_component": 0.000962,
+        "original_value": 771.523,
+        "original_unit": "lb CO2 per MWh (total output, US average)",
+        "original_notes": "Source: eGRID2023. Converted from lb/MWh to kg CO2e/kWh.",
+        "geographic_scope": "US (national average)",
+        "methodology_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.177,
+        "unit_denominator": "kWh",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.177,
+        "original_unit": "kg CO2e per kWh",
+        "original_notes": "UK national grid average, generation only (excludes T&D losses)",
+        "geographic_scope": "UK",
+        "methodology_notes": "UK national grid average. T&D losses are reported separately under Scope 3. This is generation-only.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": 66.1,
+      "level": "very_high",
+      "min_value": 0.177,
+      "max_value": 0.351642,
+      "diagnosis": "Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference \u2014 it's a real physical difference in how electricity is generated."
+    },
+    "key_insight": "These 2 sources vary by 66.1%. Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference \u2014 it's a real physical difference in how electricity is generated."
+  },
+  "freight_road_truck": {
+    "activity_id": "freight_road_truck",
+    "activity_name": "Freight - Road (Heavy Truck)",
+    "category": "freight",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per vehicle-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.812931,
+        "unit_denominator": "vehicle-km",
+        "co2_component": 0.80654,
+        "ch4_component": 0.0002,
+        "n2o_component": 0.006191,
+        "original_value": 1.298,
+        "original_unit": "kg CO2 per vehicle-mile",
+        "original_notes": "Medium- and Heavy-Duty Truck. Converted from vehicle-miles to vehicle-km.",
+        "geographic_scope": "US",
+        "methodology_notes": "Vehicle-mile basis (not ton-mile). For weight-distance, see row 425.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.812931,
+      "max_value": 0.812931,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (EPA GHG Emission Factors Hub). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "hotel_stay_uk": {
+    "activity_id": "hotel_stay_uk",
+    "activity_name": "Hotel Stay (UK)",
+    "category": "accommodation",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per room-night",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 10.4,
+        "unit_denominator": "room-night",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 10.4,
+        "original_unit": "kg CO2e per room per night",
+        "original_notes": "",
+        "geographic_scope": "UK",
+        "methodology_notes": "",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 10.4,
+      "max_value": 10.4,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "hotel_stay_us": {
+    "activity_id": "hotel_stay_us",
+    "activity_name": "Hotel Stay (US)",
+    "category": "accommodation",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per room-night",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 16.1,
+        "unit_denominator": "room-night",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 16.1,
+        "original_unit": "kg CO2e per room per night",
+        "original_notes": "",
+        "geographic_scope": "United States",
+        "methodology_notes": "",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 16.1,
+      "max_value": 16.1,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "light_duty_truck": {
+    "activity_id": "light_duty_truck",
+    "activity_name": "Light-Duty Truck",
+    "category": "ground_transport",
+    "scope": "scope_1",
+    "normalized_unit": "kg CO2e per vehicle-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.246459,
+        "unit_denominator": "vehicle-km",
+        "co2_component": 0.24482,
+        "ch4_component": 0.00019,
+        "n2o_component": 0.001449,
+        "original_value": 0.394,
+        "original_unit": "kg CO2 per vehicle-mile",
+        "original_notes": "Vehicle type: Light-Duty Truck. Converted from vehicle-miles to vehicle-km.",
+        "geographic_scope": "US",
+        "methodology_notes": "Mixed fleet average. CO2 only in original; CH4/N2O added using AR5 GWPs.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 0.246459,
+      "max_value": 0.246459,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (EPA GHG Emission Factors Hub). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  },
+  "natural_gas_stationary": {
+    "activity_id": "natural_gas_stationary",
+    "activity_name": "Natural Gas (Stationary Combustion)",
+    "category": "stationary_combustion",
+    "scope": "scope_1",
+    "normalized_unit": "kg CO2e per kWh",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.181234,
+        "unit_denominator": "kWh",
+        "co2_component": 0.181048,
+        "ch4_component": 9.6e-05,
+        "n2o_component": 9e-05,
+        "original_value": 53.06,
+        "original_unit": "kg CO2 per mmBtu",
+        "original_notes": "CO2 only; CH4 and N2O added during normalization using AR5 GWPs",
+        "geographic_scope": "US",
+        "methodology_notes": "Higher Heating Value (HHV) basis. IPCC AR5 GWPs (CH4=28, N2O=265). CH4 and N2O converted to CO2e and added.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.2027,
+        "unit_denominator": "kWh",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.2027,
+        "original_unit": "kg CO2e per kWh (Net CV)",
+        "original_notes": "Net Calorific Value (LHV) basis. Already in kg CO2e.",
+        "geographic_scope": "UK",
+        "methodology_notes": "Net Calorific Value (Lower Heating Value) basis. Note: EPA uses Gross/HHV which gives ~10% higher energy content per unit fuel.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "IPCC 2006 Guidelines",
+        "value_kg_co2e": 0.20196,
+        "unit_denominator": "kWh",
+        "co2_component": 0.20196,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 56100.0,
+        "original_unit": "kg CO2 per TJ",
+        "original_notes": "CO2 only. CH4/N2O in separate table. LHV (Net CV) basis.",
+        "geographic_scope": "Global (IPCC default)",
+        "methodology_notes": "IPCC 2006 default factor. Lower Heating Value (Net CV) basis. CO2 only \u2014 does not include CH4/N2O from combustion.",
+        "staleness_flag": true
+      }
+    ],
+    "variance": {
+      "percentage": 11.0,
+      "level": "moderate",
+      "min_value": 0.181234,
+      "max_value": 0.2027,
+      "diagnosis": "Energy measurement basis. EPA uses Higher Heating Value (HHV/Gross CV), while DEFRA and IPCC use Lower Heating Value (LHV/Net CV). HHV includes the latent heat of water vapor in combustion products; LHV does not. The difference is ~10% for natural gas. Additionally, the IPCC factor (via GHG Protocol) is CO2-only while EPA/DEFRA include CH4/N2O."
+    },
+    "key_insight": "These 3 sources vary by 11.0%. Energy measurement basis. EPA uses Higher Heating Value (HHV/Gross CV), while DEFRA and IPCC use Lower Heating Value (LHV/Net CV). HHV includes the latent heat of water vapor in combustion products; LHV does not. The difference is ~10% for natural gas. Additionally, the IPCC factor (via GHG Protocol) is CO2-only while EPA/DEFRA include CH4/N2O."
+  },
+  "passenger_car": {
+    "activity_id": "passenger_car",
+    "activity_name": "Passenger Car (Gasoline)",
+    "category": "ground_transport",
+    "scope": "scope_1",
+    "normalized_unit": "kg CO2e per vehicle-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.185523,
+        "unit_denominator": "vehicle-km",
+        "co2_component": 0.184547,
+        "ch4_component": 0.000103,
+        "n2o_component": 0.000873,
+        "original_value": 0.297,
+        "original_unit": "kg CO2 per vehicle-mile",
+        "original_notes": "Vehicle type: Passenger Car. Converted from vehicle-miles to vehicle-km.",
+        "geographic_scope": "US",
+        "methodology_notes": "Mixed fleet average. CO2 only in original; CH4/N2O added using AR5 GWPs.",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "GHG Protocol Cross-Sector Emission Factors",
+        "source_edition": "V2.0",
+        "source_publisher": "Greenhouse Gas Protocol (WRI/WBCSD)",
+        "source_url": "https://ghgprotocol.org/calculation-tools-and-guidance",
+        "last_updated": "2024-03-13",
+        "underlying_data_source": "EPA",
+        "value_kg_co2e": 0.109321,
+        "unit_denominator": "vehicle-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.175,
+        "original_unit": "kg CO2 per vehicle-mile",
+        "original_notes": "US Passenger Car. Converted from vehicle-miles to vehicle-km.",
+        "geographic_scope": "US",
+        "methodology_notes": "From EPA via GHG Protocol. WARNING: GHG Protocol value (0.175 kg CO2/mi) differs significantly from EPA Hub value (0.297 kg CO2/mi). Likely different fleet definitions or data vintages. The EPA Hub 2025 value appears to be a newer, higher estimate. This 51% discrepancy is itself a key finding.",
+        "staleness_flag": true
+      }
+    ],
+    "variance": {
+      "percentage": 51.7,
+      "level": "very_high",
+      "min_value": 0.109321,
+      "max_value": 0.185523,
+      "diagnosis": "Data vintage. GHG Protocol Cross-Sector Emission Factors uses older underlying data. Emission factors change as energy grids evolve, vehicle fleets turn over, and measurement methodologies improve."
+    },
+    "key_insight": "These 2 sources vary by 51.7%. Data vintage. GHG Protocol Cross-Sector Emission Factors uses older underlying data. Emission factors change as energy grids evolve, vehicle fleets turn over, and measurement methodologies improve."
+  },
+  "rail_intercity": {
+    "activity_id": "rail_intercity",
+    "activity_name": "Intercity Rail (National Average)",
+    "category": "ground_transport",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per passenger-km",
+    "sources": [
+      {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "source_edition": "2025",
+        "source_publisher": "US Environmental Protection Agency",
+        "source_url": "https://www.epa.gov/climateleadership/ghg-emission-factors-hub",
+        "last_updated": "2025-01-15",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.06012,
+        "unit_denominator": "passenger-km",
+        "co2_component": 0.059652,
+        "ch4_component": 0.000139,
+        "n2o_component": 0.000329,
+        "original_value": 0.096,
+        "original_unit": "kg CO2 per passenger-mile",
+        "original_notes": "Intercity Rail - National Average",
+        "geographic_scope": "US",
+        "methodology_notes": "",
+        "staleness_flag": false
+      },
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 0.03546,
+        "unit_denominator": "passenger-km",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 0.03546,
+        "original_unit": "kg CO2e per passenger-km",
+        "original_notes": "",
+        "geographic_scope": "UK",
+        "methodology_notes": "",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": 51.6,
+      "level": "very_high",
+      "min_value": 0.03546,
+      "max_value": 0.06012,
+      "diagnosis": "Geographic infrastructure. UK rail is partially electrified with higher occupancy rates. US intercity rail (Amtrak) covers longer distances with lower occupancy, affecting per-passenger-km intensity."
+    },
+    "key_insight": "These 2 sources vary by 51.6%. Geographic infrastructure. UK rail is partially electrified with higher occupancy rates. US intercity rail (Amtrak) covers longer distances with lower occupancy, affecting per-passenger-km intensity."
+  },
+  "steel": {
+    "activity_id": "steel",
+    "activity_name": "Steel (Cans)",
+    "category": "materials",
+    "scope": "scope_3",
+    "normalized_unit": "kg CO2e per tonne",
+    "sources": [
+      {
+        "source_name": "UK Government GHG Conversion Factors",
+        "source_edition": "2025",
+        "source_publisher": "Department for Energy Security and Net Zero (DESNZ)",
+        "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2025",
+        "last_updated": "2025-06-10",
+        "underlying_data_source": null,
+        "value_kg_co2e": 2863.90131,
+        "unit_denominator": "tonne",
+        "co2_component": null,
+        "ch4_component": null,
+        "n2o_component": null,
+        "original_value": 2863.90131,
+        "original_unit": "kg CO2e per tonne",
+        "original_notes": "Steel cans \u2014 primary material production. Not raw steel.",
+        "geographic_scope": "UK",
+        "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
+        "staleness_flag": false
+      }
+    ],
+    "variance": {
+      "percentage": null,
+      "level": "single_source",
+      "min_value": 2863.90131,
+      "max_value": 2863.90131,
+      "diagnosis": null
+    },
+    "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available."
+  }
+}
