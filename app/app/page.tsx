@@ -426,7 +426,7 @@ function ComparisonView({ comp, compact }: { comp: Comparison; compact?: boolean
       )}
 
       {/* Source cards grid */}
-      <div className={`grid gap-4 ${comp.sources.length === 1 ? "grid-cols-1 max-w-md" : comp.sources.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
+      <div className={`grid gap-4 ${comp.sources.length === 1 ? "grid-cols-1 max-w-md" : comp.sources.length === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"}`}>
         {comp.sources.map((source, i) => (
           <SourceCard key={i} source={source} maxVal={maxVal} uncertainty={comp.uncertainty} />
         ))}
@@ -1024,7 +1024,7 @@ function CountryAccordion({ countryCompList }: { countryCompList: [string, Count
             <div key={id} className="rounded-lg bg-white overflow-hidden" style={{ border: '1px solid var(--ws-border)' }}>
               <button
                 onClick={() => setOpenId(isOpen ? null : id)}
-                className="w-full text-left px-4 py-3 flex items-center justify-between gap-4 transition-colors"
+                className="w-full text-left px-4 py-3 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 sm:gap-4 transition-colors"
                 style={isOpen ? { backgroundColor: 'var(--ws-blue-bg)' } : {}}
               >
                 <div className="min-w-0">
@@ -1078,7 +1078,7 @@ function SourceAccordion({ multiSource, singleSource }: { multiSource: [string, 
             <div key={id} className="rounded-lg bg-white overflow-hidden" style={{ border: '1px solid var(--ws-border)' }}>
               <button
                 onClick={() => setOpenId(isOpen ? null : id)}
-                className="w-full text-left px-4 py-3 flex items-center justify-between gap-4 transition-colors"
+                className="w-full text-left px-4 py-3 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 sm:gap-4 transition-colors"
                 style={isOpen ? { backgroundColor: 'var(--ws-blue-bg)' } : {}}
               >
                 <div className="min-w-0">
@@ -1321,7 +1321,7 @@ export default function Home() {
 
         {/* View mode toggle */}
         {!selected && (
-          <div className="mb-8 flex gap-1 rounded-lg p-1 w-fit" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid var(--ws-border)' }}>
+          <div className="mb-8 flex gap-1 rounded-lg p-1 w-fit overflow-x-auto max-w-full" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid var(--ws-border)' }}>
             <button
               onClick={() => setViewMode("sources")}
               className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "sources" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
