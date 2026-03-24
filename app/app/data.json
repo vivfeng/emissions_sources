@@ -24,7 +24,8 @@
           "original_notes": "Domestic flights within UK",
           "geographic_scope": "UK",
           "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_plus_rf"
         }
       ],
       "variance": {
@@ -91,7 +92,8 @@
           "original_notes": "UK region. UK domestic. Average Passenger class. Does NOT include radiative forcing.",
           "geographic_scope": "UK",
           "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
-          "staleness_flag": true
+          "staleness_flag": true,
+          "system_boundary": "combustion_no_rf"
         }
       ],
       "variance": {
@@ -158,7 +160,8 @@
           "original_notes": "International, non-UK origin/destination",
           "geographic_scope": "UK",
           "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_plus_rf"
         }
       ],
       "variance": {
@@ -225,7 +228,8 @@
           "original_notes": "UK region. Non-UK international. Average Passenger class. Does NOT include radiative forcing.",
           "geographic_scope": "UK",
           "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
-          "staleness_flag": true
+          "staleness_flag": true,
+          "system_boundary": "combustion_no_rf"
         }
       ],
       "variance": {
@@ -292,7 +296,8 @@
           "original_notes": "Distance category: >= 2300 miles / ~3701+ km. CO2 only in original; CH4/N2O added during normalization.",
           "geographic_scope": "US",
           "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_no_rf"
         },
         {
           "source_name": "UK Government GHG Conversion Factors",
@@ -311,7 +316,8 @@
           "original_notes": "Over 3700 km \u2014 comparable to EPA >=2300 miles",
           "geographic_scope": "UK",
           "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_plus_rf"
         },
         {
           "source_name": "GHG Protocol Cross-Sector Emission Factors",
@@ -330,7 +336,8 @@
           "original_notes": "US region. Distance: >= 2300 miles. Does NOT include radiative forcing.",
           "geographic_scope": "US",
           "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_no_rf"
         }
       ],
       "variance": {
@@ -339,7 +346,18 @@
         "min_value": 0.10215,
         "max_value": 0.15282,
         "diagnosis": "Radiative forcing (RF) inclusion. DEFRA includes RF (accounting for non-CO2 climate effects of aviation like contrails and NOx at altitude), which roughly increases the climate impact by 50-90%. EPA and GHG Protocol do not include RF. This is a genuine methodological choice, not an error.",
-        "variance_type": "methodological"
+        "variance_type": "methodological",
+        "drivers": [
+          "system_boundary",
+          "geographic",
+          "methodological"
+        ],
+        "has_boundary_mismatch": true,
+        "decomposition": {
+          "boundary_pct": 100,
+          "other_pct": 0,
+          "note": "~100% of variance from system boundary differences, ~0% from other factors (geography, methodology, data vintage)"
+        }
       },
       "uncertainty": {
         "low": 0.10215,
@@ -399,7 +417,8 @@
           "original_notes": "UK region. Over 3700km. Average Passenger class. Does NOT include radiative forcing.",
           "geographic_scope": "UK",
           "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
-          "staleness_flag": true
+          "staleness_flag": true,
+          "system_boundary": "combustion_no_rf"
         }
       ],
       "variance": {
@@ -466,7 +485,8 @@
           "original_notes": "Distance category: 300-2300 miles / ~483-3701 km. CO2 only in original; CH4/N2O added during normalization.",
           "geographic_scope": "US",
           "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_no_rf"
         },
         {
           "source_name": "GHG Protocol Cross-Sector Emission Factors",
@@ -485,7 +505,8 @@
           "original_notes": "US region. Distance: 300-2300 miles. Does NOT include radiative forcing.",
           "geographic_scope": "US",
           "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_no_rf"
         }
       ],
       "variance": {
@@ -494,7 +515,11 @@
         "min_value": 0.080842,
         "max_value": 0.080842,
         "diagnosis": "Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation.",
-        "variance_type": "methodological"
+        "variance_type": "methodological",
+        "drivers": [
+          "methodological"
+        ],
+        "has_boundary_mismatch": false
       },
       "uncertainty": {
         "low": 0.080842,
@@ -553,7 +578,8 @@
           "original_notes": "Distance category: < 300 miles / ~483 km. CO2 only in original; CH4/N2O added during normalization.",
           "geographic_scope": "US",
           "methodology_notes": "Does NOT include radiative forcing. EPA sources these from 'high altitude calculations' per the footnote. Converted from passenger-miles to passenger-km.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_no_rf"
         },
         {
           "source_name": "GHG Protocol Cross-Sector Emission Factors",
@@ -572,7 +598,8 @@
           "original_notes": "US region. Distance: < 300 miles. Does NOT include radiative forcing.",
           "geographic_scope": "US",
           "methodology_notes": "GHG Protocol sources US air travel from DEFRA via EPA. Does NOT include radiative forcing. Converted from passenger-miles to passenger-km.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_no_rf"
         }
       ],
       "variance": {
@@ -581,7 +608,11 @@
         "min_value": 0.129822,
         "max_value": 0.129822,
         "diagnosis": "Source circularity. Some factors trace back to the same underlying source (DEFRA (via EPA)). Apparent agreement may reflect shared provenance rather than independent validation.",
-        "variance_type": "methodological"
+        "variance_type": "methodological",
+        "drivers": [
+          "methodological"
+        ],
+        "has_boundary_mismatch": false
       },
       "uncertainty": {
         "low": 0.129822,
@@ -640,7 +671,8 @@
           "original_notes": "Up to 3700 km. WARNING: Not comparable to EPA short-haul (<300 miles/483km). Covers EPA short + medium combined.",
           "geographic_scope": "UK",
           "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_plus_rf"
         }
       ],
       "variance": {
@@ -707,7 +739,8 @@
           "original_notes": "UK region. Up to 3700km. Average Passenger class. Does NOT include radiative forcing.",
           "geographic_scope": "UK",
           "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
-          "staleness_flag": true
+          "staleness_flag": true,
+          "system_boundary": "combustion_no_rf"
         }
       ],
       "variance": {
@@ -774,7 +807,8 @@
           "original_notes": "Aluminium cans and foil, excluding forming. Primary material production.",
           "geographic_scope": "UK",
           "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "embodied_cradle_to_gate"
         }
       ],
       "variance": {
@@ -841,7 +875,8 @@
           "original_notes": "",
           "geographic_scope": "US",
           "methodology_notes": "",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         },
         {
           "source_name": "UK Government GHG Conversion Factors",
@@ -860,7 +895,8 @@
           "original_notes": "",
           "geographic_scope": "UK",
           "methodology_notes": "",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         },
         {
           "source_name": "GHG Protocol Cross-Sector Emission Factors",
@@ -879,7 +915,8 @@
           "original_notes": "",
           "geographic_scope": "US",
           "methodology_notes": "",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         }
       ],
       "variance": {
@@ -888,7 +925,11 @@
         "min_value": 0.041403,
         "max_value": 0.10385,
         "diagnosis": "Geographic fleet composition. US and UK vehicle fleets differ in average vehicle size, fuel efficiency standards, fuel mix, and public transit ridership patterns. US buses tend to show lower per-passenger-km emissions partly due to different occupancy assumptions.",
-        "variance_type": "geographic"
+        "variance_type": "geographic",
+        "drivers": [
+          "geographic"
+        ],
+        "has_boundary_mismatch": false
       },
       "uncertainty": {
         "low": 0.041403,
@@ -948,7 +989,8 @@
           "original_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
           "geographic_scope": "US (national average)",
           "methodology_notes": "eGRID2023 total output emission factor. US national average across all subregions. CH4 and N2O converted to CO2e using AR5 GWPs.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "generation_only"
         },
         {
           "source_name": "UK Government GHG Conversion Factors",
@@ -967,7 +1009,8 @@
           "original_notes": "UK national grid average, generation only (excludes T&D losses)",
           "geographic_scope": "UK",
           "methodology_notes": "UK national grid average. T&D losses are reported separately under Scope 3. This is generation-only.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "generation_only"
         }
       ],
       "variance": {
@@ -976,7 +1019,11 @@
         "min_value": 0.177,
         "max_value": 0.351642,
         "diagnosis": "Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference \u2014 it's a real physical difference in how electricity is generated.",
-        "variance_type": "mixed"
+        "variance_type": "mixed",
+        "drivers": [
+          "geographic"
+        ],
+        "has_boundary_mismatch": false
       },
       "uncertainty": {
         "low": 0.177,
@@ -1036,7 +1083,8 @@
           "original_notes": "Medium- and Heavy-Duty Truck. Converted from vehicle-miles to vehicle-km.",
           "geographic_scope": "US",
           "methodology_notes": "Vehicle-mile basis (not ton-mile). For weight-distance, see row 425.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         }
       ],
       "variance": {
@@ -1103,7 +1151,8 @@
           "original_notes": "",
           "geographic_scope": "UK",
           "methodology_notes": "",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "operational"
         }
       ],
       "variance": {
@@ -1170,7 +1219,8 @@
           "original_notes": "",
           "geographic_scope": "United States",
           "methodology_notes": "",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "operational"
         }
       ],
       "variance": {
@@ -1237,7 +1287,8 @@
           "original_notes": "Vehicle type: Light-Duty Truck. Converted from vehicle-miles to vehicle-km.",
           "geographic_scope": "US",
           "methodology_notes": "Mixed fleet average. CO2 only in original; CH4/N2O added using AR5 GWPs.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         }
       ],
       "variance": {
@@ -1304,7 +1355,8 @@
           "original_notes": "CO2 only; CH4 and N2O added during normalization using AR5 GWPs",
           "geographic_scope": "US",
           "methodology_notes": "Higher Heating Value (HHV) basis. IPCC AR5 GWPs (CH4=28, N2O=265). CH4 and N2O converted to CO2e and added.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         },
         {
           "source_name": "UK Government GHG Conversion Factors",
@@ -1323,7 +1375,8 @@
           "original_notes": "Net Calorific Value (LHV) basis. Already in kg CO2e.",
           "geographic_scope": "UK",
           "methodology_notes": "Net Calorific Value (Lower Heating Value) basis. Note: EPA uses Gross/HHV which gives ~10% higher energy content per unit fuel.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         },
         {
           "source_name": "GHG Protocol Cross-Sector Emission Factors",
@@ -1342,7 +1395,8 @@
           "original_notes": "CO2 only. CH4/N2O in separate table. LHV (Net CV) basis.",
           "geographic_scope": "Global (IPCC default)",
           "methodology_notes": "IPCC 2006 default factor. Lower Heating Value (Net CV) basis. CO2 only \u2014 does not include CH4/N2O from combustion.",
-          "staleness_flag": true
+          "staleness_flag": true,
+          "system_boundary": "co2_only"
         }
       ],
       "variance": {
@@ -1351,7 +1405,18 @@
         "min_value": 0.181234,
         "max_value": 0.2027,
         "diagnosis": "Energy measurement basis. EPA uses Higher Heating Value (HHV/Gross CV), while DEFRA and IPCC use Lower Heating Value (LHV/Net CV). HHV includes the latent heat of water vapor in combustion products; LHV does not. The difference is ~10% for natural gas. Additionally, the IPCC factor (via GHG Protocol) is CO2-only while EPA/DEFRA include CH4/N2O.",
-        "variance_type": "methodological"
+        "variance_type": "methodological",
+        "drivers": [
+          "system_boundary",
+          "geographic",
+          "methodological"
+        ],
+        "has_boundary_mismatch": true,
+        "decomposition": {
+          "boundary_pct": 47,
+          "other_pct": 53,
+          "note": "~47% of variance from system boundary differences, ~53% from other factors (geography, methodology, data vintage)"
+        }
       },
       "uncertainty": {
         "low": 0.181234,
@@ -1411,7 +1476,8 @@
           "original_notes": "Vehicle type: Passenger Car. Converted from vehicle-miles to vehicle-km.",
           "geographic_scope": "US",
           "methodology_notes": "Mixed fleet average. CO2 only in original; CH4/N2O added using AR5 GWPs.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         },
         {
           "source_name": "GHG Protocol Cross-Sector Emission Factors",
@@ -1430,7 +1496,8 @@
           "original_notes": "US Passenger Car. Converted from vehicle-miles to vehicle-km.",
           "geographic_scope": "US",
           "methodology_notes": "From EPA via GHG Protocol. WARNING: GHG Protocol value (0.175 kg CO2/mi) differs significantly from EPA Hub value (0.297 kg CO2/mi). Likely different fleet definitions or data vintages. The EPA Hub 2025 value appears to be a newer, higher estimate. This 51% discrepancy is itself a key finding.",
-          "staleness_flag": true
+          "staleness_flag": true,
+          "system_boundary": "combustion_only"
         }
       ],
       "variance": {
@@ -1439,7 +1506,11 @@
         "min_value": 0.109321,
         "max_value": 0.185523,
         "diagnosis": "Data vintage. GHG Protocol Cross-Sector Emission Factors uses older underlying data. Emission factors change as energy grids evolve, vehicle fleets turn over, and measurement methodologies improve.",
-        "variance_type": "mixed"
+        "variance_type": "mixed",
+        "drivers": [
+          "methodological"
+        ],
+        "has_boundary_mismatch": false
       },
       "uncertainty": {
         "low": 0.109321,
@@ -1498,7 +1569,8 @@
           "original_notes": "Intercity Rail - National Average",
           "geographic_scope": "US",
           "methodology_notes": "",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         },
         {
           "source_name": "UK Government GHG Conversion Factors",
@@ -1517,7 +1589,8 @@
           "original_notes": "",
           "geographic_scope": "UK",
           "methodology_notes": "",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "combustion_only"
         }
       ],
       "variance": {
@@ -1526,7 +1599,11 @@
         "min_value": 0.03546,
         "max_value": 0.06012,
         "diagnosis": "Geographic infrastructure. UK rail is partially electrified with higher occupancy rates. US intercity rail (Amtrak) covers longer distances with lower occupancy, affecting per-passenger-km intensity.",
-        "variance_type": "geographic"
+        "variance_type": "geographic",
+        "drivers": [
+          "geographic"
+        ],
+        "has_boundary_mismatch": false
       },
       "uncertainty": {
         "low": 0.03546,
@@ -1586,7 +1663,8 @@
           "original_notes": "Steel cans \u2014 primary material production. Not raw steel.",
           "geographic_scope": "UK",
           "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
-          "staleness_flag": false
+          "staleness_flag": false,
+          "system_boundary": "embodied_cradle_to_gate"
         }
       ],
       "variance": {
@@ -2484,6 +2562,18 @@
       "ghg_protocol_independent": 0,
       "ghg_protocol_compiled": 10,
       "narrative": "GHG Protocol provides no independently derived emission factors in its Cross-Sector Tools. Every factor traces back to EPA, DEFRA, or IPCC. Apparent 'three-source agreement' is circular citation."
+    }
+  },
+  "_meta": {
+    "system_boundary_labels": {
+      "combustion_only": "Combustion only",
+      "well_to_wheel": "Well-to-wheel",
+      "combustion_plus_rf": "Combustion + radiative forcing",
+      "combustion_no_rf": "Combustion only (no RF)",
+      "generation_only": "Generation only (no T&D)",
+      "embodied_cradle_to_gate": "Embodied (cradle-to-gate)",
+      "operational": "Operational",
+      "co2_only": "CO\u2082 only (no CH\u2084/N\u2082O)"
     }
   }
 }
