@@ -18,6 +18,7 @@ type Source = {
   geographic_scope: string;
   methodology_notes: string;
   staleness_flag: boolean;
+  system_boundary?: string;
 };
 
 type Uncertainty = {
@@ -42,6 +43,13 @@ type Comparison = {
     max_value: number | null;
     diagnosis: string | null;
     variance_type?: string | null;
+    drivers?: string[];
+    has_boundary_mismatch?: boolean;
+    decomposition?: {
+      boundary_pct: number;
+      other_pct: number;
+      note: string;
+    };
   };
   uncertainty?: Uncertainty | null;
   key_insight: string;
@@ -220,6 +228,62 @@ function VarianceTypeBadge({ varianceType }: { varianceType?: string | null }) {
   );
 }
 
+const BOUNDARY_LABELS: Record<string, { label: string; icon: string; tooltip: string }> = {
+  combustion_only: {
+    label: "Combustion only",
+    icon: "🔥",
+    tooltip: "Covers direct combustion emissions (tank-to-wheel). Does not include upstream fuel production, extraction, or transport emissions.",
+  },
+  combustion_plus_rf: {
+    label: "Combustion + RF",
+    icon: "✈️",
+    tooltip: "Includes combustion emissions plus a radiative forcing multiplier for aviation's non-CO₂ climate effects (contrails, NOx, etc). Roughly 1.7-2x higher than combustion-only.",
+  },
+  combustion_no_rf: {
+    label: "Combustion only (no RF)",
+    icon: "✈️",
+    tooltip: "Covers direct combustion emissions only. Does NOT include radiative forcing — the non-CO₂ climate effects of aviation. Compare carefully with sources that include RF.",
+  },
+  generation_only: {
+    label: "Generation only",
+    icon: "⚡",
+    tooltip: "Grid generation emissions only. Does not include transmission & distribution (T&D) losses, which are typically reported separately under Scope 3.",
+  },
+  embodied_cradle_to_gate: {
+    label: "Embodied (cradle-to-gate)",
+    icon: "🏭",
+    tooltip: "Cradle-to-gate embodied carbon: covers raw material extraction through manufacturing. Does not include use-phase or end-of-life emissions.",
+  },
+  operational: {
+    label: "Operational",
+    icon: "🏨",
+    tooltip: "Operational emissions from building energy use. Based on average energy consumption per room-night. Does not include embodied carbon of the building.",
+  },
+  co2_only: {
+    label: "CO₂ only",
+    icon: "⚠️",
+    tooltip: "Covers CO₂ only — does NOT include CH₄ (methane) or N₂O (nitrous oxide) from combustion. Understates total GHG impact by ~1-5% depending on fuel.",
+  },
+  well_to_wheel: {
+    label: "Well-to-wheel",
+    icon: "🛢️",
+    tooltip: "Full fuel lifecycle: extraction, refining, transport, and combustion. Higher than combustion-only factors.",
+  },
+};
+
+function BoundaryBadge({ boundary }: { boundary?: string }) {
+  if (!boundary || boundary === "unclassified") return null;
+  const info = BOUNDARY_LABELS[boundary];
+  if (!info) return null;
+  return (
+    <span className="tooltip-wrap text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 cursor-help inline-flex items-center gap-1" style={{ border: '1px solid var(--ws-border)' }}>
+      <span>{info.icon}</span>
+      <span>{info.label}</span>
+      <span className="tooltip-text">{info.tooltip}</span>
+    </span>
+  );
+}
+
 function StaleFlag() {
   return (
     <span className="inline-flex items-center text-xs text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded" title="Underlying data may be outdated (2+ years)">
@@ -360,6 +424,11 @@ function SourceCard({ source, maxVal, uncertainty }: { source: Source; maxVal: n
           {source.value_kg_co2e.toFixed(4)}
         </div>
         <div className="text-xs text-gray-500">kg CO2e / {source.unit_denominator}</div>
+        {source.system_boundary && source.system_boundary !== "unclassified" && (
+          <div className="mt-1.5">
+            <BoundaryBadge boundary={source.system_boundary} />
+          </div>
+        )}
       </div>
 
       {/* Bar visualization with uncertainty overlay */}
@@ -445,6 +514,46 @@ function ComparisonView({ comp, compact }: { comp: Comparison; compact?: boolean
           <SourceCard key={i} source={source} maxVal={maxVal} uncertainty={comp.uncertainty} />
         ))}
       </div>
+
+      {/* Boundary mismatch warning + variance decomposition */}
+      {comp.variance.has_boundary_mismatch && (
+        <div className="mt-4 rounded-lg px-4 py-3 flex items-start gap-2.5" style={{ backgroundColor: '#FFF7ED', border: '1px solid #FED7AA' }}>
+          <span className="text-amber-500 mt-0.5 shrink-0">⚠️</span>
+          <div>
+            <div className="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-0.5">System Boundary Mismatch</div>
+            <p className="text-sm text-amber-900 leading-relaxed">
+              These sources use different system boundaries — they&apos;re not measuring the same thing.
+              {comp.variance.decomposition && (
+                <> <strong>~{comp.variance.decomposition.boundary_pct}%</strong> of the {comp.variance.percentage}% variance comes from boundary differences, <strong>~{comp.variance.decomposition.other_pct}%</strong> from other factors (geography, methodology, data vintage).</>
+              )}
+              {!comp.variance.decomposition && " Compare the boundary labels on each source card before drawing conclusions from the variance number."}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Variance decomposition bar (when available) */}
+      {comp.variance.decomposition && comp.variance.percentage !== null && (
+        <div className="mt-3 rounded-lg p-3" style={{ border: '1px solid var(--ws-border)' }}>
+          <div className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: 'var(--ws-body)' }}>Variance Breakdown</div>
+          <div className="flex h-4 rounded-full overflow-hidden bg-gray-100">
+            <div
+              className="h-full bg-amber-400 transition-all"
+              style={{ width: `${comp.variance.decomposition.boundary_pct}%` }}
+              title={`System boundary: ${comp.variance.decomposition.boundary_pct}%`}
+            />
+            <div
+              className="h-full transition-all"
+              style={{ width: `${comp.variance.decomposition.other_pct}%`, backgroundColor: 'var(--ws-blue-light)' }}
+              title={`Other factors: ${comp.variance.decomposition.other_pct}%`}
+            />
+          </div>
+          <div className="flex justify-between mt-1.5 text-xs" style={{ color: 'var(--ws-body)' }}>
+            <span><span className="inline-block w-2 h-2 rounded-sm bg-amber-400 mr-1" />System boundary: {comp.variance.decomposition.boundary_pct}%</span>
+            <span><span className="inline-block w-2 h-2 rounded-sm mr-1" style={{ backgroundColor: 'var(--ws-blue-light)' }} />Other factors: {comp.variance.decomposition.other_pct}%</span>
+          </div>
+        </div>
+      )}
 
       {/* Uncertainty Range */}
       {comp.uncertainty && <UncertaintyBar uncertainty={comp.uncertainty} />}
