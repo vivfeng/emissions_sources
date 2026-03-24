@@ -183,8 +183,18 @@ function VarianceBadge({ level, pct }: { level: string; pct: number | null }) {
     high: "bg-orange-100 text-orange-800",
     very_high: "bg-red-100 text-red-800",
   };
+  const tooltips: Record<string, string> = {
+    low: "Sources broadly agree. Differences are minor and unlikely to affect reporting decisions.",
+    moderate: "Noticeable disagreement between sources. Choice of database could shift your footprint meaningfully.",
+    high: "Large disagreement. The same activity produces very different numbers depending on which source you use.",
+    very_high: "Extreme disagreement. Source choice dominates the result more than the underlying activity data.",
+  };
+  const tooltip = tooltips[level] || `Sources differ by ${pct}% for this activity.`;
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors[level] || "bg-gray-100"}`}>
+    <span
+      className={`text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${colors[level] || "bg-gray-100"}`}
+      title={tooltip}
+    >
       {pct}% variance
     </span>
   );
