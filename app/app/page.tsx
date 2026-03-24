@@ -699,7 +699,7 @@ type DecisionFramework = {
   defensibility_note: string;
 };
 
-type PageMode = "background" | "product";
+type PageMode = "background" | "product" | "recommended";
 type ViewMode = "sources" | "countries" | "subnational" | "independence";
 
 // ── Source Independence Graph ───────────────────────────────────
@@ -1142,6 +1142,202 @@ function SourceAccordion({ multiSource, singleSource }: { multiSource: [string, 
   );
 }
 
+// ── Recommended Stack ───────────────────────────────────────
+
+type Recommendation = {
+  activity: string;
+  scope: string;
+  source: string;
+  factor: string;
+  unit: string;
+  rationale: string;
+  watchout?: string;
+};
+
+type Preset = {
+  id: string;
+  label: string;
+  flag: string;
+  location: string;
+  framework: string;
+  gridRegion?: string;
+  gridFactor?: string;
+  usAvgFactor?: string;
+  headline: string;
+  coreRule: string;
+  recommendations: Recommendation[];
+  bottomLine: string;
+};
+
+const PRESETS: Preset[] = [
+  {
+    id: "sf",
+    label: "San Francisco, CA",
+    flag: "\u{1F1FA}\u{1F1F8}",
+    location: "US-based company, operations in California",
+    framework: "SEC Climate Disclosure / CDP / GHG Protocol",
+    gridRegion: "CAMX (WECC California)",
+    gridFactor: "0.1987",
+    usAvgFactor: "0.3516",
+    headline: "EPA for US operations, eGRID CAMX for Scope 2, skip GHG Protocol as an independent source.",
+    coreRule: "Match your source to geography, not just category. Using the US national average for electricity would overstate your Scope 2 by 77%.",
+    recommendations: [
+      { activity: "Grid Electricity", scope: "Scope 2", source: "EPA eGRID \u2014 CAMX subregion", factor: "0.1987", unit: "kg CO2e/kWh", rationale: "SF draws from the CAMX grid (WECC California). The US national average is 0.3516 \u2014 using it would overstate Scope 2 by 77%. eGRID subregion data is the most defensible factor for location-based reporting.", watchout: "For market-based Scope 2, use your utility\u2019s specific factor or REC/EAC certificates instead." },
+      { activity: "Natural Gas", scope: "Scope 1", source: "EPA GHG Emission Factors Hub", factor: "0.0531", unit: "kg CO2e/scf", rationale: "Low variance across sources (11%). EPA uses HHV which matches US gas metering conventions. Safe choice for any US reporter.", watchout: "If your meter reports in therms or MMBtu, use the corresponding EPA factor \u2014 don\u2019t convert manually." },
+      { activity: "Air Travel (Long Haul)", scope: "Scope 3", source: "EPA GHG Emission Factors Hub", factor: "0.1471", unit: "kg CO2e/pkm", rationale: "EPA excludes radiative forcing (RF), which is the conservative US convention. SEC/CDP do not require RF inclusion.", watchout: "If you later need CSRD compliance for EU subsidiaries, you\u2019ll need DEFRA\u2019s factor (0.1944) which includes RF." },
+      { activity: "Bus / Transit", scope: "Scope 3", source: "EPA GHG Emission Factors Hub", factor: "0.0414", unit: "kg CO2e/pkm", rationale: "98.7% variance across sources is entirely geographic \u2014 US and UK fleets have different sizes and occupancy. EPA measures US transit buses.", watchout: "GHG Protocol (0.0445) cites EPA underneath \u2014 not an independent third source. This tool flags it as \u20182 effective sources.\u2019" },
+      { activity: "Passenger Car", scope: "Scope 3", source: "EPA GHG Emission Factors Hub", factor: "0.000210", unit: "kg CO2e/vehicle-km", rationale: "EPA uses current US fleet data. GHG Protocol\u2019s factor is based on older data (staleness flag).", watchout: "If employees drive EVs, use electricity factors instead of gasoline combustion factors." },
+      { activity: "Hotel Stay", scope: "Scope 3", source: "EPA (via DEFRA methodology)", factor: "17.43", unit: "kg CO2e/night", rationale: "Only DEFRA publishes hotel factors. US factor (17.43) vs UK (15.27) reflects different energy mixes.", watchout: "Consider HCMI (Hotel Carbon Measurement Initiative) for property-specific data." },
+    ],
+    bottomLine: "EPA for everything US-based. Use eGRID CAMX (not the US average) for electricity. Don\u2019t count GHG Protocol as a third independent source when it\u2019s citing EPA underneath. Document your radiative forcing treatment explicitly.",
+  },
+  {
+    id: "london",
+    label: "London, UK",
+    flag: "\u{1F1EC}\u{1F1E7}",
+    location: "UK-based company, CSRD-bound or EU-reporting",
+    framework: "CSRD / EU Taxonomy / SECR (UK)",
+    headline: "DEFRA for all UK operations. Include radiative forcing for aviation. Annual updates keep factors current.",
+    coreRule: "DEFRA is the single authoritative source for UK reporting. Updated annually, includes RF for aviation (CSRD best practice), and aligns with SECR requirements.",
+    recommendations: [
+      { activity: "Grid Electricity", scope: "Scope 2", source: "DEFRA/DESNZ Conversion Factors", factor: "0.2072", unit: "kg CO2e/kWh", rationale: "UK grid factor reflects the current generation mix. Updated annually. Aligns with SECR and CSRD location-based requirements.", watchout: "For market-based reporting, use REGO certificates or supplier-specific factors." },
+      { activity: "Natural Gas", scope: "Scope 1", source: "DEFRA/DESNZ Conversion Factors", factor: "0.2024", unit: "kg CO2e/kWh", rationale: "DEFRA uses LHV (Net CV) which is the UK/EU convention. Matches how UK gas is metered and billed.", watchout: "If comparing to US operations, note EPA uses HHV \u2014 the 11% gap is methodological, not a real emissions difference." },
+      { activity: "Air Travel (Long Haul)", scope: "Scope 3", source: "DEFRA/DESNZ Conversion Factors", factor: "0.1944", unit: "kg CO2e/pkm", rationale: "Includes radiative forcing (RF). CSRD and EU taxonomy guidance considers RF inclusion best practice for aviation.", watchout: "The with-RF factor is ~32% higher than without-RF. Always disclose RF treatment in your methodology." },
+      { activity: "Bus / Transit", scope: "Scope 3", source: "DEFRA/DESNZ Conversion Factors", factor: "0.1038", unit: "kg CO2e/pkm", rationale: "Reflects UK bus fleet composition and occupancy. UK buses are smaller with different ridership than US transit.", watchout: "If reporting for US subsidiaries, switch to EPA (0.0414). The 2.5x gap is real \u2014 different fleets." },
+      { activity: "Rail (Intercity)", scope: "Scope 3", source: "DEFRA/DESNZ Conversion Factors", factor: "0.0283", unit: "kg CO2e/pkm", rationale: "UK rail is partially electrified with higher occupancy. 51.6% lower than the US factor.", watchout: "This is geographic, not methodological \u2014 UK rail genuinely emits less per passenger-km." },
+      { activity: "Hotel Stay", scope: "Scope 3", source: "DEFRA/DESNZ Conversion Factors", factor: "15.27", unit: "kg CO2e/night", rationale: "UK hotel factor based on average energy consumption per room-night. Only published source for UK accommodation." },
+    ],
+    bottomLine: "DEFRA covers everything for UK operations in one consistent, annually-updated package. Always include radiative forcing for aviation \u2014 EU auditors will expect it. If you have US operations, switch to EPA for those activities specifically.",
+  },
+  {
+    id: "munich",
+    label: "Munich, Germany",
+    flag: "\u{1F1E9}\u{1F1EA}",
+    location: "EU multinational with US and EU operations",
+    framework: "CSRD / EU Taxonomy / GHG Protocol Corporate Standard",
+    headline: "Split approach: DEFRA for EU-side (includes RF), EPA for US-side, Ember for country-specific grid factors.",
+    coreRule: "Multinationals need a split stack. No single database covers both US and EU operations well. Document the per-region source choice in your methodology statement.",
+    recommendations: [
+      { activity: "Grid Electricity (DE)", scope: "Scope 2", source: "Ember Climate \u2014 Germany", factor: "0.3640", unit: "kg CO2e/kWh", rationale: "Germany\u2019s grid has cut intensity 41% since 2015 but remains coal-heavy. Ember provides the most current country-level data.", watchout: "Germany\u2019s grid is declining fast \u2014 a factor from even 2 years ago materially overstates emissions." },
+      { activity: "Grid Electricity (US ops)", scope: "Scope 2", source: "EPA eGRID \u2014 match to subregion", factor: "varies", unit: "kg CO2e/kWh", rationale: "US operations should use the eGRID subregion where the facility draws power. The US average hides 6.4x internal variation.", watchout: "eGRID subregions vary from 0.0628 (NYUP) to 0.4014 (MROE). Using the national average can misstate by 5.6x." },
+      { activity: "Natural Gas", scope: "Scope 1", source: "DEFRA for EU, EPA for US", factor: "0.2024 / 0.0531", unit: "kg CO2e/kWh / scf", rationale: "The 11% gap is entirely methodological (LHV vs HHV). Match to how gas is metered in each region.", watchout: "Don\u2019t mix LHV and HHV factors across regions \u2014 auditors will question the inconsistency." },
+      { activity: "Air Travel (Long Haul)", scope: "Scope 3", source: "DEFRA/DESNZ (company-wide)", factor: "0.1944", unit: "kg CO2e/pkm", rationale: "Use DEFRA with radiative forcing for all aviation regardless of origin. CSRD considers RF best practice.", watchout: "Standardize on DEFRA for aviation company-wide, even if US subsidiaries would typically use EPA." },
+      { activity: "Bus / Transit", scope: "Scope 3", source: "EPA for US, DEFRA for EU", factor: "0.0414 / 0.1038", unit: "kg CO2e/pkm", rationale: "98.7% geographic variance. These are genuinely different transport systems. Use the factor matching where the trip happens.", watchout: "Never average US and UK bus factors \u2014 it produces a number that describes neither fleet." },
+      { activity: "Freight (Road)", scope: "Scope 3", source: "EPA GHG Emission Factors Hub", factor: "0.1621", unit: "kg CO2e/tonne-km", rationale: "EPA provides a well-documented US heavy truck factor. For EU freight, supplement with DEFRA or GLEC Framework.", watchout: "Freight factors vary significantly by truck class and load factor. Consider carrier-specific data." },
+    ],
+    bottomLine: "Document a clear per-region source policy: Ember for country-specific grid, DEFRA for EU operations and all aviation (with RF), EPA + eGRID for US operations. The key audit risk for multinationals is inconsistent source choices across subsidiaries.",
+  },
+];
+
+function RecommendedStack() {
+  const [activePreset, setActivePreset] = useState("sf");
+  const preset = PRESETS.find(p => p.id === activePreset) || PRESETS[0];
+
+  return (
+    <div>
+      <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
+        <span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />
+        Recommended Source Stack
+      </h2>
+      <p className="text-sm mb-6 max-w-3xl" style={{ color: 'var(--ws-body)' }}>
+        Pre-built source recommendations for common reporting contexts.
+        Each stack tells you which database to use for each activity, why, and what to watch out for.
+      </p>
+
+      {/* Preset selector */}
+      <div className="flex gap-2 mb-6 flex-wrap">
+        {PRESETS.map(p => (
+          <button
+            key={p.id}
+            onClick={() => setActivePreset(p.id)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${activePreset === p.id ? "bg-white shadow-sm" : "hover:bg-white/60"}`}
+            style={{
+              border: activePreset === p.id ? '1.5px solid var(--ws-blue)' : '1px solid var(--ws-border)',
+              color: activePreset === p.id ? 'var(--ws-blue)' : 'var(--ws-body)',
+              backgroundColor: activePreset === p.id ? 'white' : 'transparent',
+            }}
+          >
+            <span className="mr-1.5">{p.flag}</span> {p.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Preset detail */}
+      <div className="rounded-lg bg-white p-5 sm:p-6" style={{ border: '1px solid var(--ws-border)' }}>
+        {/* Header */}
+        <div className="mb-5">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-2xl">{preset.flag}</span>
+            <h3 className="text-lg font-semibold" style={{ color: 'var(--ws-dark)' }}>{preset.label}</h3>
+          </div>
+          <div className="text-xs mb-3 space-y-0.5" style={{ color: 'var(--ws-body)' }}>
+            <div>{preset.location}</div>
+            <div>Framework: <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>{preset.framework}</span></div>
+            {preset.gridRegion && (
+              <div>Grid region: <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>{preset.gridRegion}</span> ({preset.gridFactor} kg CO2e/kWh vs US avg {preset.usAvgFactor})</div>
+            )}
+          </div>
+        </div>
+
+        {/* Headline */}
+        <div className="rounded-lg px-4 py-3 mb-4" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid #D0DAFE' }}>
+          <div className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: 'var(--ws-blue)' }}>Headline</div>
+          <p className="text-sm font-medium" style={{ color: 'var(--ws-dark)' }}>{preset.headline}</p>
+        </div>
+
+        <div className="rounded-lg px-4 py-3 mb-5" style={{ backgroundColor: '#FFF7ED', border: '1px solid #FED7AA' }}>
+          <div className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: '#C2410C' }}>Core Rule</div>
+          <p className="text-sm" style={{ color: 'var(--ws-dark)' }}>{preset.coreRule}</p>
+        </div>
+
+        {/* Recommendations */}
+        <div className="space-y-2">
+          {preset.recommendations.map((rec, i) => (
+            <details key={i} className="rounded-lg group" style={{ border: '1px solid var(--ws-border)' }}>
+              <summary className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors rounded-lg">
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="text-xs px-2 py-0.5 rounded font-medium shrink-0" style={{ backgroundColor: 'var(--ws-blue-bg)', color: 'var(--ws-blue)' }}>{rec.scope}</span>
+                  <span className="font-medium text-sm truncate" style={{ color: 'var(--ws-dark)' }}>{rec.activity}</span>
+                </div>
+                <div className="flex items-center gap-3 shrink-0 ml-3">
+                  <span className="text-xs font-medium hidden sm:inline" style={{ color: 'var(--ws-body)' }}>{rec.source.length > 25 ? rec.source.slice(0, 25) + '\u2026' : rec.source}</span>
+                  <span className="font-mono text-sm font-semibold" style={{ color: 'var(--ws-dark)' }}>{rec.factor}</span>
+                  <svg className="w-4 h-4 transition-transform group-open:rotate-180 shrink-0" style={{ color: 'var(--ws-body)' }} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </summary>
+              <div className="px-4 pb-4 pt-2 space-y-2" style={{ borderTop: '1px solid var(--ws-border)' }}>
+                <div>
+                  <div className="text-xs font-semibold mb-0.5" style={{ color: 'var(--ws-body)' }}>Source</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--ws-dark)' }}>{rec.source}</div>
+                  <div className="text-xs font-mono" style={{ color: 'var(--ws-body)' }}>{rec.factor} {rec.unit}</div>
+                </div>
+                <div>
+                  <div className="text-xs font-semibold mb-0.5" style={{ color: 'var(--ws-body)' }}>Why this source</div>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--ws-dark)' }}>{rec.rationale}</p>
+                </div>
+                {rec.watchout && (
+                  <div className="rounded px-3 py-2" style={{ backgroundColor: '#FFF7ED', border: '1px solid #FED7AA' }}>
+                    <div className="text-xs font-semibold mb-0.5" style={{ color: '#C2410C' }}>Watch out</div>
+                    <p className="text-xs leading-relaxed" style={{ color: 'var(--ws-dark)' }}>{rec.watchout}</p>
+                  </div>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
+
+        {/* Bottom line */}
+        <div className="mt-5 rounded-lg px-4 py-3" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid #D0DAFE' }}>
+          <div className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: 'var(--ws-blue)' }}>Bottom Line</div>
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--ws-dark)' }}>{preset.bottomLine}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AnimatedNumber({ target, decimals = 0, duration = 1200 }: { target: number; decimals?: number; duration?: number }) {
   const [value, setValue] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -1217,6 +1413,15 @@ export default function Home() {
             >
               Explorer
             </button>
+            <button
+              onClick={() => { setPageMode("recommended"); setSelected(null); }}
+              className="pb-3 text-sm font-medium transition-all whitespace-nowrap"
+              style={pageMode === "recommended"
+                ? { color: 'var(--ws-dark)', borderBottom: '2px solid var(--ws-blue)' }
+                : { color: 'var(--ws-body)', borderBottom: '2px solid transparent' }}
+            >
+              Recommended Stack
+            </button>
           </nav>
         </div>
       </header>
@@ -1273,6 +1478,11 @@ export default function Home() {
               Explore the data &rarr;
             </button>
           </div>
+        )}
+
+        {/* ── RECOMMENDED STACK PAGE ── */}
+        {pageMode === "recommended" && (
+          <RecommendedStack />
         )}
 
         {/* ── PRODUCT PAGE ── */}
