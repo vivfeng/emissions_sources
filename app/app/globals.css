@@ -1,1 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
 @import "tailwindcss";
+
+:root {
+  --ws-blue: #265CFF;
+  --ws-blue-light: #657EFF;
+  --ws-blue-bg: #F5F8FF;
+  --ws-dark: #242633;
+  --ws-body: #4F596E;
+  --ws-border: #E2E6ED;
+  --ws-bg: #F5F7FA;
+  --ws-coral: #FF6633;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--ws-dark);
+  letter-spacing: -0.2px;
+}
+
+h1, h2, h3, h4 {
+  letter-spacing: -0.5px;
+}
+
+code, .font-mono {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  letter-spacing: 0;
+}

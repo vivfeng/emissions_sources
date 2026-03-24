@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Emission Factor Source Comparator",
+  title: "Emission Factor Comparator: How Much Do Carbon Databases Actually Agree?",
   description:
-    "Compare emission factors across EPA, DEFRA, and GHG Protocol for the same business activities",
+    "Side-by-side comparison of emission factors from EPA, DEFRA, and GHG Protocol. See where databases agree, where they diverge by up to 7x, and why: geographic differences, methodological choices, or circular sourcing. Built for sustainability PMs choosing defensible factors for Scope 1-3 reporting.",
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-50 text-gray-900 antialiased">{children}</body>
+      <body className="antialiased" style={{ backgroundColor: 'var(--ws-bg)' }}>{children}</body>
     </html>
   );
 }
