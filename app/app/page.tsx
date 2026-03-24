@@ -419,10 +419,9 @@ function ComparisonView({ comp, compact }: { comp: Comparison; compact?: boolean
           </div>
         </>
       )}
-      {compact && (
-        <div className="text-sm text-gray-600 mb-4">
-          <span className="font-mono">{comp.normalized_unit}</span>
-          {ei && <span className="ml-3"><IndependenceBadge ei={ei} /></span>}
+      {compact && ei && (
+        <div className="mb-4">
+          <IndependenceBadge ei={ei} />
         </div>
       )}
 
