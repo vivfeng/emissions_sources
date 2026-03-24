@@ -1215,7 +1215,7 @@ export default function Home() {
                 ? { color: 'var(--ws-dark)', borderBottom: '2px solid var(--ws-blue)' }
                 : { color: 'var(--ws-body)', borderBottom: '2px solid transparent' }}
             >
-              Product
+              Explorer
             </button>
           </nav>
         </div>
