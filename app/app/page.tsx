@@ -183,8 +183,14 @@ function VarianceBadge({ level, pct }: { level: string; pct: number | null }) {
     high: "bg-orange-100 text-orange-800",
     very_high: "bg-red-100 text-red-800",
   };
+  const tooltips: Record<string, string> = {
+    low: `${pct}% difference between the highest and lowest source. Sources largely agree — your choice of database won't significantly change the result.`,
+    moderate: `${pct}% difference between sources. Noticeable gap — check whether the divergence is geographic or methodological before picking a source.`,
+    high: `${pct}% difference between sources. Large gap — the database you choose will materially change your reported emissions. Investigate the cause.`,
+    very_high: `${pct}% difference between sources. Massive gap — your reported number could vary by 2x+ depending on which database you use. Understand why before reporting.`,
+  };
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors[level] || "bg-gray-100"}`}>
+    <span className={`text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${colors[level] || "bg-gray-100"}`} title={tooltips[level] || `${pct}% variance across sources`}>
       {pct}% variance
     </span>
   );
@@ -196,11 +202,17 @@ const VARIANCE_TYPE_LABELS: Record<string, { label: string; color: string }> = {
   mixed: { label: "Mixed", color: "text-amber-600 bg-amber-50 border-amber-200" },
 };
 
+const VARIANCE_TYPE_TOOLTIPS: Record<string, string> = {
+  geographic: "Variance is driven by real physical differences between regions — different grid mixes, fleet compositions, or infrastructure. The sources aren't wrong; they're measuring different things.",
+  methodological: "Variance comes from how the factor is calculated — e.g., whether radiative forcing is included for aviation, or whether HHV vs LHV is used for gas. Same physical activity, different accounting choices.",
+  mixed: "Variance is driven by a combination of geographic differences and methodological choices. Disentangling the two requires looking at the specific sources.",
+};
+
 function VarianceTypeBadge({ varianceType }: { varianceType?: string | null }) {
   if (!varianceType || !VARIANCE_TYPE_LABELS[varianceType]) return null;
   const { label, color } = VARIANCE_TYPE_LABELS[varianceType];
   return (
-    <span className={`text-xs px-2 py-0.5 rounded border ${color}`}>
+    <span className={`text-xs px-2 py-0.5 rounded border cursor-help ${color}`} title={VARIANCE_TYPE_TOOLTIPS[varianceType]}>
       {label}
     </span>
   );
@@ -937,9 +949,23 @@ function SourceIndependenceView({
 function IndependenceBadge({ ei }: { ei: EffectiveIndependence }) {
   if (ei.listed_sources <= 1) return null;
   const ratio = ei.effective_sources / ei.listed_sources;
-  const color = ratio >= 0.8 ? "bg-green-100 text-green-700" : ratio >= 0.5 ? "bg-yellow-100 text-yellow-700" : "bg-red-100 text-red-700";
+
+  let color: string;
+  let explanation: string;
+
+  if (ratio >= 0.8) {
+    color = "bg-green-100 text-green-700";
+    explanation = `All ${ei.listed_sources} sources are truly independent — they collect their own data rather than citing each other. This means cross-source agreement is meaningful.`;
+  } else if (ratio >= 0.5) {
+    color = "bg-yellow-100 text-yellow-700";
+    explanation = `Only ${ei.effective_sources} of ${ei.listed_sources} sources are truly independent. Some sources cite each other underneath (e.g., GHG Protocol often repackages EPA or DEFRA data). Apparent "multi-source agreement" may be partially circular.`;
+  } else {
+    color = "bg-red-100 text-red-700";
+    explanation = `Only ${ei.effective_sources} of ${ei.listed_sources} sources are truly independent. Most sources here derive from the same underlying data. Cross-source "agreement" is largely an illusion — you effectively have ${ei.effective_sources === 1 ? "one data point" : "fewer data points than it appears"}.`;
+  }
+
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${color}`} title={ei.note}>
+    <span className={`text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${color}`} title={explanation}>
       {ei.effective_sources} effective {ei.effective_sources === 1 ? "source" : "sources"}
     </span>
   );
