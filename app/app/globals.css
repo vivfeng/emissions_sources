@@ -26,3 +26,54 @@ code, .font-mono {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   letter-spacing: 0;
 }
+
+/* Custom tooltip */
+.tooltip-wrap {
+  position: relative;
+}
+.tooltip-wrap .tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  z-index: 50;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 320px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--ws-dark);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.tooltip-wrap .tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ws-dark);
+}
+.tooltip-wrap:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+/* Right-aligned variant for badges near screen edge */
+.tooltip-wrap.tooltip-right .tooltip-text {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+.tooltip-wrap.tooltip-right .tooltip-text::after {
+  left: auto;
+  right: 16px;
+  transform: none;
+}

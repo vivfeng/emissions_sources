@@ -184,14 +184,15 @@ function VarianceBadge({ level, pct }: { level: string; pct: number | null }) {
     very_high: "bg-red-100 text-red-800",
   };
   const tooltips: Record<string, string> = {
-    low: `${pct}% difference between the highest and lowest source. Sources largely agree — your choice of database won't significantly change the result.`,
-    moderate: `${pct}% difference between sources. Noticeable gap — check whether the divergence is geographic or methodological before picking a source.`,
-    high: `${pct}% difference between sources. Large gap — the database you choose will materially change your reported emissions. Investigate the cause.`,
-    very_high: `${pct}% difference between sources. Massive gap — your reported number could vary by 2x+ depending on which database you use. Understand why before reporting.`,
+    low: `Sources largely agree — your choice of database won't significantly change the result.`,
+    moderate: `Noticeable gap between sources. Check whether the divergence is geographic or methodological before picking.`,
+    high: `Large gap — the database you choose will materially change your reported emissions. Investigate the cause.`,
+    very_high: `Massive gap — your reported number could vary by 2x+ depending on which database you use. Understand why before reporting.`,
   };
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${colors[level] || "bg-gray-100"}`} title={tooltips[level] || `${pct}% variance across sources`}>
+    <span className={`tooltip-wrap tooltip-right text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${colors[level] || "bg-gray-100"}`}>
       {pct}% variance
+      <span className="tooltip-text">{tooltips[level] || `${pct}% difference between the highest and lowest emission factor for this activity.`}</span>
     </span>
   );
 }
@@ -212,8 +213,9 @@ function VarianceTypeBadge({ varianceType }: { varianceType?: string | null }) {
   if (!varianceType || !VARIANCE_TYPE_LABELS[varianceType]) return null;
   const { label, color } = VARIANCE_TYPE_LABELS[varianceType];
   return (
-    <span className={`text-xs px-2 py-0.5 rounded border cursor-help ${color}`} title={VARIANCE_TYPE_TOOLTIPS[varianceType]}>
+    <span className={`tooltip-wrap tooltip-right text-xs px-2 py-0.5 rounded border cursor-help ${color}`}>
       {label}
+      <span className="tooltip-text">{VARIANCE_TYPE_TOOLTIPS[varianceType]}</span>
     </span>
   );
 }
@@ -965,8 +967,9 @@ function IndependenceBadge({ ei }: { ei: EffectiveIndependence }) {
   }
 
   return (
-    <span className={`text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${color}`} title={explanation}>
+    <span className={`tooltip-wrap tooltip-right text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${color}`}>
       {ei.effective_sources} effective {ei.effective_sources === 1 ? "source" : "sources"}
+      <span className="tooltip-text">{explanation}</span>
     </span>
   );
 }
