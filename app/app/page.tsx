@@ -1415,7 +1415,7 @@ export default function Home() {
                 Emission Factor Comparator
               </h1>
               <p className="mt-0.5 text-sm" style={{ color: 'var(--ws-body)' }}>
-                How much do EPA, DEFRA, and GHG Protocol actually agree? And what should you use?
+                Compare emission factors across EPA, DEFRA, and GHG Protocol. See where they agree, where they diverge, and when to use which.
               </p>
             </div>
           </div>
