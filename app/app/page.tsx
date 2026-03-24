@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import data from "./data.json";
 
 type Source = {
@@ -41,9 +41,11 @@ type Comparison = {
     min_value: number | null;
     max_value: number | null;
     diagnosis: string | null;
+    variance_type?: string | null;
   };
   uncertainty?: Uncertainty | null;
   key_insight: string;
+  quick_guidance?: string;
 };
 
 type CountryEntry = {
@@ -184,6 +186,22 @@ function VarianceBadge({ level, pct }: { level: string; pct: number | null }) {
   return (
     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors[level] || "bg-gray-100"}`}>
       {pct}% variance
+    </span>
+  );
+}
+
+const VARIANCE_TYPE_LABELS: Record<string, { label: string; color: string }> = {
+  geographic: { label: "Geographic", color: "text-sky-600 bg-sky-50 border-sky-200" },
+  methodological: { label: "Methodological", color: "text-violet-600 bg-violet-50 border-violet-200" },
+  mixed: { label: "Mixed", color: "text-amber-600 bg-amber-50 border-amber-200" },
+};
+
+function VarianceTypeBadge({ varianceType }: { varianceType?: string | null }) {
+  if (!varianceType || !VARIANCE_TYPE_LABELS[varianceType]) return null;
+  const { label, color } = VARIANCE_TYPE_LABELS[varianceType];
+  return (
+    <span className={`text-xs px-2 py-0.5 rounded border ${color}`}>
+      {label}
     </span>
   );
 }
@@ -345,7 +363,7 @@ function SourceCard({ source, maxVal, uncertainty }: { source: Source; maxVal: n
       </div>
       {uncertainty && (
         <div className="text-xs text-gray-400 mt-0.5">
-          Range: {uncertainty.low.toFixed(4)} &mdash; {uncertainty.high.toFixed(4)}
+          Range: {uncertainty.low.toFixed(4)} to {uncertainty.high.toFixed(4)}
         </div>
       )}
 
@@ -373,29 +391,40 @@ function SourceCard({ source, maxVal, uncertainty }: { source: Source; maxVal: n
   );
 }
 
-function ComparisonView({ comp }: { comp: Comparison }) {
+function ComparisonView({ comp, compact }: { comp: Comparison; compact?: boolean }) {
   const maxVal = Math.max(...comp.sources.map((s) => s.value_kg_co2e));
   const ei = (comp as Comparison & { effective_independence?: EffectiveIndependence }).effective_independence;
   const df = (comp as Comparison & { decision_framework?: DecisionFramework }).decision_framework;
 
   return (
-    <div className="mb-8">
+    <div className={compact ? "" : "mb-8"}>
       {/* Header */}
-      <div className="flex items-center gap-3 mb-4 flex-wrap">
-        <h2 className="text-xl font-bold">{comp.activity_name}</h2>
-        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
-          {SCOPE_LABELS[comp.scope] || comp.scope}
-        </span>
-        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
-          {CATEGORY_LABELS[comp.category] || comp.category}
-        </span>
-        <VarianceBadge level={comp.variance.level} pct={comp.variance.percentage} />
-        {ei && <IndependenceBadge ei={ei} />}
-      </div>
+      {!compact && (
+        <>
+          <div className="flex items-center gap-3 mb-4 flex-wrap">
+            <h2 className="text-xl font-bold">{comp.activity_name}</h2>
+            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+              {SCOPE_LABELS[comp.scope] || comp.scope}
+            </span>
+            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+              {CATEGORY_LABELS[comp.category] || comp.category}
+            </span>
+            <VarianceTypeBadge varianceType={comp.variance.variance_type} />
+            <VarianceBadge level={comp.variance.level} pct={comp.variance.percentage} />
+            {ei && <IndependenceBadge ei={ei} />}
+          </div>
 
-      <div className="text-sm text-gray-600 mb-4">
-        Normalized unit: <span className="font-mono">{comp.normalized_unit}</span>
-      </div>
+          <div className="text-sm text-gray-600 mb-4">
+            Normalized unit: <span className="font-mono">{comp.normalized_unit}</span>
+          </div>
+        </>
+      )}
+      {compact && (
+        <div className="text-sm text-gray-600 mb-4">
+          <span className="font-mono">{comp.normalized_unit}</span>
+          {ei && <span className="ml-3"><IndependenceBadge ei={ei} /></span>}
+        </div>
+      )}
 
       {/* Source cards grid */}
       <div className={`grid gap-4 ${comp.sources.length === 1 ? "grid-cols-1 max-w-md" : comp.sources.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
@@ -414,6 +443,17 @@ function ComparisonView({ comp }: { comp: Comparison }) {
         </div>
         <p className="text-sm text-slate-700 leading-relaxed">{comp.key_insight}</p>
       </div>
+
+      {/* Quick Guidance — how to choose */}
+      {comp.quick_guidance && (
+        <div className="mt-3 flex items-start gap-2.5 rounded-lg px-4 py-3" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid #D0DAFE' }}>
+          <span className="mt-0.5 shrink-0 text-sm font-bold" style={{ color: 'var(--ws-blue)' }}>&rarr;</span>
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wide mb-0.5" style={{ color: 'var(--ws-blue)' }}>How to Choose</div>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--ws-dark)' }}>{comp.quick_guidance}</p>
+          </div>
+        </div>
+      )}
 
       {/* Decision Framework */}
       {df && <DecisionFrameworkPanel framework={df} />}
@@ -451,25 +491,29 @@ function CountryBar({ country, maxVal }: { country: CountryEntry; maxVal: number
   );
 }
 
-function CountryComparisonView({ comp }: { comp: CountryComparison }) {
+function CountryComparisonView({ comp, compact }: { comp: CountryComparison; compact?: boolean }) {
   const maxVal = Math.max(...comp.countries.map((c) => c.value_kg_co2e));
   const sorted = [...comp.countries].sort((a, b) => b.value_kg_co2e - a.value_kg_co2e);
   const trends = comp.trends;
 
   return (
-    <div className="mb-8">
-      <div className="flex items-center gap-3 mb-4">
-        <h2 className="text-xl font-bold">{comp.activity_name}</h2>
-        <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
-          {CATEGORY_LABELS[comp.category] || comp.category}
-        </span>
-        <VarianceBadge level={comp.variance.level} pct={comp.variance.percentage} />
-      </div>
+    <div className={compact ? "" : "mb-8"}>
+      {!compact && (
+        <>
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="text-xl font-bold">{comp.activity_name}</h2>
+            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
+              {CATEGORY_LABELS[comp.category] || comp.category}
+            </span>
+            <VarianceBadge level={comp.variance.level} pct={comp.variance.percentage} />
+          </div>
 
-      <div className="text-sm text-gray-600 mb-4">
-        {comp.normalized_unit} &middot; {comp.countries.length} countries &middot;{" "}
-        {comp.variance.highest_country} is {comp.variance.ratio}x {comp.variance.lowest_country}
-      </div>
+          <div className="text-sm text-gray-600 mb-4">
+            {comp.normalized_unit} &middot; {comp.countries.length} countries &middot;{" "}
+            {comp.variance.highest_country} is {comp.variance.ratio}x {comp.variance.lowest_country}
+          </div>
+        </>
+      )}
 
       {/* Country bars */}
       <div className="border border-gray-200 rounded-lg p-4 bg-white">
@@ -500,7 +544,7 @@ function CountryComparisonView({ comp }: { comp: CountryComparison }) {
               Germany has cut grid intensity by 41% since 2015, the fastest among the top 5 emitters.
               China&apos;s absolute renewable capacity is the world&apos;s largest, but rising demand keeps
               intensity declining slowly (~10%). Russia is the only country where grid intensity is rising.
-              These trends mean that Scope 2 emission factors have a shelf life &mdash; using a factor
+              These trends mean that Scope 2 emission factors have a shelf life. Using a factor
               from even 2-3 years ago can materially misstate a company&apos;s footprint.
             </p>
           </div>
@@ -656,6 +700,7 @@ type DecisionFramework = {
   defensibility_note: string;
 };
 
+type PageMode = "background" | "product";
 type ViewMode = "sources" | "countries" | "subnational" | "independence";
 
 // ── Source Independence Graph ───────────────────────────────────
@@ -921,7 +966,7 @@ function DecisionFrameworkPanel({ framework }: { framework: DecisionFramework })
     <div className="mt-4">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 text-sm text-purple-700 hover:text-purple-900 font-medium"
+        className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--ws-blue)' }}
       >
         <svg className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-90" : ""}`} fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
@@ -962,7 +1007,166 @@ function DecisionFrameworkPanel({ framework }: { framework: DecisionFramework })
   );
 }
 
+function CountryAccordion({ countryCompList }: { countryCompList: [string, CountryComparison][] }) {
+  const [openId, setOpenId] = useState<string | null>(countryCompList[0]?.[0] ?? null);
+
+  return (
+    <>
+      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+        <span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />
+        Same activity, different countries
+        <span className="text-sm font-normal text-gray-400">({countryCompList.length} activities)</span>
+      </h2>
+
+      <div className="space-y-2 mb-8">
+        {countryCompList.map(([id, comp]) => {
+          const isOpen = openId === id;
+          return (
+            <div key={id} className="rounded-lg bg-white overflow-hidden" style={{ border: '1px solid var(--ws-border)' }}>
+              <button
+                onClick={() => setOpenId(isOpen ? null : id)}
+                className="w-full text-left px-4 py-3 flex items-center justify-between gap-4 transition-colors"
+                style={isOpen ? { backgroundColor: 'var(--ws-blue-bg)' } : {}}
+              >
+                <div className="min-w-0">
+                  <div className="font-medium truncate">{comp.activity_name}</div>
+                  <div className="text-xs text-gray-500 mt-0.5 truncate">
+                    {comp.countries.length} countries &middot;{" "}
+                    {comp.variance.highest_country} is {comp.variance.ratio}x {comp.variance.lowest_country} &middot;{" "}
+                    {comp.normalized_unit}
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 shrink-0">
+                  <VarianceBadge level={comp.variance.level} pct={comp.variance.percentage} />
+                  <svg
+                    className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    style={{ color: 'var(--ws-body)' }}
+                    fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </div>
+              </button>
+              {isOpen && (
+                <div className="px-4 pb-4">
+                  <CountryComparisonView comp={comp} compact />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
+function SourceAccordion({ multiSource, singleSource }: { multiSource: [string, Comparison][]; singleSource: [string, Comparison][] }) {
+  const [openId, setOpenId] = useState<string | null>(multiSource[0]?.[0] ?? null);
+  const [showSingle, setShowSingle] = useState(false);
+
+  return (
+    <>
+      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+        <span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />
+        Same activity, different databases
+        <span className="text-sm font-normal text-gray-400">({multiSource.length} with multiple sources)</span>
+      </h2>
+
+      <div className="space-y-2 mb-8">
+        {multiSource.map(([id, comp]) => {
+          const isOpen = openId === id;
+          return (
+            <div key={id} className="rounded-lg bg-white overflow-hidden" style={{ border: '1px solid var(--ws-border)' }}>
+              <button
+                onClick={() => setOpenId(isOpen ? null : id)}
+                className="w-full text-left px-4 py-3 flex items-center justify-between gap-4 transition-colors"
+                style={isOpen ? { backgroundColor: 'var(--ws-blue-bg)' } : {}}
+              >
+                <div className="min-w-0">
+                  <div className="font-medium truncate">{comp.activity_name}</div>
+                  <div className="text-xs text-gray-500 mt-0.5 truncate">
+                    {comp.sources.length} sources &middot;{" "}
+                    {SCOPE_LABELS[comp.scope]} &middot;{" "}
+                    {comp.normalized_unit}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <VarianceTypeBadge varianceType={comp.variance.variance_type} />
+                  <VarianceBadge level={comp.variance.level} pct={comp.variance.percentage} />
+                  <svg
+                    className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    style={{ color: 'var(--ws-body)' }}
+                    fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </div>
+              </button>
+              {isOpen && (
+                <div className="px-4 pb-4">
+                  <ComparisonView comp={comp} compact />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {singleSource.length > 0 && (
+        <>
+          <button
+            onClick={() => setShowSingle(!showSingle)}
+            className="text-sm text-gray-500 hover:text-gray-700 mb-4"
+          >
+            {showSingle ? "Hide" : "Show"} {singleSource.length} single-source activities
+          </button>
+          {showSingle && (
+            <div className="space-y-2">
+              {singleSource.map(([id, comp]) => (
+                <div key={id} className="rounded-lg p-3 bg-white opacity-70" style={{ border: '1px solid var(--ws-border)' }}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-medium text-sm">{comp.activity_name}</div>
+                      <div className="text-xs text-gray-500">
+                        {comp.sources[0]?.source_name.replace("UK Government GHG Conversion Factors", "DEFRA").replace("GHG Protocol Cross-Sector Emission Factors", "GHG Protocol")} only
+                      </div>
+                    </div>
+                    <span className="text-xs text-gray-400">No comparison available</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+    </>
+  );
+}
+
+function AnimatedNumber({ target, decimals = 0, duration = 1200 }: { target: number; decimals?: number; duration?: number }) {
+  const [value, setValue] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    let start: number | null = null;
+    let raf: number;
+    const step = (ts: number) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(eased * target);
+      if (progress < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration]);
+
+  return <span ref={ref} className="font-mono font-semibold">{value.toFixed(decimals)}</span>;
+}
+
 export default function Home() {
+  const [pageMode, setPageMode] = useState<PageMode>("product");
   const [selected, setSelected] = useState<string | null>(null);
   const [showSingleSource, setShowSingleSource] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("sources");
@@ -979,21 +1183,51 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-6 py-6">
-          <h1 className="text-2xl font-bold">Emission Factor Source Comparator</h1>
-          <p className="text-gray-500 mt-1 text-sm">
-            How much do emission factor databases actually agree with each other?
-          </p>
+      <header className="bg-white" style={{ borderBottom: '1px solid var(--ws-border)' }}>
+        <div className="max-w-6xl mx-auto px-6 pt-5 pb-0">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs font-mono tracking-wider mb-1.5" style={{ color: 'var(--ws-blue)' }}>
+                <AnimatedNumber target={Object.keys(comparisons).length} /> activities &middot; <AnimatedNumber target={multiSource.length} /> multi-source &middot; <AnimatedNumber target={5} /> countries
+              </div>
+              <h1 className="text-xl font-semibold tracking-tight" style={{ color: 'var(--ws-dark)', letterSpacing: '-0.3px' }}>
+                Emission Factor Comparator
+              </h1>
+              <p className="mt-0.5 text-sm" style={{ color: 'var(--ws-body)' }}>
+                How much do EPA, DEFRA, and GHG Protocol actually agree? And what should you use?
+              </p>
+            </div>
+          </div>
+          {/* Page tabs — Watershed-style underline nav */}
+          <nav className="flex gap-8 mt-4 -mb-px">
+            <button
+              onClick={() => { setPageMode("background"); setSelected(null); }}
+              className="pb-3 text-sm font-medium transition-all"
+              style={pageMode === "background"
+                ? { color: 'var(--ws-dark)', borderBottom: '2px solid var(--ws-blue)' }
+                : { color: 'var(--ws-body)', borderBottom: '2px solid transparent' }}
+            >
+              Background
+            </button>
+            <button
+              onClick={() => { setPageMode("product"); setSelected(null); }}
+              className="pb-3 text-sm font-medium transition-all"
+              style={pageMode === "product"
+                ? { color: 'var(--ws-dark)', borderBottom: '2px solid var(--ws-blue)' }
+                : { color: 'var(--ws-body)', borderBottom: '2px solid transparent' }}
+            >
+              Product
+            </button>
+          </nav>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8">
-        {/* Introduction — show only on list views */}
-        {!selected && viewMode !== "subnational" && viewMode !== "independence" && (
-          <div className="mb-10 max-w-3xl">
-            <h2 className="text-lg font-semibold mb-3">The Problem</h2>
-            <p className="text-sm text-gray-700 leading-relaxed mb-4">
+        {/* ── BACKGROUND PAGE ── */}
+        {pageMode === "background" && (
+          <div className="max-w-3xl">
+            <h2 className="text-lg font-semibold mb-3 flex items-center gap-2"><span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />The Problem</h2>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--ws-body)' }}>
               Companies measuring carbon emissions rely on published emission factor databases to
               convert activity data (kWh consumed, km traveled) into CO2e. But these databases
               often disagree, sometimes by over 90% for the same activity. If your bus travel
@@ -1001,8 +1235,8 @@ export default function Home() {
               the final number?
             </p>
 
-            <h2 className="text-lg font-semibold mb-3">What This Tool Does</h2>
-            <p className="text-sm text-gray-700 leading-relaxed mb-4">
+            <h2 className="text-lg font-semibold mb-3 flex items-center gap-2"><span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />What This Tool Does</h2>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--ws-body)' }}>
               This comparator normalizes emission factors from three major public databases to a
               common unit (kg CO2e), then calculates variance and diagnoses <em>why</em> they differ.
               It surfaces whether disagreement comes from real physical differences like grid mix and fleet composition,
@@ -1010,66 +1244,71 @@ export default function Home() {
               and stale data.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <div className="border border-gray-200 rounded-lg p-4 bg-white">
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Data Sources</div>
-                <ul className="text-sm text-gray-700 space-y-1.5">
-                  <li><span className="font-medium">EPA</span> GHG Emission Factors Hub (Jan 2025), US-focused</li>
-                  <li><span className="font-medium">DEFRA/DESNZ</span> Conversion Factors (Jun 2025), UK-focused</li>
-                  <li><span className="font-medium">GHG Protocol</span> Cross-Sector Tools V2.0 (Mar 2024), compiles from IPCC, EPA, DEFRA</li>
-                  <li><span className="font-medium">Ember Climate</span> Global Electricity Review (2025), country-level grid intensity</li>
-                  <li><span className="font-medium">ICCT, UBA, IPCC</span> for country-level transport factors</li>
-                </ul>
-              </div>
-              <div className="border border-gray-200 rounded-lg p-4 bg-white">
-                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Features</div>
-                <ul className="text-sm text-gray-700 space-y-1.5">
-                  <li><span className="font-medium">{Object.keys(comparisons).length} activities</span> compared across sources ({multiSource.length} with 2+ sources)</li>
-                  <li><span className="font-medium">5 countries</span> compared for 4 key activities</li>
-                  <li><span className="font-medium">27 US subregions</span> showing {subregionComparison?.variance.ratio}x internal variation</li>
-                  <li><span className="font-medium">Uncertainty ranges</span> on every factor (cross-source or IPCC default)</li>
-                  <li><span className="font-medium">10-year trends</span> for grid carbon intensity (2015&ndash;2024)</li>
-                </ul>
-              </div>
-            </div>
-
-            <h2 className="text-lg font-semibold mb-3">What We Learn</h2>
-            <div className="text-sm text-gray-700 leading-relaxed space-y-2 mb-6">
+            <h2 className="text-lg font-semibold mb-3 flex items-center gap-2"><span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />Learnings</h2>
+            <div className="text-sm leading-relaxed space-y-3 mb-8" style={{ color: 'var(--ws-body)' }}>
               <p>
-                <span className="font-medium">1. Geography dominates.</span>{" "}Most variance comes from comparing
+                <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>1. Geography dominates.</span>{" "}Most variance comes from comparing
                 US factors to UK factors, not from methodology disagreement. A US bus factor (0.04 kg/pkm)
                 and a UK one (0.10 kg/pkm) aren&apos;t wrong. They measure different fleets with different occupancy.
               </p>
               <p>
-                <span className="font-medium">2. Sub-national variation is massive.</span>{" "}Within the US alone,
+                <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>2. Sub-national variation is massive.</span>{" "}Within the US alone,
                 eGRID subregions vary by {subregionComparison?.variance.ratio}x. Using the national average
                 can over- or under-estimate Scope 2 emissions by 2-3x.
               </p>
               <p>
-                <span className="font-medium">3. Source independence is an illusion.</span>{" "}GHG Protocol compiles from
+                <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>3. Source independence is an illusion.</span>{" "}GHG Protocol compiles from
                 IPCC, DEFRA, and EPA. Apparent &quot;three-source agreement&quot; may actually be circular citation.
               </p>
               <p>
-                <span className="font-medium">4. Factors have a shelf life.</span>{" "}Germany&apos;s grid intensity
+                <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>4. Factors have a shelf life.</span>{" "}Germany&apos;s grid intensity
                 fell 41% from 2015&ndash;2024. Using a 3-year-old factor materially misstates the footprint.
               </p>
             </div>
+
+            <button
+              onClick={() => setPageMode("product")}
+              className="text-sm font-medium px-5 py-2 rounded text-white transition-all hover:opacity-90"
+              style={{ backgroundColor: 'var(--ws-blue)' }}
+            >
+              Explore the data &rarr;
+            </button>
+          </div>
+        )}
+
+        {/* ── PRODUCT PAGE ── */}
+        {pageMode === "product" && (<div>
+        {/* Context — show on product list views */}
+        {!selected && (
+          <div className="mb-8 max-w-3xl">
+            <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--ws-body)' }}>
+              Emissions factors from <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>EPA</span>,{" "}
+              <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>DEFRA/DESNZ</span>,{" "}
+              <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>GHG Protocol</span>,{" "}
+              <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>Ember Climate</span>, and{" "}
+              <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>IPCC</span>,
+              normalized to a common unit, compared side by side, and diagnosed for why they diverge.
+              The same activity can vary 2-7x across databases. Full calculation transparency
+              and data lineage for every factor.
+            </p>
           </div>
         )}
 
         {/* View mode toggle */}
         {!selected && (
-          <div className="mb-8 flex gap-1 bg-gray-100 rounded-lg p-1 w-fit">
+          <div className="mb-8 flex gap-1 rounded-lg p-1 w-fit" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid var(--ws-border)' }}>
             <button
               onClick={() => setViewMode("sources")}
-              className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "sources" ? "bg-white shadow font-medium" : "text-gray-500 hover:text-gray-700"}`}
+              className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "sources" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
+              style={viewMode === "sources" ? { color: 'var(--ws-blue)' } : { color: 'var(--ws-body)' }}
             >
               By Source
             </button>
             {hasCountryData && (
               <button
                 onClick={() => setViewMode("countries")}
-                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "countries" ? "bg-white shadow font-medium" : "text-gray-500 hover:text-gray-700"}`}
+                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "countries" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
+                style={viewMode === "countries" ? { color: 'var(--ws-blue)' } : { color: 'var(--ws-body)' }}
               >
                 By Country
               </button>
@@ -1077,7 +1316,8 @@ export default function Home() {
             {hasSubregionData && (
               <button
                 onClick={() => setViewMode("subnational")}
-                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "subnational" ? "bg-white shadow font-medium" : "text-gray-500 hover:text-gray-700"}`}
+                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "subnational" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
+                style={viewMode === "subnational" ? { color: 'var(--ws-blue)' } : { color: 'var(--ws-body)' }}
               >
                 Sub-national
               </button>
@@ -1085,7 +1325,8 @@ export default function Home() {
             {hasSourceGraph && (
               <button
                 onClick={() => setViewMode("independence")}
-                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "independence" ? "bg-white shadow font-medium" : "text-gray-500 hover:text-gray-700"}`}
+                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "independence" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
+                style={viewMode === "independence" ? { color: 'var(--ws-blue)' } : { color: 'var(--ws-body)' }}
               >
                 Source Independence
               </button>
@@ -1103,156 +1344,19 @@ export default function Home() {
           <SubregionView comp={subregionComparison} />
         )}
 
-        {/* COUNTRY VIEW */}
+        {/* COUNTRY VIEW — inline accordion */}
         {viewMode === "countries" && !selected && (
-          <>
-            <h2 className="text-lg font-semibold mb-4">
-              Same activity, different countries ({countryCompList.length} activities)
-            </h2>
-
-            <div className="grid gap-3 mb-8">
-              {countryCompList.map(([id, comp]) => (
-                <button
-                  key={id}
-                  onClick={() => { setSelected(id); setViewMode("countries"); }}
-                  className="text-left border border-gray-200 rounded-lg p-4 bg-white hover:border-emerald-300 hover:shadow-sm transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">{comp.activity_name}</div>
-                      <div className="text-xs text-gray-500 mt-0.5">
-                        {comp.countries.length} countries &middot;{" "}
-                        {comp.variance.highest_country} is {comp.variance.ratio}x {comp.variance.lowest_country} &middot;{" "}
-                        {comp.normalized_unit}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <VarianceBadge
-                        level={comp.variance.level}
-                        pct={comp.variance.percentage}
-                      />
-                      <span className="text-gray-300">&rarr;</span>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </>
+          <CountryAccordion countryCompList={countryCompList} />
         )}
 
-        {/* SOURCE VIEW - Activity selector */}
+        {/* SOURCE VIEW — inline accordion */}
         {viewMode === "sources" && !selected && (
-          <>
-            <h2 className="text-lg font-semibold mb-4">
-              Same activity, different databases ({multiSource.length} with multiple sources)
-            </h2>
-
-            {/* Multi-source activities */}
-            <div className="grid gap-3 mb-8">
-              {multiSource.map(([id, comp]) => (
-                <button
-                  key={id}
-                  onClick={() => { setSelected(id); setViewMode("sources"); }}
-                  className="text-left border border-gray-200 rounded-lg p-4 bg-white hover:border-blue-300 hover:shadow-sm transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">{comp.activity_name}</div>
-                      <div className="text-xs text-gray-500 mt-0.5">
-                        {comp.sources.length} sources &middot;{" "}
-                        {SCOPE_LABELS[comp.scope]} &middot;{" "}
-                        {comp.normalized_unit}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <VarianceBadge
-                        level={comp.variance.level}
-                        pct={comp.variance.percentage}
-                      />
-                      <span className="text-gray-300">&rarr;</span>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            {/* Single-source toggle */}
-            <button
-              onClick={() => setShowSingleSource(!showSingleSource)}
-              className="text-sm text-gray-500 hover:text-gray-700 mb-4"
-            >
-              {showSingleSource ? "Hide" : "Show"} {singleSource.length}{" "}
-              single-source activities
-            </button>
-
-            {showSingleSource && (
-              <div className="grid gap-3">
-                {singleSource.map(([id, comp]) => (
-                  <button
-                    key={id}
-                    onClick={() => { setSelected(id); setViewMode("sources"); }}
-                    className="text-left border border-gray-200 rounded-lg p-3 bg-white hover:border-blue-300 transition-all opacity-70"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="font-medium text-sm">
-                          {comp.activity_name}
-                        </div>
-                        <div className="text-xs text-gray-500">
-                          {comp.sources[0]?.source_name.replace("UK Government GHG Conversion Factors", "DEFRA").replace("GHG Protocol Cross-Sector Emission Factors", "GHG Protocol")} only
-                        </div>
-                      </div>
-                      <span className="text-xs text-gray-400">No comparison available</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-          </>
+          <SourceAccordion multiSource={multiSource} singleSource={singleSource} />
         )}
-
-        {/* Detail view */}
-        {selected && (
-          <>
-            <button
-              onClick={() => setSelected(null)}
-              className="text-sm text-blue-600 hover:underline mb-6 inline-block"
-            >
-              &larr; Back to all activities
-            </button>
-
-            {/* Show country comparison if in country mode and data exists */}
-            {viewMode === "countries" && selectedCountryComp && (
-              <CountryComparisonView comp={selectedCountryComp} />
-            )}
-
-            {/* Show source comparison */}
-            {viewMode === "sources" && selectedComp && (
-              <ComparisonView comp={selectedComp} />
-            )}
-
-            {/* Cross-link: if viewing sources, offer country view and vice versa */}
-            {viewMode === "sources" && countryComparisons[selected] && (
-              <button
-                onClick={() => setViewMode("countries")}
-                className="text-sm text-emerald-600 hover:underline mt-4 inline-block"
-              >
-                View this activity across countries &rarr;
-              </button>
-            )}
-            {viewMode === "countries" && selectedComp && (
-              <button
-                onClick={() => setViewMode("sources")}
-                className="text-sm text-blue-600 hover:underline mt-4 inline-block"
-              >
-                View source-by-source comparison &rarr;
-              </button>
-            )}
-          </>
-        )}
+        </div>)}
 
         {/* Footer */}
-        <footer className="mt-16 pt-8 border-t border-gray-200 text-xs text-gray-400">
+        <footer className="mt-16 pt-6 pb-2 text-xs" style={{ borderTop: '1px solid var(--ws-border)', color: 'var(--ws-body)' }}>
           <p>
             Data sourced from EPA GHG Emission Factors Hub (Jan 2025), UK
             DEFRA/DESNZ Conversion Factors (Jun 2025), GHG Protocol
@@ -1267,7 +1371,8 @@ export default function Home() {
               href="https://www.linkedin.com/in/vivfeng"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
+              className="hover:underline"
+              style={{ color: 'var(--ws-blue)' }}
             >
               Reach out on LinkedIn
             </a>
