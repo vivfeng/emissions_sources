@@ -1164,11 +1164,37 @@ function AnimatedNumber({ target, decimals = 0, duration = 1200 }: { target: num
   return <span ref={ref} className="font-mono font-semibold">{value.toFixed(decimals)}</span>;
 }
 
+function getInitialPageMode(): PageMode {
+  if (typeof window !== "undefined") {
+    const hash = window.location.hash.replace("#", "");
+    if (hash === "background") return "background";
+  }
+  return "product";
+}
+
 export default function Home() {
-  const [pageMode, setPageMode] = useState<PageMode>("product");
+  const [pageMode, setPageMode] = useState<PageMode>(getInitialPageMode);
   const [selected, setSelected] = useState<string | null>(null);
   const [showSingleSource, setShowSingleSource] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("sources");
+
+  // Sync hash with page mode
+  useEffect(() => {
+    window.location.hash = pageMode;
+  }, [pageMode]);
+
+  // Listen for back/forward navigation
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash === "background" || hash === "product") {
+        setPageMode(hash);
+        setSelected(null);
+      }
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
 
   const selectedComp = selected ? comparisons[selected] : null;
   const selectedCountryComp = selected ? countryComparisons[selected] : null;
@@ -1362,7 +1388,7 @@ export default function Home() {
             Cross-Sector Tools V2.0 (Mar 2024), Ember Global Electricity
             Review (2025), IPCC 2006 Guidelines, ICCT, and UBA TREMOD.
             All factors normalized to kg CO2e per common unit.
-            This is a learning artifact, not a production tool.
+            This is a learning artifact by Vivian Feng.
           </p>
           <p className="mt-3">
             Questions, suggestions, or want to contribute?{" "}
