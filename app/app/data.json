@@ -42,14 +42,14 @@
         "method": "ipcc_default",
         "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
-      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "defra"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -58,13 +58,13 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
           "rationale": "No single source covers all geographies. Use DEFRA for EU operations (includes RF), EPA for US operations (excludes RF). Document the choice and RF treatment explicitly."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "For US Scope 3: EPA is standard. For CSRD-bound reporting: DEFRA includes radiative forcing required by most EU auditors."
     },
@@ -91,7 +91,7 @@
           "original_unit": "kg CO2 per passenger-km",
           "original_notes": "UK region. UK domestic. Average Passenger class. Does NOT include radiative forcing.",
           "geographic_scope": "UK",
-          "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+          "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF — this explains the ~2x difference.",
           "staleness_flag": true,
           "system_boundary": "combustion_no_rf"
         }
@@ -110,14 +110,14 @@
         "method": "ipcc_default",
         "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
-      "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "ghg_protocol"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -126,13 +126,13 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
           "rationale": "No single source covers all geographies. Use DEFRA for EU operations (includes RF), EPA for US operations (excludes RF). Document the choice and RF treatment explicitly."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "GHG Protocol compiles from DEFRA 2022 (stale). Use DEFRA 2025 directly for current UK factors."
     },
@@ -178,14 +178,14 @@
         "method": "ipcc_default",
         "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
-      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "defra"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -194,13 +194,13 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
           "rationale": "No single source covers all geographies. Use DEFRA for EU operations (includes RF), EPA for US operations (excludes RF). Document the choice and RF treatment explicitly."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "For US reporting: EPA. For EU/CSRD: DEFRA with RF. Document RF treatment explicitly in methodology."
     },
@@ -227,7 +227,7 @@
           "original_unit": "kg CO2 per passenger-km",
           "original_notes": "UK region. Non-UK international. Average Passenger class. Does NOT include radiative forcing.",
           "geographic_scope": "UK",
-          "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+          "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF — this explains the ~2x difference.",
           "staleness_flag": true,
           "system_boundary": "combustion_no_rf"
         }
@@ -246,14 +246,14 @@
         "method": "ipcc_default",
         "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
-      "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "ghg_protocol"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -262,13 +262,13 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
           "rationale": "No single source covers all geographies. Use DEFRA for EU operations (includes RF), EPA for US operations (excludes RF). Document the choice and RF treatment explicitly."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Based on older DEFRA data. Use DEFRA 2025 directly unless reproducing a prior-year inventory."
     },
@@ -289,7 +289,7 @@
           "value_kg_co2e": 0.10215,
           "unit_denominator": "passenger-km",
           "co2_component": 0.101284,
-          "ch4_component": 1e-05,
+          "ch4_component": 0.00001,
           "n2o_component": 0.000856,
           "original_value": 0.163,
           "original_unit": "kg CO2 per passenger-mile",
@@ -313,7 +313,7 @@
           "n2o_component": null,
           "original_value": 0.15282,
           "original_unit": "kg CO2e per passenger-km",
-          "original_notes": "Over 3700 km \u2014 comparable to EPA >=2300 miles",
+          "original_notes": "Over 3700 km — comparable to EPA >=2300 miles",
           "geographic_scope": "UK",
           "methodology_notes": "Includes radiative forcing (RF) multiplier. 'Average passenger' class. DEFRA recommends including RF for company reporting. The WITHOUT-RF value is approximately 60% of this number.",
           "staleness_flag": false,
@@ -329,7 +329,7 @@
           "value_kg_co2e": 0.10215,
           "unit_denominator": "passenger-km",
           "co2_component": 0.101284,
-          "ch4_component": 1e-05,
+          "ch4_component": 0.00001,
           "n2o_component": 0.000856,
           "original_value": 0.163,
           "original_unit": "kg CO2 per passenger-mile",
@@ -383,7 +383,7 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
@@ -416,7 +416,7 @@
           "original_unit": "kg CO2 per passenger-km",
           "original_notes": "UK region. Over 3700km. Average Passenger class. Does NOT include radiative forcing.",
           "geographic_scope": "UK",
-          "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+          "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF — this explains the ~2x difference.",
           "staleness_flag": true,
           "system_boundary": "combustion_no_rf"
         }
@@ -435,14 +435,14 @@
         "method": "ipcc_default",
         "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
-      "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "ghg_protocol"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -451,13 +451,13 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
           "rationale": "No single source covers all geographies. Use DEFRA for EU operations (includes RF), EPA for US operations (excludes RF). Document the choice and RF treatment explicitly."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Uses older DEFRA data without RF. Prefer DEFRA 2025 for current EU reporting."
     },
@@ -478,7 +478,7 @@
           "value_kg_co2e": 0.080842,
           "unit_denominator": "passenger-km",
           "co2_component": 0.080157,
-          "ch4_component": 1e-05,
+          "ch4_component": 0.00001,
           "n2o_component": 0.000675,
           "original_value": 0.129,
           "original_unit": "kg CO2 per passenger-mile",
@@ -498,7 +498,7 @@
           "value_kg_co2e": 0.080842,
           "unit_denominator": "passenger-km",
           "co2_component": 0.080157,
-          "ch4_component": 1e-05,
+          "ch4_component": 0.00001,
           "n2o_component": 0.000675,
           "original_value": 0.129,
           "original_unit": "kg CO2 per passenger-mile",
@@ -510,7 +510,7 @@
         }
       ],
       "variance": {
-        "percentage": 0.0,
+        "percentage": 0,
         "level": "low",
         "min_value": 0.080842,
         "max_value": 0.080842,
@@ -524,7 +524,7 @@
       "uncertainty": {
         "low": 0.080842,
         "high": 0.080842,
-        "spread_pct": 0.0,
+        "spread_pct": 0,
         "method": "cross_source_spread",
         "notes": "Range across 2 independent sources. True uncertainty may be wider."
       },
@@ -544,7 +544,7 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
@@ -603,7 +603,7 @@
         }
       ],
       "variance": {
-        "percentage": 0.0,
+        "percentage": 0,
         "level": "low",
         "min_value": 0.129822,
         "max_value": 0.129822,
@@ -617,7 +617,7 @@
       "uncertainty": {
         "low": 0.129822,
         "high": 0.129822,
-        "spread_pct": 0.0,
+        "spread_pct": 0,
         "method": "cross_source_spread",
         "notes": "Range across 2 independent sources. True uncertainty may be wider."
       },
@@ -637,7 +637,7 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
@@ -689,14 +689,14 @@
         "method": "ipcc_default",
         "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
-      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "defra"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -705,13 +705,13 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
           "rationale": "No single source covers all geographies. Use DEFRA for EU operations (includes RF), EPA for US operations (excludes RF). Document the choice and RF treatment explicitly."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Single DEFRA source. Suitable for UK/EU. No US-specific alternative available for short-haul."
     },
@@ -738,7 +738,7 @@
           "original_unit": "kg CO2 per passenger-km",
           "original_notes": "UK region. Up to 3700km. Average Passenger class. Does NOT include radiative forcing.",
           "geographic_scope": "UK",
-          "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF \u2014 this explains the ~2x difference.",
+          "methodology_notes": "From DEFRA 2022 WITHOUT radiative forcing. Compare to DEFRA 2025 flat file which INCLUDES RF — this explains the ~2x difference.",
           "staleness_flag": true,
           "system_boundary": "combustion_no_rf"
         }
@@ -757,14 +757,14 @@
         "method": "ipcc_default",
         "notes": "High uncertainty from radiative forcing inclusion/exclusion (2x effect), load factor assumptions, and distance category definitions."
       },
-      "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (GHG Protocol Cross-Sector Emission Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "ghg_protocol"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -773,13 +773,13 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF \u2014 conservative approach aligned with US reporting norms."
+          "rationale": "US-specific factors recognized by SEC and CDP. Excludes RF — conservative approach aligned with US reporting norms."
         },
         "global": {
           "recommended_source": null,
           "rationale": "No single source covers all geographies. Use DEFRA for EU operations (includes RF), EPA for US operations (excludes RF). Document the choice and RF treatment explicitly."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Based on older DEFRA data. Use DEFRA 2025 directly."
     },
@@ -806,7 +806,7 @@
           "original_unit": "kg CO2e per tonne",
           "original_notes": "Aluminium cans and foil, excluding forming. Primary material production.",
           "geographic_scope": "UK",
-          "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
+          "methodology_notes": "Embodied carbon — primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
           "staleness_flag": false,
           "system_boundary": "embodied_cradle_to_gate"
         }
@@ -825,14 +825,14 @@
         "method": "ipcc_default",
         "notes": "Primary vs recycled content, production process variation (e.g., BF-BOF vs EAF for steel), and system boundary choices."
       },
-      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "defra"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -847,7 +847,7 @@
           "recommended_source": "DEFRA/DESNZ",
           "rationale": "Single-source coverage. For higher-stakes reporting, supplement with lifecycle databases (ecoinvent, GaBi)."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Single source available. Consider supplementing with industry-specific LCA data for material accuracy."
     },
@@ -955,7 +955,7 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "EPA factors reflect US fleet composition, fuel efficiency standards, and driving patterns. GHG Protocol values may use older EPA vintages \u2014 check data currency."
+          "rationale": "EPA factors reflect US fleet composition, fuel efficiency standards, and driving patterns. GHG Protocol values may use older EPA vintages — check data currency."
         },
         "global": {
           "recommended_source": null,
@@ -1018,7 +1018,7 @@
         "level": "very_high",
         "min_value": 0.177,
         "max_value": 0.351642,
-        "diagnosis": "Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference \u2014 it's a real physical difference in how electricity is generated.",
+        "diagnosis": "Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference — it's a real physical difference in how electricity is generated.",
         "variance_type": "mixed",
         "drivers": [
           "geographic"
@@ -1032,7 +1032,7 @@
         "method": "cross_source_spread",
         "notes": "Range across 2 independent sources. True uncertainty may be wider."
       },
-      "key_insight": "These 2 sources vary by 66.1%. Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference \u2014 it's a real physical difference in how electricity is generated.",
+      "key_insight": "These 2 sources vary by 66.1%. Geographic grid mix. US electricity (eGRID2023) reflects a coal/gas-heavy grid averaging ~0.35 kg CO2e/kWh, while UK electricity reflects a grid that has rapidly decarbonized (offshore wind, nuclear) to ~0.18 kg CO2e/kWh. This is not a methodology difference — it's a real physical difference in how electricity is generated.",
       "effective_independence": {
         "listed_sources": 2,
         "effective_sources": 2,
@@ -1049,11 +1049,11 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA eGRID (subregional)",
-          "rationale": "EPA eGRID provides US subregional factors \u2014 more accurate than national average. SEC and CDP both accept eGRID as authoritative for US operations."
+          "rationale": "EPA eGRID provides US subregional factors — more accurate than national average. SEC and CDP both accept eGRID as authoritative for US operations."
         },
         "global": {
           "recommended_source": "Country-specific (Ember/IEA)",
-          "rationale": "Always use the most geographically specific grid factor available. National > continental > global. Update annually \u2014 grid factors have the shortest shelf life of any emission factor."
+          "rationale": "Always use the most geographically specific grid factor available. National > continental > global. Update annually — grid factors have the shortest shelf life of any emission factor."
         },
         "defensibility_note": "All 2 sources are independently derived."
       },
@@ -1101,14 +1101,14 @@
         "method": "ipcc_default",
         "notes": "Payload utilization, route efficiency, vehicle age, and per-tonne-km vs per-vehicle-km basis choices."
       },
-      "key_insight": "Only one source covers this activity (EPA GHG Emission Factors Hub). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (EPA GHG Emission Factors Hub). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "epa"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -1123,7 +1123,7 @@
           "recommended_source": null,
           "rationale": "Freight factors vary significantly by vehicle type, load factor, and road conditions. Use the most specific factor available for each operation."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Use region-matched source. EPA for US trucking, DEFRA for UK. GHG Protocol may use stale underlying data."
     },
@@ -1169,14 +1169,14 @@
         "method": "ipcc_default",
         "notes": "Hotel energy use varies by climate zone, building age, HVAC type, and occupancy. Few standardized measurement approaches."
       },
-      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "defra"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -1191,7 +1191,7 @@
           "recommended_source": "DEFRA/DESNZ",
           "rationale": "Only source with hotel accommodation factors. Flag as single-source with no independent validation."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Limited to DEFRA. No US-published hotel factor exists in these databases. Consider HCMI for hotel-specific data."
     },
@@ -1237,14 +1237,14 @@
         "method": "ipcc_default",
         "notes": "Hotel energy use varies by climate zone, building age, HVAC type, and occupancy. Few standardized measurement approaches."
       },
-      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "defra"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -1259,7 +1259,7 @@
           "recommended_source": "DEFRA/DESNZ",
           "rationale": "Only source with hotel accommodation factors. Flag as single-source with no independent validation."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Use EPA for US hotels. No cross-source validation available."
     },
@@ -1305,14 +1305,14 @@
         "method": "ipcc_default",
         "notes": "Fleet composition, occupancy assumptions, and real-world vs test-cycle driving conditions vary widely across geographies."
       },
-      "key_insight": "Only one source covers this activity (EPA GHG Emission Factors Hub). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (EPA GHG Emission Factors Hub). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "epa"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -1321,13 +1321,13 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "EPA factors reflect US fleet composition, fuel efficiency standards, and driving patterns. GHG Protocol values may use older EPA vintages \u2014 check data currency."
+          "rationale": "EPA factors reflect US fleet composition, fuel efficiency standards, and driving patterns. GHG Protocol values may use older EPA vintages — check data currency."
         },
         "global": {
           "recommended_source": null,
           "rationale": "Ground transport factors are highly geography-dependent (fleet composition, fuel mix, occupancy). Always match the factor's geographic scope to the reporting entity's operations."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "EPA covers US light trucks. No UK equivalent in current data."
     },
@@ -1348,8 +1348,8 @@
           "value_kg_co2e": 0.181234,
           "unit_denominator": "kWh",
           "co2_component": 0.181048,
-          "ch4_component": 9.6e-05,
-          "n2o_component": 9e-05,
+          "ch4_component": 0.000096,
+          "n2o_component": 0.00009,
           "original_value": 53.06,
           "original_unit": "kg CO2 per mmBtu",
           "original_notes": "CO2 only; CH4 and N2O added during normalization using AR5 GWPs",
@@ -1390,17 +1390,17 @@
           "co2_component": 0.20196,
           "ch4_component": null,
           "n2o_component": null,
-          "original_value": 56100.0,
+          "original_value": 56100,
           "original_unit": "kg CO2 per TJ",
           "original_notes": "CO2 only. CH4/N2O in separate table. LHV (Net CV) basis.",
           "geographic_scope": "Global (IPCC default)",
-          "methodology_notes": "IPCC 2006 default factor. Lower Heating Value (Net CV) basis. CO2 only \u2014 does not include CH4/N2O from combustion.",
+          "methodology_notes": "IPCC 2006 default factor. Lower Heating Value (Net CV) basis. CO2 only — does not include CH4/N2O from combustion.",
           "staleness_flag": true,
           "system_boundary": "co2_only"
         }
       ],
       "variance": {
-        "percentage": 11.0,
+        "percentage": 11,
         "level": "moderate",
         "min_value": 0.181234,
         "max_value": 0.2027,
@@ -1421,7 +1421,7 @@
       "uncertainty": {
         "low": 0.181234,
         "high": 0.2027,
-        "spread_pct": 11.0,
+        "spread_pct": 11,
         "method": "cross_source_spread",
         "notes": "Range across 3 independent sources. True uncertainty may be wider."
       },
@@ -1442,11 +1442,11 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "EPA uses HHV (Higher Heating Value), which aligns with US energy reporting conventions. The difference vs LHV is ~10% \u2014 not trivial but well-understood."
+          "rationale": "EPA uses HHV (Higher Heating Value), which aligns with US energy reporting conventions. The difference vs LHV is ~10% — not trivial but well-understood."
         },
         "global": {
           "recommended_source": "IPCC",
-          "rationale": "IPCC provides globally accepted default factors. Be explicit about HHV vs LHV basis \u2014 this is the main source of apparent disagreement."
+          "rationale": "IPCC provides globally accepted default factors. Be explicit about HHV vs LHV basis — this is the main source of apparent disagreement."
         },
         "defensibility_note": "GHG Protocol compiles from IPCC. Effective independence: 2.5 of 3 listed sources."
       },
@@ -1535,7 +1535,7 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "EPA factors reflect US fleet composition, fuel efficiency standards, and driving patterns. GHG Protocol values may use older EPA vintages \u2014 check data currency."
+          "rationale": "EPA factors reflect US fleet composition, fuel efficiency standards, and driving patterns. GHG Protocol values may use older EPA vintages — check data currency."
         },
         "global": {
           "recommended_source": null,
@@ -1629,7 +1629,7 @@
         },
         "sec_cdp_us": {
           "recommended_source": "EPA",
-          "rationale": "EPA factors reflect US fleet composition, fuel efficiency standards, and driving patterns. GHG Protocol values may use older EPA vintages \u2014 check data currency."
+          "rationale": "EPA factors reflect US fleet composition, fuel efficiency standards, and driving patterns. GHG Protocol values may use older EPA vintages — check data currency."
         },
         "global": {
           "recommended_source": null,
@@ -1660,9 +1660,9 @@
           "n2o_component": null,
           "original_value": 2863.90131,
           "original_unit": "kg CO2e per tonne",
-          "original_notes": "Steel cans \u2014 primary material production. Not raw steel.",
+          "original_notes": "Steel cans — primary material production. Not raw steel.",
           "geographic_scope": "UK",
-          "methodology_notes": "Embodied carbon \u2014 primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
+          "methodology_notes": "Embodied carbon — primary material production (no recycling credit). DEFRA also publishes a 'closed-loop' value that nets out recycled content. This is for specific product forms (cans/foil), not raw material.",
           "staleness_flag": false,
           "system_boundary": "embodied_cradle_to_gate"
         }
@@ -1681,14 +1681,14 @@
         "method": "ipcc_default",
         "notes": "Primary vs recycled content, production process variation (e.g., BF-BOF vs EAF for steel), and system boundary choices."
       },
-      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding \u2014 it means there is no independent validation available.",
+      "key_insight": "Only one source covers this activity (UK Government GHG Conversion Factors). No cross-source comparison is possible, which is itself a finding — it means there is no independent validation available.",
       "effective_independence": {
         "listed_sources": 1,
         "effective_sources": 1,
         "independent_ids": [
           "defra"
         ],
-        "note": "Single source \u2014 no independent validation available."
+        "note": "Single source — no independent validation available."
       },
       "decision_framework": {
         "csrd_eu": {
@@ -1703,7 +1703,7 @@
           "recommended_source": "DEFRA/DESNZ",
           "rationale": "Single-source coverage. For higher-stakes reporting, supplement with lifecycle databases (ecoinvent, GaBi)."
         },
-        "defensibility_note": "Single source \u2014 no independent validation available."
+        "defensibility_note": "Single source — no independent validation available."
       },
       "quick_guidance": "Single source. Supplement with World Steel Association data for production-route specificity."
     }
@@ -1780,7 +1780,7 @@
         "lowest_country": "Germany",
         "ratio": 1.9
       },
-      "key_insight": "These 5 countries vary by 69.8% in grid carbon intensity. India (1.9x Germany) reflects real differences in electricity generation mix: India's grid is ~75% coal, while Germany has exceeded 60% renewables. This is not a methodology difference \u2014 it's a physical difference in how electricity is generated. Implication: the same kWh of electricity has very different climate impact depending on where it's consumed. A company's Scope 2 emissions are heavily geography-dependent.",
+      "key_insight": "These 5 countries vary by 69.8% in grid carbon intensity. India (1.9x Germany) reflects real differences in electricity generation mix: India's grid is ~75% coal, while Germany has exceeded 60% renewables. This is not a methodology difference — it's a physical difference in how electricity is generated. Implication: the same kWh of electricity has very different climate impact depending on where it's consumed. A company's Scope 2 emissions are heavily geography-dependent.",
       "trends": {
         "US": {
           "country_code": "US",
@@ -1814,16 +1814,16 @@
           "yoy_changes_pct": [
             -3.2,
             -2.9,
-            -2.0,
+            -2,
             -5.6,
             -4.7,
             2.8,
             -1.3,
             -1.5,
-            -1.0
+            -1
           ],
           "total_change_pct": -17.9,
-          "avg_annual_change_pct": -2.0,
+          "avg_annual_change_pct": -2,
           "direction": "declining",
           "period": "2015-2024",
           "notes": "Driven by coal-to-gas switching and wind/solar growth. 2021 uptick from post-COVID demand rebound."
@@ -1863,7 +1863,7 @@
             -1.1,
             -2.3,
             -2.2,
-            0.0,
+            0,
             -0.7,
             -2.3,
             -0.7
@@ -1907,10 +1907,10 @@
             -0.4,
             -1.2,
             -0.5,
-            -1.0,
+            -1,
             -1.4,
             0.8,
-            0.0,
+            0,
             -0.6,
             -0.6
           ],
@@ -1951,7 +1951,7 @@
           ],
           "yoy_changes_pct": [
             -2.3,
-            -6.0,
+            -6,
             -3.5,
             -14.3,
             -15.7,
@@ -2072,20 +2072,20 @@
           "source_name": "IPCC 2006 Guidelines",
           "source_edition": "2006 (2019 Refinement)",
           "geographic_scope": "Global (IPCC default)",
-          "methodology_notes": "IPCC 2006 Guidelines Vol 2, Ch 2, Table 2.2. Global default \u2014 natural gas composition is relatively uniform worldwide (uncertainty range: 54,200-58,300 kg CO2/TJ). NCV/LHV basis. Applied as US factor since IPCC provides a single global default for natural gas.",
+          "methodology_notes": "IPCC 2006 Guidelines Vol 2, Ch 2, Table 2.2. Global default — natural gas composition is relatively uniform worldwide (uncertainty range: 54,200-58,300 kg CO2/TJ). NCV/LHV basis. Applied as US factor since IPCC provides a single global default for natural gas.",
           "staleness_flag": false
         }
       ],
       "variance": {
-        "percentage": 0.0,
+        "percentage": 0,
         "level": "low",
         "min_value": 0.2022,
         "max_value": 0.2022,
         "highest_country": "China",
         "lowest_country": "China",
-        "ratio": 1.0
+        "ratio": 1
       },
-      "key_insight": "All 5 countries show identical factors (0% variance) because the IPCC provides a single global default for natural gas. Unlike electricity or transport, natural gas composition is relatively uniform worldwide \u2014 the combustion chemistry doesn't vary by country. This is itself a key finding: some emission sources are genuinely geography-independent. The real country-level variation in natural gas emissions comes from upstream methane leakage rates (not captured here), which can vary 2-10x between countries."
+      "key_insight": "All 5 countries show identical factors (0% variance) because the IPCC provides a single global default for natural gas. Unlike electricity or transport, natural gas composition is relatively uniform worldwide — the combustion chemistry doesn't vary by country. This is itself a key finding: some emission sources are genuinely geography-independent. The real country-level variation in natural gas emissions comes from upstream methane leakage rates (not captured here), which can vary 2-10x between countries."
     },
     "passenger_car_gasoline": {
       "activity_id": "passenger_car_gasoline",
@@ -2158,7 +2158,7 @@
         "lowest_country": "India",
         "ratio": 1.8
       },
-      "key_insight": "These 5 countries vary by 57.3% (Germany is 1.8x India). Variance is driven by three factors: (1) vehicle fleet composition \u2014 Indian/Chinese fleets are smaller and lighter than US/German fleets; (2) fuel efficiency standards \u2014 EU regulations are stricter than US; (3) occupancy assumptions \u2014 ranging from 1.4 (Germany) to 1.6 (India). China's rapid BEV/PHEV adoption (~35% of new sales in 2023) is also pulling fleet averages down. Caution: some values use new-sales averages while others use on-road fleet averages, which can differ by 20-40%. Data quality caveat: India, Russia use stale data (2+ years old), so these figures may not reflect current conditions."
+      "key_insight": "These 5 countries vary by 57.3% (Germany is 1.8x India). Variance is driven by three factors: (1) vehicle fleet composition — Indian/Chinese fleets are smaller and lighter than US/German fleets; (2) fuel efficiency standards — EU regulations are stricter than US; (3) occupancy assumptions — ranging from 1.4 (Germany) to 1.6 (India). China's rapid BEV/PHEV adoption (~35% of new sales in 2023) is also pulling fleet averages down. Caution: some values use new-sales averages while others use on-road fleet averages, which can differ by 20-40%. Data quality caveat: India, Russia use stale data (2+ years old), so these figures may not reflect current conditions."
     },
     "bus": {
       "activity_id": "bus",
@@ -2236,7 +2236,7 @@
   },
   "subregion_comparison": {
     "activity_id": "electricity_grid",
-    "activity_name": "Grid Electricity \u2014 US eGRID Subregions",
+    "activity_name": "Grid Electricity — US eGRID Subregions",
     "category": "electricity",
     "normalized_unit": "kg CO2e per kWh",
     "source": "EPA eGRID2023 (January 2025)",
@@ -2573,7 +2573,259 @@
       "generation_only": "Generation only (no T&D)",
       "embodied_cradle_to_gate": "Embodied (cradle-to-gate)",
       "operational": "Operational",
-      "co2_only": "CO\u2082 only (no CH\u2084/N\u2082O)"
+      "co2_only": "CO₂ only (no CH₄/N₂O)"
     }
-  }
+  },
+  "spend_comparisons": [
+    {
+      "activity_id": "air_travel_domestic",
+      "activity_name": "Air Travel - Domestic",
+      "category": "air_travel",
+      "scope": "scope_3",
+      "normalized_unit": "kg CO2e per passenger-km",
+      "useeio_sector": {
+        "sector_code": "481000",
+        "sector_name": "Air transportation",
+        "naics_code": "481",
+        "factor_kg_co2e_per_usd": 0.51,
+        "source_name": "USEEIO v2.0.1-411",
+        "source_url": "https://www.epa.gov/land-research/us-environmentally-extended-input-output-useeio-technical-content",
+        "source_edition": "2024",
+        "last_updated": "2024-06-01",
+        "geographic_scope": "US national average",
+        "methodology_notes": "Supply-chain model based on BEA input-output tables combined with EPA satellite accounts. Covers Scope 1+2+3 upstream emissions for the entire air transportation sector, averaged across all revenue."
+      },
+      "conversion_bridge": {
+        "assumed_cost_per_unit": 0.18,
+        "cost_unit": "USD per passenger-km",
+        "cost_source": "Bureau of Transportation Statistics, average domestic yield 2023",
+        "derived_spend_factor": 0.0918,
+        "derived_unit": "kg CO2e per passenger-km (via spend)",
+        "notes": "Derived as: 0.51 kg/USD × $0.18/pkm = 0.0918 kg/pkm. Highly sensitive to fare assumptions — premium fares would lower the derived factor per dollar."
+      },
+      "activity_based_representative": {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 0.22928,
+        "unit_denominator": "passenger-km",
+        "system_boundary": "combustion_plus_rf"
+      },
+      "gap_analysis": {
+        "ratio": 2.5,
+        "direction": "activity_higher",
+        "gap_percentage": 150,
+        "level": "moderate",
+        "drivers": [
+          "USEEIO is a top-down macro model that averages emissions across all revenue in the air transport sector, including cargo, charter, and ground operations",
+          "Activity-based factor (DEFRA) isolates passenger combustion emissions with radiative forcing uplift",
+          "The assumed fare/km is a national average — actual fares vary 2-4x by route and booking class"
+        ],
+        "interpretation": "The 2.5x gap reflects fundamentally different measurement approaches. Spend-based captures a broader economic footprint but at lower precision. Use activity-based when you have passenger-km data."
+      },
+      "guidance": {
+        "when_to_use_spend": "Scope 3 Category 6 (Business Travel) screening when you only have total airfare spend from expense reports, not itinerary-level data.",
+        "when_to_use_activity": "Whenever you have flight itineraries with origin-destination pairs or distance data. Activity-based factors are 5-10x more accurate for aviation.",
+        "key_caveat": "Never mix spend-based and activity-based factors for the same travel category to avoid double-counting."
+      }
+    },
+    {
+      "activity_id": "electricity_grid",
+      "activity_name": "Grid Electricity",
+      "category": "electricity",
+      "scope": "scope_2",
+      "normalized_unit": "kg CO2e per kWh",
+      "useeio_sector": {
+        "sector_code": "221100",
+        "sector_name": "Electric power generation, transmission, and distribution",
+        "naics_code": "2211",
+        "factor_kg_co2e_per_usd": 4.67,
+        "source_name": "USEEIO v2.0.1-411",
+        "source_url": "https://www.epa.gov/land-research/us-environmentally-extended-input-output-useeio-technical-content",
+        "source_edition": "2024",
+        "last_updated": "2024-06-01",
+        "geographic_scope": "US national average",
+        "methodology_notes": "Covers full supply chain of the electric power sector including generation, T&D losses, and upstream fuel extraction. Averaged across all electricity revenue."
+      },
+      "conversion_bridge": {
+        "assumed_cost_per_unit": 0.125,
+        "cost_unit": "USD per kWh",
+        "cost_source": "EIA average US retail electricity price, 2023",
+        "derived_spend_factor": 0.584,
+        "derived_unit": "kg CO2e per kWh (via spend)",
+        "notes": "Derived as: 4.67 kg/USD × $0.125/kWh = 0.584 kg/kWh. Commercial rates (~$0.11) vs residential (~$0.16) change this significantly."
+      },
+      "activity_based_representative": {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.351642,
+        "unit_denominator": "kWh",
+        "system_boundary": "generation_only"
+      },
+      "gap_analysis": {
+        "ratio": 1.7,
+        "direction": "spend_higher",
+        "gap_percentage": 66,
+        "level": "moderate",
+        "drivers": [
+          "USEEIO includes upstream fuel extraction, equipment manufacturing, and T&D infrastructure — activity-based EPA factor covers generation-only emissions",
+          "USEEIO factor reflects full supply chain (Scope 1+2+3 of the utility), while EPA eGRID is combustion at the plant",
+          "Electricity price varies 2-3x by state and rate class, making the conversion bridge sensitive"
+        ],
+        "interpretation": "Surprisingly close — the 1.7x gap is smaller than most sectors because electricity generation is already the dominant emission source. The spend-based number is higher because it includes supply chain overhead."
+      },
+      "guidance": {
+        "when_to_use_spend": "Scope 3 Category 1 screening for purchased electricity services when you only have utility bills in dollar amounts, not kWh consumption.",
+        "when_to_use_activity": "Always for Scope 2 reporting — use EPA eGRID or utility-specific factors with actual kWh. Spend-based is never appropriate for Scope 2.",
+        "key_caveat": "Spend-based electricity factors are Scope 3 tools. Scope 2 must always use location-based or market-based activity factors per GHG Protocol Scope 2 Guidance."
+      }
+    },
+    {
+      "activity_id": "steel",
+      "activity_name": "Steel (Cans)",
+      "category": "materials",
+      "scope": "scope_3",
+      "normalized_unit": "kg CO2e per tonne",
+      "useeio_sector": {
+        "sector_code": "331110",
+        "sector_name": "Iron and steel mills and ferroalloy manufacturing",
+        "naics_code": "3311",
+        "factor_kg_co2e_per_usd": 1.42,
+        "source_name": "USEEIO v2.0.1-411",
+        "source_url": "https://www.epa.gov/land-research/us-environmentally-extended-input-output-useeio-technical-content",
+        "source_edition": "2024",
+        "last_updated": "2024-06-01",
+        "geographic_scope": "US national average",
+        "methodology_notes": "Covers all GHG emissions in the iron and steel manufacturing supply chain, including coking, blast furnace operation, and upstream mining. Averaged across all steel products and revenue."
+      },
+      "conversion_bridge": {
+        "assumed_cost_per_unit": 750,
+        "cost_unit": "USD per tonne",
+        "cost_source": "World Steel Association, average US hot-rolled coil price, 2023",
+        "derived_spend_factor": 1065,
+        "derived_unit": "kg CO2e per tonne (via spend)",
+        "notes": "Derived as: 1.42 kg/USD × $750/tonne = 1065 kg/tonne. Steel prices are highly volatile — can range from $400 to $1,500/tonne depending on grade and market conditions."
+      },
+      "activity_based_representative": {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 2863.90131,
+        "unit_denominator": "tonne",
+        "system_boundary": "embodied_cradle_to_gate"
+      },
+      "gap_analysis": {
+        "ratio": 2.7,
+        "direction": "activity_higher",
+        "gap_percentage": 169,
+        "level": "moderate",
+        "drivers": [
+          "DEFRA factor is for steel cans specifically (higher processing intensity) while USEEIO covers all iron and steel mill output including lower-intensity products",
+          "Steel price volatility means the conversion bridge can shift 2x year-over-year",
+          "USEEIO averages across recycled and virgin steel production routes; DEFRA factor may reflect a specific mix"
+        ],
+        "interpretation": "The 2.7x gap is driven by product specificity — DEFRA measures cans (a finished product), while USEEIO averages across the entire iron & steel sector. For procurement screening, spend-based is acceptable; for product-level LCA, use activity-based."
+      },
+      "guidance": {
+        "when_to_use_spend": "Scope 3 Category 1 screening when you only know total steel procurement spend, not tonnage or product grade.",
+        "when_to_use_activity": "When you have weight-based procurement data (tonnes of specific steel products). DEFRA or worldsteel factors are more accurate for specific products.",
+        "key_caveat": "Steel prices fluctuate 50-100% year-over-year. Spend-based estimates from 2021 vs 2023 could differ 2x for identical physical quantities."
+      }
+    },
+    {
+      "activity_id": "freight_road_truck",
+      "activity_name": "Freight - Road (Heavy Truck)",
+      "category": "freight",
+      "scope": "scope_3",
+      "normalized_unit": "kg CO2e per vehicle-km",
+      "useeio_sector": {
+        "sector_code": "484000",
+        "sector_name": "Truck transportation",
+        "naics_code": "484",
+        "factor_kg_co2e_per_usd": 0.82,
+        "source_name": "USEEIO v2.0.1-411",
+        "source_url": "https://www.epa.gov/land-research/us-environmentally-extended-input-output-useeio-technical-content",
+        "source_edition": "2024",
+        "last_updated": "2024-06-01",
+        "geographic_scope": "US national average",
+        "methodology_notes": "Covers all trucking sector emissions including long-haul, local delivery, and specialized freight. Averaged across all trucking revenue regardless of distance or cargo type."
+      },
+      "conversion_bridge": {
+        "assumed_cost_per_unit": 1.85,
+        "cost_unit": "USD per vehicle-km",
+        "cost_source": "American Transportation Research Institute, average trucking operational cost per mile, 2023 (converted to km)",
+        "derived_spend_factor": 1.517,
+        "derived_unit": "kg CO2e per vehicle-km (via spend)",
+        "notes": "Derived as: 0.82 kg/USD × $1.85/vkm = 1.517 kg/vkm. Costs vary significantly by truck class, load factor, and route type."
+      },
+      "activity_based_representative": {
+        "source_name": "EPA GHG Emission Factors Hub",
+        "value_kg_co2e": 0.812931,
+        "unit_denominator": "vehicle-km",
+        "system_boundary": "combustion_only"
+      },
+      "gap_analysis": {
+        "ratio": 1.9,
+        "direction": "spend_higher",
+        "gap_percentage": 87,
+        "level": "moderate",
+        "drivers": [
+          "USEEIO includes full supply chain — vehicle manufacturing, maintenance, infrastructure, and upstream fuel — while EPA covers combustion only",
+          "Trucking cost per km varies 3x between local delivery and long-haul routes",
+          "Empty return trips inflate cost-per-km without proportional emissions, distorting the spend-based conversion"
+        ],
+        "interpretation": "The 1.9x gap is modest and directionally expected — spend-based captures supply chain overhead. For logistics screening with invoice data, spend-based is a reasonable first pass."
+      },
+      "guidance": {
+        "when_to_use_spend": "Scope 3 Category 4 (Upstream Transportation) or Category 9 (Downstream Transportation) when you only have freight invoices, not tonne-km or vehicle-km data.",
+        "when_to_use_activity": "When your logistics provider gives you vehicle-km, tonne-km, or fuel consumption data. Activity-based is always preferred for transport.",
+        "key_caveat": "Freight spend includes margins, surcharges, and accessorial fees that don't correlate with emissions. Strip fuel surcharges if possible before applying spend-based factors."
+      }
+    },
+    {
+      "activity_id": "hotel_stay_us",
+      "activity_name": "Hotel Stay (US)",
+      "category": "accommodation",
+      "scope": "scope_3",
+      "normalized_unit": "kg CO2e per room-night",
+      "useeio_sector": {
+        "sector_code": "721000",
+        "sector_name": "Accommodation",
+        "naics_code": "721",
+        "factor_kg_co2e_per_usd": 0.35,
+        "source_name": "USEEIO v2.0.1-411",
+        "source_url": "https://www.epa.gov/land-research/us-environmentally-extended-input-output-useeio-technical-content",
+        "source_edition": "2024",
+        "last_updated": "2024-06-01",
+        "geographic_scope": "US national average",
+        "methodology_notes": "Covers all accommodation sector emissions including hotels, motels, B&Bs, and RV parks. Includes energy, water, laundry, food service, and upstream supply chain. Averaged across all accommodation revenue."
+      },
+      "conversion_bridge": {
+        "assumed_cost_per_unit": 150,
+        "cost_unit": "USD per room-night",
+        "cost_source": "STR Global, average US hotel ADR (average daily rate), 2023",
+        "derived_spend_factor": 52.5,
+        "derived_unit": "kg CO2e per room-night (via spend)",
+        "notes": "Derived as: 0.35 kg/USD × $150/night = 52.5 kg/night. Hotel rates vary 5x+ from budget motels ($60) to luxury hotels ($300+), making this highly sensitive."
+      },
+      "activity_based_representative": {
+        "source_name": "UK Government GHG Conversion Factors",
+        "value_kg_co2e": 16.1,
+        "unit_denominator": "room-night",
+        "system_boundary": "operational"
+      },
+      "gap_analysis": {
+        "ratio": 3.3,
+        "direction": "spend_higher",
+        "gap_percentage": 226,
+        "level": "high",
+        "drivers": [
+          "USEEIO includes full supply chain — food service, laundry, amenities, construction amortization — while DEFRA covers operational energy only",
+          "Hotel room rates vary 5x+ by location and tier, making the cost bridge extremely sensitive",
+          "DEFRA factor is UK-specific where grid carbon intensity is ~50% lower than US average, explaining part of the gap"
+        ],
+        "interpretation": "The 3.3x gap is expected — spend-based captures the full hospitality supply chain while activity-based covers only on-site energy. For business travel screening, spend-based is common but imprecise."
+      },
+      "guidance": {
+        "when_to_use_spend": "Scope 3 Category 6 (Business Travel) screening when you only have hotel expense totals from corporate travel reports.",
+        "when_to_use_activity": "When you have room-night counts. Even the simpler DEFRA per-night factor is more stable than spend-based, since it removes price variation.",
+        "key_caveat": "A $300 luxury hotel night does not produce 2x the emissions of a $150 business hotel. Spend-based factors penalize premium accommodation disproportionately."
+      }
+    }
+  ]
 }

@@ -27,7 +27,7 @@ code, .font-mono {
   letter-spacing: 0;
 }
 
-/* Custom tooltip */
+/* Custom tooltip — appears ABOVE badge, centered */
 .tooltip-wrap {
   position: relative;
 }
@@ -35,12 +35,12 @@ code, .font-mono {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  z-index: 50;
+  z-index: 9999;
   bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
-  max-width: 320px;
+  max-width: 280px;
   padding: 8px 12px;
   border-radius: 6px;
   background: var(--ws-dark);
@@ -66,14 +66,16 @@ code, .font-mono {
   visibility: visible;
   opacity: 1;
 }
-/* Right-aligned variant for badges near screen edge */
-.tooltip-wrap.tooltip-right .tooltip-text {
-  left: auto;
-  right: 0;
-  transform: none;
+
+/* Spend-based card accent — teal to distinguish from activity-based blue */
+.spend-card-accent {
+  border-left: 3px solid #0D9488;
 }
-.tooltip-wrap.tooltip-right .tooltip-text::after {
-  left: auto;
-  right: 16px;
-  transform: none;
+
+/* Conversion bridge dashed callout */
+.conversion-bridge {
+  background: #F9FAFB;
+  border: 1px dashed #D1D5DB;
+  border-radius: 8px;
+  padding: 16px;
 }
