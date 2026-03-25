@@ -131,6 +131,63 @@ type SubregionComparison = {
   key_insight: string;
 };
 
+// ── Spend-Based (USEEIO) Types ──────────────────────────────
+
+type UseeioSector = {
+  sector_code: string;
+  sector_name: string;
+  naics_code: string;
+  factor_kg_co2e_per_usd: number;
+  source_name: string;
+  source_url: string;
+  source_edition: string;
+  last_updated: string;
+  geographic_scope: string;
+  methodology_notes: string;
+};
+
+type ConversionBridge = {
+  assumed_cost_per_unit: number;
+  cost_unit: string;
+  cost_source: string;
+  derived_spend_factor: number;
+  derived_unit: string;
+  notes: string;
+};
+
+type SpendGapAnalysis = {
+  ratio: number;
+  direction: string;
+  gap_percentage: number;
+  level: string;
+  drivers: string[];
+  interpretation: string;
+};
+
+type SpendGuidance = {
+  when_to_use_spend: string;
+  when_to_use_activity: string;
+  key_caveat: string;
+};
+
+type SpendComparison = {
+  activity_id: string;
+  activity_name: string;
+  category: string;
+  scope: string;
+  normalized_unit: string;
+  useeio_sector: UseeioSector;
+  conversion_bridge: ConversionBridge;
+  activity_based_representative: {
+    source_name: string;
+    value_kg_co2e: number;
+    unit_denominator: string;
+    system_boundary: string;
+  };
+  gap_analysis: SpendGapAnalysis;
+  guidance: SpendGuidance;
+};
+
 // Handle both old flat format and new nested format
 const rawData = data as Record<string, unknown>;
 const hasNestedFormat = "source_comparisons" in rawData;
@@ -138,6 +195,7 @@ const comparisons = (hasNestedFormat ? rawData.source_comparisons : rawData) as 
 const countryComparisons = (hasNestedFormat ? rawData.country_comparisons : {}) as Record<string, CountryComparison>;
 const subregionComparison = (rawData.subregion_comparison || null) as SubregionComparison | null;
 const sourceGraph = (rawData.source_graph || null) as SourceGraph | null;
+const spendComparisons = (rawData.spend_comparisons || []) as SpendComparison[];
 
 // Group activities by category for the selector
 const categories: Record<string, { id: string; name: string }[]> = {};
@@ -823,7 +881,7 @@ type DecisionFramework = {
 };
 
 type PageMode = "background" | "product" | "recommended";
-type ViewMode = "sources" | "countries" | "subnational" | "independence";
+type ViewMode = "sources" | "countries" | "subnational" | "independence" | "spend";
 
 // ── Source Independence Graph ───────────────────────────────────
 
@@ -1159,7 +1217,7 @@ function CountryAccordion({ countryCompList }: { countryCompList: [string, Count
         {countryCompList.map(([id, comp]) => {
           const isOpen = openId === id;
           return (
-            <div key={id} className="rounded-lg bg-white overflow-hidden" style={{ border: '1px solid var(--ws-border)' }}>
+            <div key={id} className="rounded-lg bg-white" style={{ border: '1px solid var(--ws-border)' }}>
               <button
                 onClick={() => setOpenId(isOpen ? null : id)}
                 className="w-full text-left px-4 py-3 flex items-center justify-between gap-4 transition-colors"
@@ -1213,7 +1271,7 @@ function SourceAccordion({ multiSource, singleSource }: { multiSource: [string, 
         {multiSource.map(([id, comp]) => {
           const isOpen = openId === id;
           return (
-            <div key={id} className="rounded-lg bg-white overflow-hidden" style={{ border: '1px solid var(--ws-border)' }}>
+            <div key={id} className="rounded-lg bg-white" style={{ border: '1px solid var(--ws-border)' }}>
               <button
                 onClick={() => setOpenId(isOpen ? null : id)}
                 className="w-full text-left px-4 py-3 flex items-center justify-between gap-4 transition-colors"
@@ -1276,6 +1334,193 @@ function SourceAccordion({ multiSource, singleSource }: { multiSource: [string, 
           )}
         </>
       )}
+    </>
+  );
+}
+
+// ── Spend-Based (USEEIO) Components ─────────────────────────
+
+function SpendGapBadge({ level, ratio }: { level: string; ratio: number }) {
+  const colors: Record<string, string> = {
+    low: "bg-green-100 text-green-800",
+    moderate: "bg-yellow-100 text-yellow-800",
+    high: "bg-orange-100 text-orange-800",
+    extreme: "bg-red-100 text-red-800",
+  };
+  const tooltips: Record<string, string> = {
+    low: "Spend-based and activity-based factors are within 2x. Either approach is reasonable for screening.",
+    moderate: "Spend-based factor differs 2–5x from activity-based. Use activity-based when possible.",
+    high: "Large gap (5–20x). Spend-based is only suitable for rough screening.",
+    extreme: "Massive gap (>20x). Spend-based is a last resort only when no activity data exists.",
+  };
+  return (
+    <span className={`tooltip-wrap text-xs font-semibold px-2 py-0.5 rounded-full cursor-help ${colors[level] || colors.high}`}>
+      {ratio}x gap
+      <span className="tooltip-text">{tooltips[level] || ""}</span>
+    </span>
+  );
+}
+
+function SpendComparisonCard({ comp }: { comp: SpendComparison }) {
+  const actVal = comp.activity_based_representative.value_kg_co2e;
+  const spendVal = comp.conversion_bridge.derived_spend_factor;
+  const maxVal = Math.max(actVal, spendVal);
+
+  const BOUNDARY_SHORT: Record<string, string> = {
+    combustion_only: "Combustion only",
+    combustion_plus_rf: "Combustion + RF",
+    generation_only: "Generation only",
+    operational: "Operational",
+    embodied_cradle_to_gate: "Cradle-to-gate",
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Side-by-side factor cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {/* Activity-based card */}
+        <div className="rounded-lg p-4 bg-white" style={{ border: '1px solid var(--ws-border)', borderLeft: '3px solid var(--ws-blue)' }}>
+          <div className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: 'var(--ws-blue)' }}>Activity-Based Factor</div>
+          <div className="text-xs text-gray-500 mb-2">{comp.activity_based_representative.source_name.replace("UK Government GHG Conversion Factors", "DEFRA/DESNZ").replace("EPA GHG Emission Factors Hub", "EPA")}</div>
+          <div className="font-mono text-xl font-bold mb-0.5" style={{ color: 'var(--ws-heading)' }}>{actVal < 1 ? actVal.toPrecision(4) : actVal.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
+          <div className="text-xs text-gray-500 mb-3">{comp.normalized_unit}</div>
+          <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+            <div className="h-full rounded-full" style={{ width: `${(actVal / maxVal) * 100}%`, backgroundColor: 'var(--ws-blue)' }} />
+          </div>
+          <div className="mt-2 flex items-center gap-2">
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-600" style={{ border: '1px solid var(--ws-border)' }}>
+              {BOUNDARY_SHORT[comp.activity_based_representative.system_boundary] || comp.activity_based_representative.system_boundary}
+            </span>
+          </div>
+        </div>
+
+        {/* USEEIO spend-based card */}
+        <div className="rounded-lg p-4 bg-white spend-card-accent" style={{ border: '1px solid var(--ws-border)' }}>
+          <div className="text-[10px] font-semibold uppercase tracking-wider mb-2 text-teal-700">Spend-Based Factor (USEEIO)</div>
+          <div className="text-xs text-gray-500 mb-1">{comp.useeio_sector.source_name}</div>
+          <div className="text-xs text-gray-400 mb-2">
+            NAICS {comp.useeio_sector.naics_code} · {comp.useeio_sector.sector_name}
+          </div>
+          <div className="font-mono text-xl font-bold mb-0.5 text-teal-800">{comp.useeio_sector.factor_kg_co2e_per_usd < 1 ? comp.useeio_sector.factor_kg_co2e_per_usd.toPrecision(3) : comp.useeio_sector.factor_kg_co2e_per_usd.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
+          <div className="text-xs text-gray-500 mb-1">kg CO₂e per USD</div>
+          <div className="mt-1 text-xs text-gray-400">→ Derived: <span className="font-mono font-medium text-teal-700">{spendVal < 1 ? spendVal.toPrecision(4) : spendVal.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span> {comp.normalized_unit}</div>
+          <div className="mt-2 h-2.5 bg-gray-100 rounded-full overflow-hidden">
+            <div className="h-full rounded-full bg-teal-500" style={{ width: `${(spendVal / maxVal) * 100}%` }} />
+          </div>
+          <div className="mt-2">
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-teal-50 text-teal-600" style={{ border: '1px solid #99f6e4' }}>
+              Full supply chain (Scope 1+2+3)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Conversion bridge */}
+      <div className="conversion-bridge">
+        <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-2">Conversion Bridge</div>
+        <div className="text-sm text-gray-700">
+          <span className="font-mono font-medium text-teal-700">{comp.useeio_sector.factor_kg_co2e_per_usd}</span> kg/USD × <span className="font-mono font-medium">${comp.conversion_bridge.assumed_cost_per_unit}</span>/{comp.activity_based_representative.unit_denominator} = <span className="font-mono font-bold text-teal-700">{spendVal < 1 ? spendVal.toPrecision(4) : spendVal.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span> {comp.normalized_unit}
+        </div>
+        <div className="text-xs text-gray-400 mt-1">Cost assumption: {comp.conversion_bridge.cost_source}</div>
+        <div className="text-xs text-gray-400 italic mt-1">{comp.conversion_bridge.notes}</div>
+      </div>
+
+      {/* Gap analysis */}
+      <div className="rounded-lg p-4 bg-white" style={{ border: '1px solid var(--ws-border)' }}>
+        <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 mb-3">Gap Analysis</div>
+        <div className="flex items-center gap-3 mb-3">
+          <SpendGapBadge level={comp.gap_analysis.level} ratio={comp.gap_analysis.ratio} />
+          <span className="text-xs text-gray-500">
+            {comp.gap_analysis.direction === "activity_higher" ? "Activity-based is higher" : "Spend-based is higher"} ({comp.gap_analysis.gap_percentage}% difference)
+          </span>
+        </div>
+        <div className="space-y-1.5 mb-3">
+          {comp.gap_analysis.drivers.map((d, i) => (
+            <div key={i} className="flex items-start gap-2 text-xs text-gray-600">
+              <span className="text-gray-300 mt-0.5">•</span>
+              <span>{d}</span>
+            </div>
+          ))}
+        </div>
+        <div className="text-xs text-gray-500 italic bg-gray-50 rounded p-2" style={{ border: '1px solid var(--ws-border)' }}>
+          {comp.gap_analysis.interpretation}
+        </div>
+      </div>
+
+      {/* Guidance */}
+      <div className="rounded-lg p-4" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid #dbeafe' }}>
+        <div className="text-[10px] font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--ws-blue)' }}>When to Use Which</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <div className="text-xs font-semibold text-teal-700 mb-1">✦ Use spend-based when:</div>
+            <div className="text-xs text-gray-600">{comp.guidance.when_to_use_spend}</div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold mb-1" style={{ color: 'var(--ws-blue)' }}>✦ Use activity-based when:</div>
+            <div className="text-xs text-gray-600">{comp.guidance.when_to_use_activity}</div>
+          </div>
+        </div>
+        <div className="mt-3 text-xs text-amber-700 bg-amber-50 rounded p-2 flex items-start gap-1.5" style={{ border: '1px solid #fde68a' }}>
+          <span>⚠</span>
+          <span>{comp.guidance.key_caveat}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SpendAccordion({ spendCompList }: { spendCompList: SpendComparison[] }) {
+  const [openId, setOpenId] = useState<string | null>(spendCompList[0]?.activity_id ?? null);
+
+  return (
+    <>
+      <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
+        <span className="w-1 h-5 rounded-full inline-block bg-teal-500" />
+        Activity-based vs. spend-based (USEEIO)
+        <span className="text-sm font-normal text-gray-400">({spendCompList.length} activities)</span>
+      </h2>
+      <p className="text-sm text-gray-500 mb-4 ml-3">
+        How much does your emission factor change if you use economic spend data instead of physical activity data? USEEIO is EPA&apos;s Environmentally-Extended Input-Output model.
+      </p>
+
+      <div className="space-y-2 mb-8">
+        {spendCompList.map((comp) => {
+          const isOpen = openId === comp.activity_id;
+          return (
+            <div key={comp.activity_id} className="rounded-lg bg-white" style={{ border: '1px solid var(--ws-border)' }}>
+              <button
+                onClick={() => setOpenId(isOpen ? null : comp.activity_id)}
+                className="w-full text-left px-4 py-3 flex items-center justify-between gap-4 transition-colors"
+                style={isOpen ? { backgroundColor: '#f0fdfa' } : {}}
+              >
+                <div className="min-w-0">
+                  <div className="font-medium truncate">{comp.activity_name}</div>
+                  <div className="text-xs text-gray-500 mt-0.5 truncate">
+                    {SCOPE_LABELS[comp.scope] || comp.scope} &middot;{" "}
+                    NAICS {comp.useeio_sector.naics_code} ({comp.useeio_sector.sector_name}) &middot;{" "}
+                    {comp.normalized_unit}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <SpendGapBadge level={comp.gap_analysis.level} ratio={comp.gap_analysis.ratio} />
+                  <svg
+                    className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    style={{ color: 'var(--ws-body)' }}
+                    fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </div>
+              </button>
+              {isOpen && (
+                <div className="px-4 pb-4">
+                  <SpendComparisonCard comp={comp} />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }
@@ -1509,6 +1754,8 @@ export default function Home() {
   const hasCountryData = Object.keys(countryComparisons).length > 0;
   const hasSubregionData = subregionComparison !== null;
   const hasSourceGraph = sourceGraph !== null;
+  const hasSpendData = spendComparisons.length > 0;
+  const spendCompList = [...spendComparisons].sort((a, b) => b.gap_analysis.gap_percentage - a.gap_analysis.gap_percentage);
 
   const countryCompList = Object.entries(countryComparisons)
     .sort((a, b) => b[1].variance.percentage - a[1].variance.percentage);
@@ -1678,7 +1925,21 @@ export default function Home() {
                 Source Independence
               </button>
             )}
+            {hasSpendData && (
+              <button
+                onClick={() => setViewMode("spend")}
+                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "spend" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
+                style={viewMode === "spend" ? { color: 'var(--ws-blue)' } : { color: 'var(--ws-body)' }}
+              >
+                By Spend (USEEIO)
+              </button>
+            )}
           </div>
+        )}
+
+        {/* SPEND-BASED VIEW */}
+        {viewMode === "spend" && !selected && hasSpendData && (
+          <SpendAccordion spendCompList={spendCompList} />
         )}
 
         {/* SOURCE INDEPENDENCE VIEW */}
@@ -1708,7 +1969,8 @@ export default function Home() {
             Data sourced from EPA GHG Emission Factors Hub (Jan 2025), UK
             DEFRA/DESNZ Conversion Factors (Jun 2025), GHG Protocol
             Cross-Sector Tools V2.0 (Mar 2024), Ember Global Electricity
-            Review (2025), IPCC 2006 Guidelines, ICCT, and UBA TREMOD.
+            Review (2025), IPCC 2006 Guidelines, ICCT, UBA TREMOD, and
+            EPA USEEIO v2.0.1-411 (2024).
             All factors normalized to kg CO2e per common unit.
             This is a learning artifact, not a production tool.
           </p>
