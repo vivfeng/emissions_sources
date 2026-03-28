@@ -881,7 +881,7 @@ type DecisionFramework = {
 };
 
 type PageMode = "background" | "product" | "recommended";
-type ViewMode = "sources" | "countries" | "subnational" | "independence" | "spend";
+type ViewMode = "sources" | "countries";
 
 // ── Source Independence Graph ───────────────────────────────────
 
@@ -1765,18 +1765,16 @@ export default function Home() {
       {/* Header */}
       <header className="bg-white" style={{ borderBottom: '1px solid var(--ws-border)' }}>
         <div className="max-w-6xl mx-auto px-6 pt-5 pb-0">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-xs font-mono tracking-wider mb-1.5" style={{ color: 'var(--ws-blue)' }}>
-                <AnimatedNumber target={Object.keys(comparisons).length} /> activities &middot; <AnimatedNumber target={multiSource.length} /> multi-source &middot; <AnimatedNumber target={5} /> countries
-              </div>
-              <h1 className="text-xl font-semibold tracking-tight" style={{ color: 'var(--ws-dark)', letterSpacing: '-0.3px' }}>
-                Emission Factor Comparator
-              </h1>
-              <p className="mt-0.5 text-sm" style={{ color: 'var(--ws-body)' }}>
-                Compare emission factors across EPA, DEFRA, and GHG Protocol. See where they agree, where they diverge, and when to use which.
-              </p>
+          <div>
+            <div className="text-xs font-mono tracking-wider mb-1.5" style={{ color: 'var(--ws-blue)' }}>
+              <AnimatedNumber target={Object.keys(comparisons).length} /> activities &middot; <AnimatedNumber target={multiSource.length} /> multi-source &middot; <AnimatedNumber target={5} /> countries
             </div>
+            <h1 className="text-xl font-semibold tracking-tight" style={{ color: 'var(--ws-dark)', letterSpacing: '-0.3px' }}>
+              Emission Factor Comparator
+            </h1>
+            <p className="mt-0.5 text-sm" style={{ color: 'var(--ws-body)' }}>
+              Compare emission factors across EPA, DEFRA, and GHG Protocol. See where they agree, where they diverge, and when to use which.
+            </p>
           </div>
           {/* Page tabs — Watershed-style underline nav */}
           <nav className="flex gap-8 mt-4 -mb-px">
@@ -1872,22 +1870,6 @@ export default function Home() {
 
         {/* ── PRODUCT PAGE ── */}
         {pageMode === "product" && (<div>
-        {/* Context — show on product list views */}
-        {!selected && (
-          <div className="mb-8 max-w-3xl">
-            <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--ws-body)' }}>
-              Emissions factors from <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>EPA</span>,{" "}
-              <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>DEFRA/DESNZ</span>,{" "}
-              <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>GHG Protocol</span>,{" "}
-              <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>Ember Climate</span>, and{" "}
-              <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>IPCC</span>,
-              normalized to a common unit, compared side by side, and diagnosed for why they diverge.
-              The same activity can vary 2-7x across databases. Full calculation transparency
-              and data lineage for every factor.
-            </p>
-          </div>
-        )}
-
         {/* View mode toggle */}
         {!selected && (
           <div className="mb-8 flex gap-1 rounded-lg p-1 w-fit" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid var(--ws-border)' }}>
@@ -1907,59 +1889,38 @@ export default function Home() {
                 By Country
               </button>
             )}
-            {hasSubregionData && (
-              <button
-                onClick={() => setViewMode("subnational")}
-                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "subnational" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
-                style={viewMode === "subnational" ? { color: 'var(--ws-blue)' } : { color: 'var(--ws-body)' }}
-              >
-                Sub-national
-              </button>
-            )}
-            {hasSourceGraph && (
-              <button
-                onClick={() => setViewMode("independence")}
-                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "independence" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
-                style={viewMode === "independence" ? { color: 'var(--ws-blue)' } : { color: 'var(--ws-body)' }}
-              >
-                Source Independence
-              </button>
-            )}
-            {hasSpendData && (
-              <button
-                onClick={() => setViewMode("spend")}
-                className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "spend" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
-                style={viewMode === "spend" ? { color: 'var(--ws-blue)' } : { color: 'var(--ws-body)' }}
-              >
-                By Spend (USEEIO)
-              </button>
-            )}
           </div>
         )}
 
-        {/* SPEND-BASED VIEW */}
-        {viewMode === "spend" && !selected && hasSpendData && (
-          <SpendAccordion spendCompList={spendCompList} />
-        )}
-
-        {/* SOURCE INDEPENDENCE VIEW */}
-        {viewMode === "independence" && !selected && sourceGraph && (
-          <SourceIndependenceView graph={sourceGraph} comparisons={comparisons} />
-        )}
-
-        {/* SUB-NATIONAL VIEW */}
-        {viewMode === "subnational" && !selected && subregionComparison && (
-          <SubregionView comp={subregionComparison} />
-        )}
-
-        {/* COUNTRY VIEW — inline accordion */}
+        {/* COUNTRY VIEW — inline accordion + sub-national drill-down */}
         {viewMode === "countries" && !selected && (
-          <CountryAccordion countryCompList={countryCompList} />
+          <>
+            <CountryAccordion countryCompList={countryCompList} />
+            {hasSubregionData && subregionComparison && (
+              <div className="mt-8">
+                <SubregionView comp={subregionComparison} />
+              </div>
+            )}
+          </>
         )}
 
-        {/* SOURCE VIEW — inline accordion */}
+        {/* SOURCE VIEW — inline accordion + source independence + spend */}
         {viewMode === "sources" && !selected && (
-          <SourceAccordion multiSource={multiSource} singleSource={singleSource} />
+          <>
+            <SourceAccordion multiSource={multiSource} singleSource={singleSource} />
+
+            {hasSourceGraph && sourceGraph && (
+              <div className="mt-10">
+                <SourceIndependenceView graph={sourceGraph} comparisons={comparisons} />
+              </div>
+            )}
+
+            {hasSpendData && (
+              <div className="mt-10">
+                <SpendAccordion spendCompList={spendCompList} />
+              </div>
+            )}
+          </>
         )}
         </div>)}
 
@@ -1984,6 +1945,16 @@ export default function Home() {
               style={{ color: 'var(--ws-blue)' }}
             >
               Reach out on LinkedIn
+            </a>
+            {" "}&middot;{" "}
+            <a
+              href="https://lu.ma/zerotoagent-sf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+              style={{ color: 'var(--ws-blue)' }}
+            >
+              Zero to Agent 2026 &mdash; SF Founding Host
             </a>
           </p>
         </footer>
