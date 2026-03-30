@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import data from "./data.json";
 
 type Source = {
@@ -197,14 +197,6 @@ const subregionComparison = (rawData.subregion_comparison || null) as SubregionC
 const sourceGraph = (rawData.source_graph || null) as SourceGraph | null;
 const spendComparisons = (rawData.spend_comparisons || []) as SpendComparison[];
 
-// Group activities by category for the selector
-const categories: Record<string, { id: string; name: string }[]> = {};
-for (const [id, comp] of Object.entries(comparisons)) {
-  const cat = comp.category;
-  if (!categories[cat]) categories[cat] = [];
-  categories[cat].push({ id, name: comp.activity_name });
-}
-
 // Only show activities with 2+ sources first, then single-source
 const multiSource = Object.entries(comparisons)
   .filter(([, c]) => c.sources.length >= 2)
@@ -214,6 +206,9 @@ const multiSource = Object.entries(comparisons)
 const singleSource = Object.entries(comparisons).filter(
   ([, c]) => c.sources.length < 2
 );
+const countryCompList = Object.entries(countryComparisons)
+  .sort((a, b) => b[1].variance.percentage - a[1].variance.percentage);
+const spendCompList = [...spendComparisons].sort((a, b) => b.gap_analysis.gap_percentage - a.gap_analysis.gap_percentage);
 
 const CATEGORY_LABELS: Record<string, string> = {
   stationary_combustion: "Stationary Combustion",
@@ -241,24 +236,26 @@ const COUNTRY_FLAGS: Record<string, string> = {
   GB: "\u{1F1EC}\u{1F1E7}",
 };
 
+const VARIANCE_COLORS: Record<string, string> = {
+  low: "bg-green-100 text-green-800",
+  moderate: "bg-yellow-100 text-yellow-800",
+  high: "bg-orange-100 text-orange-800",
+  very_high: "bg-red-100 text-red-800",
+};
+
+const VARIANCE_TOOLTIPS: Record<string, string> = {
+  low: "Sources largely agree — your choice of database won't significantly change the result.",
+  moderate: "Noticeable gap between sources. Check whether the divergence is geographic or methodological before picking.",
+  high: "Large gap — the database you choose will materially change your reported emissions. Investigate the cause.",
+  very_high: "Massive gap — your reported number could vary by 2x+ depending on which database you use. Understand why before reporting.",
+};
+
 function VarianceBadge({ level, pct }: { level: string; pct: number | null }) {
   if (pct === null) return <span className="text-xs text-gray-400">Single source</span>;
-  const colors: Record<string, string> = {
-    low: "bg-green-100 text-green-800",
-    moderate: "bg-yellow-100 text-yellow-800",
-    high: "bg-orange-100 text-orange-800",
-    very_high: "bg-red-100 text-red-800",
-  };
-  const tooltips: Record<string, string> = {
-    low: `Sources largely agree — your choice of database won't significantly change the result.`,
-    moderate: `Noticeable gap between sources. Check whether the divergence is geographic or methodological before picking.`,
-    high: `Large gap — the database you choose will materially change your reported emissions. Investigate the cause.`,
-    very_high: `Massive gap — your reported number could vary by 2x+ depending on which database you use. Understand why before reporting.`,
-  };
   return (
-    <span className={`tooltip-wrap tooltip-right text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${colors[level] || "bg-gray-100"}`}>
+    <span className={`tooltip-wrap tooltip-right text-xs font-medium px-2 py-0.5 rounded-full cursor-help ${VARIANCE_COLORS[level] || "bg-gray-100"}`}>
       {pct}% variance
-      <span className="tooltip-text">{tooltips[level] || `${pct}% difference between the highest and lowest emission factor for this activity.`}</span>
+      <span className="tooltip-text">{VARIANCE_TOOLTIPS[level] || `${pct}% difference between the highest and lowest emission factor for this activity.`}</span>
     </span>
   );
 }
@@ -347,6 +344,36 @@ function StaleFlag() {
     <span className="inline-flex items-center text-xs text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded" title="Underlying data may be outdated (2+ years)">
       Stale
     </span>
+  );
+}
+
+function ChevronIcon({ open, direction = "down" }: { open: boolean; direction?: "down" | "right" }) {
+  return (
+    <svg
+      className={`w-4 h-4 transition-transform ${open ? (direction === "down" ? "rotate-180" : "rotate-90") : ""}`}
+      style={{ color: 'var(--ws-body)' }}
+      fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d={direction === "down" ? "M19.5 8.25l-7.5 7.5-7.5-7.5" : "M8.25 4.5l7.5 7.5-7.5 7.5"} />
+    </svg>
+  );
+}
+
+function InsightCard({ label = "Key Insight", children }: { label?: string; children: React.ReactNode }) {
+  return (
+    <div className="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4">
+      <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">{label}</div>
+      <div className="text-sm text-slate-700 leading-relaxed">{children}</div>
+    </div>
+  );
+}
+
+function SectionHeading({ color, children }: { color?: string; children: React.ReactNode }) {
+  return (
+    <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+      <span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: color || 'var(--ws-blue)' }} />
+      {children}
+    </h2>
   );
 }
 
@@ -616,13 +643,7 @@ function ComparisonView({ comp, compact }: { comp: Comparison; compact?: boolean
       {/* Uncertainty Range */}
       {comp.uncertainty && <UncertaintyBar uncertainty={comp.uncertainty} />}
 
-      {/* Key Insight Row */}
-      <div className="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4">
-        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">
-          Key Insight
-        </div>
-        <p className="text-sm text-slate-700 leading-relaxed">{comp.key_insight}</p>
-      </div>
+      <InsightCard>{comp.key_insight}</InsightCard>
 
       {/* Quick Guidance — how to choose */}
       {comp.quick_guidance && (
@@ -716,30 +737,17 @@ function CountryComparisonView({ comp, compact }: { comp: CountryComparison; com
               return <TrendSparkline key={country.country_code} trend={trend} />;
             })}
           </div>
-          <div className="mt-3 bg-slate-50 border border-slate-200 rounded-lg p-3">
-            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">
-              Trend Insight
-            </div>
-            <p className="text-xs text-slate-700 leading-relaxed">
+          <InsightCard label="Trend Insight">
               Germany has cut grid intensity by 41% since 2015, the fastest among the top 5 emitters.
               China&apos;s absolute renewable capacity is the world&apos;s largest, but rising demand keeps
               intensity declining slowly (~10%). Russia is the only country where grid intensity is rising.
               These trends mean that Scope 2 emission factors have a shelf life. Using a factor
               from even 2-3 years ago can materially misstate a company&apos;s footprint.
-            </p>
-          </div>
+          </InsightCard>
         </div>
       )}
 
-      {/* Key Insight */}
-      {comp.key_insight && (
-        <div className="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4">
-          <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">
-            Key Insight
-          </div>
-          <p className="text-sm text-slate-700 leading-relaxed">{comp.key_insight}</p>
-        </div>
-      )}
+      {comp.key_insight && <InsightCard>{comp.key_insight}</InsightCard>}
 
       {/* Source attribution */}
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -822,13 +830,7 @@ function SubregionView({ comp }: { comp: SubregionComparison }) {
         )}
       </div>
 
-      {/* Key Insight */}
-      <div className="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4">
-        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">
-          Key Insight
-        </div>
-        <p className="text-sm text-slate-700 leading-relaxed">{comp.key_insight}</p>
-      </div>
+      <InsightCard>{comp.key_insight}</InsightCard>
     </div>
   );
 }
@@ -1163,9 +1165,7 @@ function DecisionFrameworkPanel({ framework }: { framework: DecisionFramework })
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--ws-blue)' }}
       >
-        <svg className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-90" : ""}`} fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-        </svg>
+        <ChevronIcon open={open} direction="right" />
         Which source should I use?
       </button>
 
@@ -1207,11 +1207,10 @@ function CountryAccordion({ countryCompList }: { countryCompList: [string, Count
 
   return (
     <>
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />
+      <SectionHeading>
         Same activity, different countries
         <span className="text-sm font-normal text-gray-400">({countryCompList.length} activities)</span>
-      </h2>
+      </SectionHeading>
 
       <div className="space-y-2 mb-8">
         {countryCompList.map(([id, comp]) => {
@@ -1233,13 +1232,7 @@ function CountryAccordion({ countryCompList }: { countryCompList: [string, Count
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
                   <VarianceBadge level={comp.variance.level} pct={comp.variance.percentage} />
-                  <svg
-                    className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-                    style={{ color: 'var(--ws-body)' }}
-                    fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                  </svg>
+                  <ChevronIcon open={isOpen} />
                 </div>
               </button>
               {isOpen && (
@@ -1261,11 +1254,10 @@ function SourceAccordion({ multiSource, singleSource }: { multiSource: [string, 
 
   return (
     <>
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-        <span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />
+      <SectionHeading>
         Same activity, different databases
         <span className="text-sm font-normal text-gray-400">({multiSource.length} with multiple sources)</span>
-      </h2>
+      </SectionHeading>
 
       <div className="space-y-2 mb-8">
         {multiSource.map(([id, comp]) => {
@@ -1288,13 +1280,7 @@ function SourceAccordion({ multiSource, singleSource }: { multiSource: [string, 
                 <div className="flex items-center gap-2 shrink-0">
                   <VarianceTypeBadge varianceType={comp.variance.variance_type} />
                   <VarianceBadge level={comp.variance.level} pct={comp.variance.percentage} />
-                  <svg
-                    className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-                    style={{ color: 'var(--ws-body)' }}
-                    fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                  </svg>
+                  <ChevronIcon open={isOpen} />
                 </div>
               </button>
               {isOpen && (
@@ -1340,39 +1326,41 @@ function SourceAccordion({ multiSource, singleSource }: { multiSource: [string, 
 
 // ── Spend-Based (USEEIO) Components ─────────────────────────
 
+const SPEND_GAP_COLORS: Record<string, string> = {
+  low: "bg-green-100 text-green-800",
+  moderate: "bg-yellow-100 text-yellow-800",
+  high: "bg-orange-100 text-orange-800",
+  extreme: "bg-red-100 text-red-800",
+};
+
+const SPEND_GAP_TOOLTIPS: Record<string, string> = {
+  low: "Spend-based and activity-based factors are within 2x. Either approach is reasonable for screening.",
+  moderate: "Spend-based factor differs 2–5x from activity-based. Use activity-based when possible.",
+  high: "Large gap (5–20x). Spend-based is only suitable for rough screening.",
+  extreme: "Massive gap (>20x). Spend-based is a last resort only when no activity data exists.",
+};
+
 function SpendGapBadge({ level, ratio }: { level: string; ratio: number }) {
-  const colors: Record<string, string> = {
-    low: "bg-green-100 text-green-800",
-    moderate: "bg-yellow-100 text-yellow-800",
-    high: "bg-orange-100 text-orange-800",
-    extreme: "bg-red-100 text-red-800",
-  };
-  const tooltips: Record<string, string> = {
-    low: "Spend-based and activity-based factors are within 2x. Either approach is reasonable for screening.",
-    moderate: "Spend-based factor differs 2–5x from activity-based. Use activity-based when possible.",
-    high: "Large gap (5–20x). Spend-based is only suitable for rough screening.",
-    extreme: "Massive gap (>20x). Spend-based is a last resort only when no activity data exists.",
-  };
   return (
-    <span className={`tooltip-wrap text-xs font-semibold px-2 py-0.5 rounded-full cursor-help ${colors[level] || colors.high}`}>
+    <span className={`tooltip-wrap text-xs font-semibold px-2 py-0.5 rounded-full cursor-help ${SPEND_GAP_COLORS[level] || SPEND_GAP_COLORS.high}`}>
       {ratio}x gap
-      <span className="tooltip-text">{tooltips[level] || ""}</span>
+      <span className="tooltip-text">{SPEND_GAP_TOOLTIPS[level] || ""}</span>
     </span>
   );
 }
+
+const BOUNDARY_SHORT: Record<string, string> = {
+  combustion_only: "Combustion only",
+  combustion_plus_rf: "Combustion + RF",
+  generation_only: "Generation only",
+  operational: "Operational",
+  embodied_cradle_to_gate: "Cradle-to-gate",
+};
 
 function SpendComparisonCard({ comp }: { comp: SpendComparison }) {
   const actVal = comp.activity_based_representative.value_kg_co2e;
   const spendVal = comp.conversion_bridge.derived_spend_factor;
   const maxVal = Math.max(actVal, spendVal);
-
-  const BOUNDARY_SHORT: Record<string, string> = {
-    combustion_only: "Combustion only",
-    combustion_plus_rf: "Combustion + RF",
-    generation_only: "Generation only",
-    operational: "Operational",
-    embodied_cradle_to_gate: "Cradle-to-gate",
-  };
 
   return (
     <div className="space-y-4">
@@ -1474,11 +1462,10 @@ function SpendAccordion({ spendCompList }: { spendCompList: SpendComparison[] })
 
   return (
     <>
-      <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
-        <span className="w-1 h-5 rounded-full inline-block bg-teal-500" />
+      <SectionHeading color="#0D9488">
         Activity-based vs. spend-based (USEEIO)
         <span className="text-sm font-normal text-gray-400">({spendCompList.length} activities)</span>
-      </h2>
+      </SectionHeading>
       <p className="text-sm text-gray-500 mb-4 ml-3">
         How much does your emission factor change if you use economic spend data instead of physical activity data? USEEIO is EPA&apos;s Environmentally-Extended Input-Output model.
       </p>
@@ -1503,13 +1490,7 @@ function SpendAccordion({ spendCompList }: { spendCompList: SpendComparison[] })
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
                   <SpendGapBadge level={comp.gap_analysis.level} ratio={comp.gap_analysis.ratio} />
-                  <svg
-                    className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-                    style={{ color: 'var(--ws-body)' }}
-                    fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                  </svg>
+                  <ChevronIcon open={isOpen} />
                 </div>
               </button>
               {isOpen && (
@@ -1618,10 +1599,7 @@ function RecommendedStack() {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
-        <span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />
-        Recommended Source Stack
-      </h2>
+      <SectionHeading>Recommended Source Stack</SectionHeading>
       <p className="text-sm mb-6 max-w-3xl" style={{ color: 'var(--ws-body)' }}>
         Pre-built source recommendations for common reporting contexts.
         Each stack tells you which database to use for each activity, why, and what to watch out for.
@@ -1721,44 +1699,9 @@ function RecommendedStack() {
   );
 }
 
-function AnimatedNumber({ target, decimals = 0, duration = 1200 }: { target: number; decimals?: number; duration?: number }) {
-  const [value, setValue] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    let start: number | null = null;
-    let raf: number;
-    const step = (ts: number) => {
-      if (!start) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      // ease-out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(eased * target);
-      if (progress < 1) raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [target, duration]);
-
-  return <span ref={ref} className="font-mono font-semibold">{value.toFixed(decimals)}</span>;
-}
-
 export default function Home() {
   const [pageMode, setPageMode] = useState<PageMode>("product");
-  const [selected, setSelected] = useState<string | null>(null);
-  const [showSingleSource, setShowSingleSource] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("sources");
-
-  const selectedComp = selected ? comparisons[selected] : null;
-  const selectedCountryComp = selected ? countryComparisons[selected] : null;
-  const hasCountryData = Object.keys(countryComparisons).length > 0;
-  const hasSubregionData = subregionComparison !== null;
-  const hasSourceGraph = sourceGraph !== null;
-  const hasSpendData = spendComparisons.length > 0;
-  const spendCompList = [...spendComparisons].sort((a, b) => b.gap_analysis.gap_percentage - a.gap_analysis.gap_percentage);
-
-  const countryCompList = Object.entries(countryComparisons)
-    .sort((a, b) => b[1].variance.percentage - a[1].variance.percentage);
 
   return (
     <div className="min-h-screen">
@@ -1767,7 +1710,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 pt-5 pb-0">
           <div>
             <div className="text-xs font-mono tracking-wider mb-1.5" style={{ color: 'var(--ws-blue)' }}>
-              <AnimatedNumber target={Object.keys(comparisons).length} /> activities &middot; <AnimatedNumber target={multiSource.length} /> multi-source &middot; <AnimatedNumber target={5} /> countries
+              {Object.keys(comparisons).length} activities &middot; {multiSource.length} multi-source &middot; 5 countries
             </div>
             <h1 className="text-xl font-semibold tracking-tight" style={{ color: 'var(--ws-dark)', letterSpacing: '-0.3px' }}>
               Emission Factor Comparator
@@ -1779,7 +1722,7 @@ export default function Home() {
           {/* Page tabs — Watershed-style underline nav */}
           <nav className="flex gap-8 mt-4 -mb-px">
             <button
-              onClick={() => { setPageMode("background"); setSelected(null); }}
+              onClick={() => setPageMode("background")}
               className="pb-3 text-sm font-medium transition-all"
               style={pageMode === "background"
                 ? { color: 'var(--ws-dark)', borderBottom: '2px solid var(--ws-blue)' }
@@ -1788,7 +1731,7 @@ export default function Home() {
               Background
             </button>
             <button
-              onClick={() => { setPageMode("product"); setSelected(null); }}
+              onClick={() => setPageMode("product")}
               className="pb-3 text-sm font-medium transition-all"
               style={pageMode === "product"
                 ? { color: 'var(--ws-dark)', borderBottom: '2px solid var(--ws-blue)' }
@@ -1797,7 +1740,7 @@ export default function Home() {
               Explorer
             </button>
             <button
-              onClick={() => { setPageMode("recommended"); setSelected(null); }}
+              onClick={() => setPageMode("recommended")}
               className="pb-3 text-sm font-medium transition-all whitespace-nowrap"
               style={pageMode === "recommended"
                 ? { color: 'var(--ws-dark)', borderBottom: '2px solid var(--ws-blue)' }
@@ -1813,7 +1756,7 @@ export default function Home() {
         {/* ── BACKGROUND PAGE ── */}
         {pageMode === "background" && (
           <div className="max-w-3xl">
-            <h2 className="text-lg font-semibold mb-3 flex items-center gap-2"><span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />The Problem</h2>
+            <SectionHeading>The Problem</SectionHeading>
             <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--ws-body)' }}>
               Companies measuring carbon emissions rely on published emission factor databases to
               convert activity data (kWh consumed, km traveled) into CO2e. But these databases
@@ -1822,7 +1765,7 @@ export default function Home() {
               the final number?
             </p>
 
-            <h2 className="text-lg font-semibold mb-3 flex items-center gap-2"><span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />What This Tool Does</h2>
+            <SectionHeading>What This Tool Does</SectionHeading>
             <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--ws-body)' }}>
               This comparator normalizes emission factors from three major public databases to a
               common unit (kg CO2e), then calculates variance and diagnoses <em>why</em> they differ.
@@ -1831,7 +1774,7 @@ export default function Home() {
               and stale data.
             </p>
 
-            <h2 className="text-lg font-semibold mb-3 flex items-center gap-2"><span className="w-1 h-5 rounded-full inline-block" style={{ backgroundColor: 'var(--ws-blue)' }} />Learnings</h2>
+            <SectionHeading>Learnings</SectionHeading>
             <div className="text-sm leading-relaxed space-y-3 mb-8" style={{ color: 'var(--ws-body)' }}>
               <p>
                 <span className="font-medium" style={{ color: 'var(--ws-dark)' }}>1. Geography dominates.</span>{" "}Most variance comes from comparing
@@ -1871,7 +1814,6 @@ export default function Home() {
         {/* ── PRODUCT PAGE ── */}
         {pageMode === "product" && (<div>
         {/* View mode toggle */}
-        {!selected && (
           <div className="mb-8 flex gap-1 rounded-lg p-1 w-fit" style={{ backgroundColor: 'var(--ws-blue-bg)', border: '1px solid var(--ws-border)' }}>
             <button
               onClick={() => setViewMode("sources")}
@@ -1880,7 +1822,7 @@ export default function Home() {
             >
               By Source
             </button>
-            {hasCountryData && (
+            {countryCompList.length > 0 && (
               <button
                 onClick={() => setViewMode("countries")}
                 className={`px-4 py-1.5 text-sm rounded-md transition-all ${viewMode === "countries" ? "bg-white shadow-sm font-medium" : "hover:bg-white/50"}`}
@@ -1890,13 +1832,12 @@ export default function Home() {
               </button>
             )}
           </div>
-        )}
 
-        {/* COUNTRY VIEW — inline accordion + sub-national drill-down */}
-        {viewMode === "countries" && !selected && (
+        {/* COUNTRY VIEW */}
+        {viewMode === "countries" && (
           <>
             <CountryAccordion countryCompList={countryCompList} />
-            {hasSubregionData && subregionComparison && (
+            {subregionComparison && (
               <div className="mt-8">
                 <SubregionView comp={subregionComparison} />
               </div>
@@ -1904,18 +1845,18 @@ export default function Home() {
           </>
         )}
 
-        {/* SOURCE VIEW — inline accordion + source independence + spend */}
-        {viewMode === "sources" && !selected && (
+        {/* SOURCE VIEW */}
+        {viewMode === "sources" && (
           <>
             <SourceAccordion multiSource={multiSource} singleSource={singleSource} />
 
-            {hasSourceGraph && sourceGraph && (
+            {sourceGraph && (
               <div className="mt-10">
                 <SourceIndependenceView graph={sourceGraph} comparisons={comparisons} />
               </div>
             )}
 
-            {hasSpendData && (
+            {spendCompList.length > 0 && (
               <div className="mt-10">
                 <SpendAccordion spendCompList={spendCompList} />
               </div>
