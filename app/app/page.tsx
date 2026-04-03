@@ -726,9 +726,10 @@ function CountryComparisonView({ comp, compact }: { comp: CountryComparison; com
       {/* Temporal Trends */}
       {trends && Object.keys(trends).length > 0 && (
         <div className="mt-6">
-          <h3 className="text-base font-semibold mb-3">Grid Intensity Trends (2015&ndash;2024)</h3>
+          <h3 className="text-base font-semibold mb-3">Generation CO&#8322; Intensity Trends (2015&ndash;2024)</h3>
           <p className="text-xs text-gray-500 mb-3">
-            Source: Ember Global Electricity Review. Generation-based CO2 intensity.
+            Source: Ember Global Electricity Review. Measures CO&#8322; per kWh of electricity generated (not overall grid demand or system stress).
+            Note: rising electricity demand from AI and data centers may slow or reverse these gains in coming years.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {sorted.map((country) => {
@@ -1024,8 +1025,12 @@ function SourceIndependenceView({
     <div>
       <h2 className="text-lg font-semibold mb-2">Source Independence Analysis</h2>
       <p className="text-sm text-gray-600 mb-6 max-w-2xl">
-        How independent are emission factor sources from each other? When GHG Protocol cites DEFRA,
-        and DEFRA cites IPCC, apparent &ldquo;multi-source agreement&rdquo; may be circular citation.
+        How independent are emission factor sources from each other? When GHG Protocol cites
+        DEFRA (UK Department for Environment, Food &amp; Rural Affairs),
+        and DEFRA cites IPCC (Intergovernmental Panel on Climate Change), apparent &ldquo;multi-source
+        agreement&rdquo; may be circular citation. Other key sources include
+        EPA (US Environmental Protection Agency) and
+        ICCT (International Council on Clean Transportation).
         This view maps the actual provenance relationships.
       </p>
 
@@ -1054,6 +1059,12 @@ function SourceIndependenceView({
             <span className="inline-block w-4 h-0.5 bg-purple-400" />
             Citation link
           </span>
+        </div>
+        <div className="mt-3 text-xs text-gray-400 text-center leading-relaxed">
+          EPA = Environmental Protection Agency &middot;
+          DEFRA = Dept for Environment, Food &amp; Rural Affairs &middot;
+          IPCC = Intergovernmental Panel on Climate Change &middot;
+          ICCT = Intl Council on Clean Transportation
         </div>
       </div>
 

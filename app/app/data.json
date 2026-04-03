@@ -2347,7 +2347,7 @@
       },
       {
         "subregion_code": "SPSO",
-        "subregion_name": "SPP South",
+        "subregion_name": "SPP S Hub (SPP South)",
         "value_kg_co2e": 0.405858,
         "unit_denominator": "kWh",
         "original_value": 891.103,
@@ -2355,7 +2355,7 @@
       },
       {
         "subregion_code": "SPNO",
-        "subregion_name": "SPP North",
+        "subregion_name": "SPP N Hub (SPP North)",
         "value_kg_co2e": 0.39351,
         "unit_denominator": "kWh",
         "original_value": 861.925,
@@ -2371,7 +2371,7 @@
       },
       {
         "subregion_code": "FRCC",
-        "subregion_name": "FRCC All",
+        "subregion_name": "Florida Reliability Coordinating Council (FRCC)",
         "value_kg_co2e": 0.364866,
         "unit_denominator": "kWh",
         "original_value": 801.891,
@@ -2395,7 +2395,7 @@
       },
       {
         "subregion_code": "ERCT",
-        "subregion_name": "ERCOT All",
+        "subregion_name": "ERCOT All (Electric Reliability Council of Texas)",
         "value_kg_co2e": 0.336036,
         "unit_denominator": "kWh",
         "original_value": 738.038,
@@ -2443,10 +2443,18 @@
       },
       {
         "subregion_code": "CAMX",
-        "subregion_name": "WECC California",
+        "subregion_name": "WECC California (CAMX eGRID subregion)",
         "value_kg_co2e": 0.198741,
         "unit_denominator": "kWh",
         "original_value": 436.655,
+        "original_unit": "lb CO2 per MWh (total output)"
+      },
+      {
+        "subregion_code": "CAISO",
+        "subregion_name": "California ISO (CAISO)",
+        "value_kg_co2e": 0.2051,
+        "unit_denominator": "kWh",
+        "original_value": 452.0,
         "original_unit": "lb CO2 per MWh (total output)"
       },
       {
@@ -2468,7 +2476,7 @@
       "lowest_subregion": "NYUP (NPCC Upstate NY)",
       "ratio": 6.4
     },
-    "key_insight": "Within the US alone, grid carbon intensity varies by 147.9% across 27 eGRID subregions. PRMS (Puerto Rico Miscellaneous) is 6.4x more carbon-intensive than NYUP (NPCC Upstate NY). This means a company's Scope 2 emissions depend heavily on which US subregion they operate in. Using the national average can over- or under-estimate by 2-3x."
+    "key_insight": "Within the US alone, grid carbon intensity varies by 147.9% across 28 eGRID subregions (plus CAISO). PRMS (Puerto Rico Miscellaneous) is 6.4x more carbon-intensive than NYUP (NPCC Upstate NY). This means a company's Scope 2 emissions depend heavily on which US subregion they operate in. Using the national average can over- or under-estimate by 2-3x."
   },
   "source_graph": {
     "nodes": [
@@ -2476,7 +2484,7 @@
         "id": "epa",
         "label": "EPA",
         "type": "primary",
-        "publisher": "US Environmental Protection Agency",
+        "publisher": "Environmental Protection Agency (EPA)",
         "edition": "2025",
         "color": "#2563eb"
       },
@@ -2484,7 +2492,7 @@
         "id": "defra",
         "label": "DEFRA/DESNZ",
         "type": "primary",
-        "publisher": "UK Dept for Energy Security & Net Zero",
+        "publisher": "Dept for Environment, Food & Rural Affairs (DEFRA)",
         "edition": "2025",
         "color": "#059669"
       },
@@ -2500,7 +2508,7 @@
         "id": "ipcc",
         "label": "IPCC",
         "type": "primary",
-        "publisher": "Intergovernmental Panel on Climate Change",
+        "publisher": "Intergovernmental Panel on Climate Change (IPCC)",
         "edition": "2006 Guidelines",
         "color": "#d97706"
       },
@@ -2516,7 +2524,7 @@
         "id": "icct",
         "label": "ICCT",
         "type": "primary",
-        "publisher": "International Council on Clean Transportation",
+        "publisher": "Intl Council on Clean Transportation (ICCT)",
         "edition": "Various",
         "color": "#0891b2"
       }
